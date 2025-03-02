@@ -1,0 +1,28 @@
+.image-description {
+  font-size: 0.7em;
+  margin-top: -2em;
+  display: block;
+}
+
+div.layout img {
+  aspect-ratio: auto !important;
+}
+
+a.router-link-active {
+  color: #ffec99 !important;
+}
+
+.no-break {
+  white-space: pre-wrap;
+  word-break: keep-all;
+}
+
+.blog-name {
+  font-size: 1.2em;
+  color: #ffec99;
+}
+
+.logo-about {
+  float: left;
+  width: 20em;
+}
