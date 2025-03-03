@@ -4,11 +4,7 @@
   display: block;
 }
 
-div.layout img {
-  aspect-ratio: auto !important;
-}
-
-a.router-link-active {
+a.router-link-active, a:hover {
   color: #ffec99 !important;
 }
 
@@ -25,4 +21,12 @@ a.router-link-active {
 .logo-about {
   float: left;
   width: 20em;
+  padding-right: 1em;
+  aspect-ratio: auto;
+}
+
+.profile-about {
+  float: right;
+  width: 6em;
+  margin-left: 1em;
 }
