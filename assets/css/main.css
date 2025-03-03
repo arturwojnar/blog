@@ -30,3 +30,21 @@ a.router-link-active, a:hover {
   width: 6em;
   margin-left: 1em;
 }
+
+.discord-section {
+  display: block;
+  width: 20em;
+  border-radius: 1em;
+  box-shadow: 0.5em 0.5em 0.5em #ffec99;
+  padding: 2em;
+  margin-bottom: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.discord-section a {
+  display: inline-block;
+  margin-left: 1em;
+}
