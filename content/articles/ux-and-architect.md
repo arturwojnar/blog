@@ -35,7 +35,7 @@ A few years back (_Kyrie Eleison!_ How time goes fast!) I was astonished that th
 
 The truth is that a UX designer _must also understand the domain and the business reality_. For the same purpose - design.
 
-What does the UX? Examples from the top of the shelf:
+What does the UX do? Examples from the top of the shelf:
 
 ➡️ Designing users' feelings into usable flows and UI
 
