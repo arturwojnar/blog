@@ -9,9 +9,19 @@ export default defineNuxtConfig({
     "@nuxt/devtools",
   ],
 
-  compatibilityDate: "2025-03-01",
-
+  compatibilityDate: "2024-04-03",
+  // plugins: ["~/plugins/supabase.js"],
   runtimeConfig: {
     FORMSPREE_URL: process.env.FORMSPREE_URL,
+    SUPABASE_URL: process.env.SUPABASE_URL,
+    SUPABASE_KEY: process.env.SUPABASE_KEY,
+    public: {
+      SUPABASE_URL: process.env.SUPABASE_URL,
+      SUPABASE_KEY: process.env.SUPABASE_KEY,
+    },
+  },
+  env: {
+    SUPABASE_URL: process.env.SUPABASE_URL,
+    SUPABASE_KEY: process.env.SUPABASE_KEY,
   },
 });

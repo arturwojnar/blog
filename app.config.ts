@@ -19,13 +19,19 @@ export default defineAppConfig({
       },
       navigation: true, // possible value are : true | false
       alignment: "center", // possible value are : 'none' | 'left' | 'center' | 'right'
-      message: "Follow me on", // string that will be displayed in the footer (leave empty or delete to disable)
+      message: "Contact with me by", // string that will be displayed in the footer (leave empty or delete to disable)
     },
     socials: {
       linkedin: {
         icon: "uil:linkedin",
         label: "LinkedIn",
         href: "https://www.linkedin.com/in/artur-wojnar-a19349a6/",
+      },
+      github: "arturwojnar",
+      envelope: {
+        href: "mailto:contact@arturwojnar.dev",
+        icon: `uil:envelope`,
+        label: "e-mail",
       },
     },
     form: {

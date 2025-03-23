@@ -10,4 +10,4 @@ layout: article
 
 <img class="article-image" src="/articles/decomposition/cover.png" alt>
 
-[Link to the article](https://arturwojnar.dev/why-make-a-decomposition-of-the-monolith-database-f91aea41af6c)
+[Link to the article](https://medium.com/@arturwojnar.dev/why-make-a-decomposition-of-the-monolith-database-f91aea41af6c)

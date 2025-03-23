@@ -10,4 +10,4 @@ layout: article
 
 <img class="article-image" src="/articles/solution/cover.png" alt>
 
-[Link to the article](https://arturwojnar.dev/the-ultimate-solution-to-everything-4e698edfc868)
+[Link to the article](https://medium.com/@arturwojnar.dev/the-ultimate-solution-to-everything-4e698edfc868)

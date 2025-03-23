@@ -10,4 +10,4 @@ layout: article
 
 <img class="article-image" src="/articles/availability/cover.png" alt>
 
-[Link to the article](https://arturwojnar.dev/comparing-time-availability-archetype-implementations-628499efaa28)
+[Link to the article](https://medium.com/@arturwojnar.dev/comparing-time-availability-archetype-implementations-628499efaa28)
