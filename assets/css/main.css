@@ -5,7 +5,7 @@
 }
 
 a.router-link-active, a:hover {
-  color: #ffec99 !important;
+  /* color: #ffec99 !important; */
 }
 
 .no-break {
@@ -15,7 +15,7 @@ a.router-link-active, a:hover {
 
 .blog-name {
   font-size: 1.2em;
-  color: #ffec99;
+  color: var(--color-primary-500);
 }
 
 .logo-about {
@@ -31,11 +31,11 @@ a.router-link-active, a:hover {
   margin-left: 1em;
 }
 
-.discord-section {
+.decorated-section {
   display: block;
   width: 20em;
   border-radius: 1em;
-  box-shadow: 0.5em 0.5em 0.5em #ffec99;
+  box-shadow: 0 0 1em var(--color-primary-500);
   padding: 2em;
   margin-bottom: 2em;
   display: flex;
@@ -44,7 +44,76 @@ a.router-link-active, a:hover {
   user-select: none;
 }
 
-.discord-section a {
+.decorated-section a {
   display: inline-block;
   margin-left: 1em;
+}
+
+.product {
+  display: flex;
+  align-items: center; /* Vertically center the image and content */
+  justify-content: center; /* Center the entire content */
+  width: 100%;
+}
+
+.product img {
+  align-self: center; /* Ensures the image is vertically centered */
+  margin-right: auto; /* Pushes everything else to the right */
+  display: block;
+}
+
+.product-content {
+  flex-grow: 1; /* Takes up remaining space */
+  display: flex;
+  flex-direction: column; /* Aligns items in rows (stacked) */
+  justify-content: center; /* Centers the content vertically */
+  text-align: left; /* Centers text inside */
+  font-size: 0.8em;
+  padding-left: 4em;
+}
+
+.product-description {
+  text-align: left;
+  text-justify: inter-word;
+}
+
+.product-description em {
+  font-weight: bold;
+}
+
+.product a {
+  margin-left: 0;
+}
+
+.talks-cover {
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.talk-section {
+  width: 100%;
+}
+
+.talk-conf {
+  font-size: 0.75em;
+}
+
+.talk-title {
+  position: relative;
+  margin-top: -1em;
+  font-weight: bold;
+}
+
+.talk-description {
+  font-size: 0.75em;
+}
+
+@media (min-width: 640px) {
+  header .main-nav {
+    font-size: var(--text-base-fontSize) !important;
+    white-space: nowrap;
+  }
 }
