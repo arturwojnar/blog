@@ -9,16 +9,20 @@ export default defineNuxtConfig({
     "@nuxtjs/supabase",
   ],
   supabase: {
-    // Disable redirect completely
+    // Set redirect to false directly
+    redirect: false,
+    // Also set redirectOptions to be safe
     redirectOptions: {
       login: false,
       callback: false,
       exclude: ["/**"],
     },
-    // This is important - set the correct client options
+    // Important for Vercel deployment
     clientOptions: {
       auth: {
-        persistSession: false, // Don't persist the session during SSR
+        persistSession: false,
+        autoRefreshToken: false,
+        detectSessionInUrl: false,
       },
     },
   },

@@ -74,7 +74,7 @@ const article = ref<HTMLElement | null>(null)
 
 const likes = ref(0)
 
-onMounted(async () => {
+if (process.client) {
   const supabase = useSupabaseClient()
   
   // Fetch likes only on client-side
@@ -85,7 +85,7 @@ onMounted(async () => {
     .maybeSingle()
   
   likes.value = data?.likes || 0
-})
+}
 
 if (page.value) {
   const linkArray = []
