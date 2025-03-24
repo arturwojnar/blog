@@ -11,27 +11,6 @@
       </span>
     </NuxtLink>
 
-    <ClientOnly>
-      <div class="like-container">
-        <button @click="likeArticle" class="like-button">❤️ {{ likes || 0 }}</button>
-        
-        <!-- Container for floating hearts -->
-        <div class="hearts-container">
-          <div
-            v-for="heart in hearts"
-            :key="heart.id"
-            class="floating-heart"
-            :style="{
-              left: heart.x + 'px',
-              animationDuration: heart.duration + 's'
-            }"
-          >
-            ❤️
-          </div>
-        </div>
-      </div>
-    </ClientOnly>
-
     <header>
       <h1
         v-if="page?.title"
@@ -72,20 +51,20 @@ const alpine = useAppConfig().alpine
 const slug = typeof route.params.slug === 'string' ? route.params.slug : route.params.slug[1] || route.params.slug[0]
 const article = ref<HTMLElement | null>(null)
 
-const likes = ref(0)
+// const likes = ref(0)
 
-if (process.client) {
-  const supabase = useSupabaseClient()
+// if (process.client) {
+//   const supabase = useSupabaseClient()
   
-  // Fetch likes only on client-side
-  const { data } = await supabase
-    .from('likes')
-    .select('likes')
-    .eq('article_slug', slug)
-    .maybeSingle()
+//   // Fetch likes only on client-side
+//   const { data } = await supabase
+//     .from('likes')
+//     .select('likes')
+//     .eq('article_slug', slug)
+//     .maybeSingle()
   
-  likes.value = data?.likes || 0
-}
+//   likes.value = data?.likes || 0
+// }
 
 if (page.value) {
   const linkArray = []
@@ -132,21 +111,21 @@ function addFloatingHeart() {
   }, duration * 1000)
 }
 
-async function likeArticle() {
-  if (process.client) {
-    const supabase = useSupabaseClient()
-    const { data, error } = await supabase.rpc('increment_likes', { slug });
+// async function likeArticle() {
+//   if (process.client) {
+//     const supabase = useSupabaseClient()
+//     const { data, error } = await supabase.rpc('increment_likes', { slug });
     
-    if (!error) {
-      likes.value = data as number
+//     if (!error) {
+//       likes.value = data as number
       
-      // Add multiple hearts for a nicer effect
-      for (let i = 0; i < 3; i++) {
-        setTimeout(() => addFloatingHeart(), i * 100) // Stagger heart creation
-      }
-    }
-  }
-}
+//       // Add multiple hearts for a nicer effect
+//       for (let i = 0; i < 3; i++) {
+//         setTimeout(() => addFloatingHeart(), i * 100) // Stagger heart creation
+//       }
+//     }
+//   }
+// }
 
 </script>
 
