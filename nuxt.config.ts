@@ -32,6 +32,10 @@ export default defineNuxtConfig({
       failOnError: false,
     },
   },
+  routeRules: {
+    // This would disable SSR for blog routes, adjust as needed
+    "/**": { ssr: false },
+  },
   runtimeConfig: {
     FORMSPREE_URL: process.env.FORMSPREE_URL,
   },
