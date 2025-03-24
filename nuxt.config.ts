@@ -26,11 +26,13 @@ export default defineNuxtConfig({
   //     },
   //   },
   // },
-  compatibilityDate: "2024-04-03",
+  // ssr: false,
   nitro: {
     preset: "vercel",
     prerender: {
-      failOnError: false,
+      // Set to empty object with no routes to effectively disable prerendering
+      routes: [],
+      ignore: ["/__studio.json", "/api/_content/*"],
     },
   },
   // routeRules: {
