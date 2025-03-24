@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     "@nuxt/devtools",
     // "@nuxtjs/supabase",
   ],
+  plugins: ["~/plugins/fix-nuxt-instance.server.js"],
   // supabase: {
   //   // Set redirect to false directly
   //   redirect: false,
