@@ -2,7 +2,7 @@
 cover: /articles/ts-dto.png
 author:
   name: Artur Wojnar
-date: 2025-03-18T00:00:00.000Z
+date: 2025-03-24T00:00:00.000Z
 title: "How easily get your DTO in TypeScript"
 layout: article
 ---
