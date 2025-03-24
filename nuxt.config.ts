@@ -26,12 +26,12 @@ export default defineNuxtConfig({
   //     },
   //   },
   // },
-  // nitro: {
-  //   preset: "vercel",
-  //   prerender: {
-  //     failOnError: false,
-  //   },
-  // },
+  nitro: {
+    preset: "vercel",
+    prerender: {
+      failOnError: false,
+    },
+  },
   // routeRules: {
   //   // This would disable SSR for blog routes, adjust as needed
   //   "/**": { ssr: false },
