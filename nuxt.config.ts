@@ -30,8 +30,6 @@ export default defineNuxtConfig({
   nitro: {
     preset: "vercel",
     prerender: {
-      // Set to empty object with no routes to effectively disable prerendering
-      routes: [],
       ignore: ["/__studio.json", "/api/_content/*"],
     },
   },
