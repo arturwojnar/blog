@@ -24,15 +24,15 @@ But what to do with those _users_?
   
 The problem is we can call whatever user-related a user.
 
-User _belongs_ to the complaints.
+➡️ User _belongs_ to the complaints.
 
-User _belongs_ to the blood examinations.
+➡️ User _belongs_ to the blood examinations.
 
-User _belongs_ to the shipment.
+➡️ User _belongs_ to the shipment.
 
-User _belongs_ to the patients' list.
+➡️ User _belongs_ to the patients' list.
 
-User _belongs_ to the clinics.
+➡️ User _belongs_ to the clinics.
 
 If you see a folder structure in your project like on the _Image 1_, there is a significant chance that something is firmly off in this project.
 
@@ -127,6 +127,8 @@ You can read more about the database coupling [here](https://www.knowhowcode.dev
 #### Outro
 
 **Adequately designed and modelled systems are nothing like a communist utopia.**
+
+Common is not good ☭ 🛑.
 
 In properly **designed** systems, there are **narrowed** "sectors" of the overall project's _domain knowledge_.
 

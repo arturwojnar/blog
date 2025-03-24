@@ -61,14 +61,10 @@
 </template>
 
 <script setup lang="ts">
-import type { SupabaseClient } from '@supabase/supabase-js'
-
-// import { supabase } from '../utils/supabase'
 
 const { page } = useContent()
 const route = useRoute()
-const { $supabase } = useNuxtApp()
-const supabase = $supabase as SupabaseClient
+const supabase = useSupabaseClient()
 const hearts = ref<{ id: number; x: number; duration: number }[]>([])
 let nextHeartId = 0
 const alpine = useAppConfig().alpine

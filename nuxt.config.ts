@@ -4,24 +4,18 @@ export default defineNuxtConfig({
   css: ["~/assets/css/main.css"],
   modules: [
     // https://github.com/nuxt-modules/plausible
-    "@nuxtjs/plausible",
-    // https://github.com/nuxt/devtools
+    "@nuxtjs/plausible", // https://github.com/nuxt/devtools
     "@nuxt/devtools",
+    "@nuxtjs/supabase",
   ],
-
-  compatibilityDate: "2024-04-03",
-  // plugins: ["~/plugins/supabase.js"],
-  runtimeConfig: {
-    FORMSPREE_URL: process.env.FORMSPREE_URL,
-    SUPABASE_URL: process.env.SUPABASE_URL,
-    SUPABASE_KEY: process.env.SUPABASE_KEY,
-    public: {
-      SUPABASE_URL: process.env.SUPABASE_URL,
-      SUPABASE_KEY: process.env.SUPABASE_KEY,
+  supabase: {
+    redirectOptions: {
+      login: false,
+      callback: false,
+      exclude: ["/**"], // This excludes ALL routes from authentication
     },
   },
-  env: {
-    SUPABASE_URL: process.env.SUPABASE_URL,
-    SUPABASE_KEY: process.env.SUPABASE_KEY,
+  runtimeConfig: {
+    FORMSPREE_URL: process.env.FORMSPREE_URL,
   },
 });
