@@ -11,24 +11,26 @@
       </span>
     </NuxtLink>
 
-    <div class="like-container">
-      <button @click="likeArticle" class="like-button">❤️ {{ likes || 0 }}</button>
-      
-      <!-- Container for floating hearts -->
-      <div class="hearts-container">
-        <div
-          v-for="heart in hearts"
-          :key="heart.id"
-          class="floating-heart"
-          :style="{
-            left: heart.x + 'px',
-            animationDuration: heart.duration + 's'
-          }"
-        >
-          ❤️
+    <ClientOnly>
+      <div class="like-container">
+        <button @click="likeArticle" class="like-button">❤️ {{ likes || 0 }}</button>
+        
+        <!-- Container for floating hearts -->
+        <div class="hearts-container">
+          <div
+            v-for="heart in hearts"
+            :key="heart.id"
+            class="floating-heart"
+            :style="{
+              left: heart.x + 'px',
+              animationDuration: heart.duration + 's'
+            }"
+          >
+            ❤️
+          </div>
         </div>
       </div>
-    </div>
+    </ClientOnly>
 
     <header>
       <h1
@@ -64,20 +66,26 @@
 
 const { page } = useContent()
 const route = useRoute()
-const supabase = useSupabaseClient()
 const hearts = ref<{ id: number; x: number; duration: number }[]>([])
 let nextHeartId = 0
 const alpine = useAppConfig().alpine
 const slug = typeof route.params.slug === 'string' ? route.params.slug : route.params.slug[1] || route.params.slug[0]
 const article = ref<HTMLElement | null>(null)
 
-const { data } = await supabase
-  .from('likes')
-  .select('likes')
-  .eq('article_slug', slug)
-  .maybeSingle()
-const initialLikes = data?.likes || 0
-const likes = ref(initialLikes)
+const likes = ref(0)
+
+onMounted(async () => {
+  const supabase = useSupabaseClient()
+  
+  // Fetch likes only on client-side
+  const { data } = await supabase
+    .from('likes')
+    .select('likes')
+    .eq('article_slug', slug)
+    .maybeSingle()
+  
+  likes.value = data?.likes || 0
+})
 
 if (page.value) {
   const linkArray = []
@@ -125,15 +133,17 @@ function addFloatingHeart() {
 }
 
 async function likeArticle() {
-  const { data, error } = await supabase.rpc('increment_likes', { slug });
-  likes.value = data as number
-
-  if (!error) {
-    likes.value = data as number
+  if (process.client) {
+    const supabase = useSupabaseClient()
+    const { data, error } = await supabase.rpc('increment_likes', { slug });
     
-    // Add multiple hearts for a nicer effect
-    for (let i = 0; i < 3; i++) {
-      setTimeout(() => addFloatingHeart(), i * 100) // Stagger heart creation
+    if (!error) {
+      likes.value = data as number
+      
+      // Add multiple hearts for a nicer effect
+      for (let i = 0; i < 3; i++) {
+        setTimeout(() => addFloatingHeart(), i * 100) // Stagger heart creation
+      }
     }
   }
 }

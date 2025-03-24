@@ -9,10 +9,23 @@ export default defineNuxtConfig({
     "@nuxtjs/supabase",
   ],
   supabase: {
+    // Disable redirect completely
     redirectOptions: {
       login: false,
       callback: false,
-      exclude: ["/**"], // This excludes ALL routes from authentication
+      exclude: ["/**"],
+    },
+    // This is important - set the correct client options
+    clientOptions: {
+      auth: {
+        persistSession: false, // Don't persist the session during SSR
+      },
+    },
+  },
+  nitro: {
+    preset: "vercel",
+    prerender: {
+      failOnError: false,
     },
   },
   runtimeConfig: {
