@@ -1,5 +1,0 @@
-{
-  "buildCommand": "NITRO_VERCEL_COMPATIBILITY_DATE=2024-04-03 NUXT_SKIP_PRERENDER=true NITRO_PRESET=vercel-edge npm run build",
-  "installCommand": "npm install",
-  "framework": "nuxt"
-}
