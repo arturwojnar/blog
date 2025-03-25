@@ -10,4 +10,4 @@ layout: article
 
 <img class="article-image" src="/articles/fhir/cover.webp" alt>
 
-[Link to the article](https://arturwojnar.dev/hl7-fhir-foundations-in-the-architectural-context-a4a676c0aeab)
+[Link to the article](https://medium.com/@arturwojnar.dev/hl7-fhir-foundations-in-the-architectural-context-a4a676c0aeab)
