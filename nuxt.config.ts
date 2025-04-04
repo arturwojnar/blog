@@ -10,7 +10,14 @@ export default defineNuxtConfig({
   ],
 
   compatibilityDate: "2025-03-01",
-
+  app: {
+    head: {
+      link: [
+        { rel: "icon", type: "image/x-icon", href: "/icons/favicon.ico" },
+        { rel: "manifest", href: "/manifest.json" },
+      ],
+    },
+  },
   supabase: {
     // Set redirect to false directly
     redirect: false,
