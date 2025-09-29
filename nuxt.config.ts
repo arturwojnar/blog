@@ -103,6 +103,7 @@ export default defineNuxtConfig({
       xl: 1280,
       xxl: 1536,
     },
+    dir: "public",
   },
 
   // Enable experimental features for better performance
