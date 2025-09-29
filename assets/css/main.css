@@ -116,8 +116,4 @@ a.router-link-active, a:hover {
     font-size: var(--text-base-fontSize) !important;
     white-space: nowrap;
   }
-
-  .decorated-section {
-    display: none
-  }
 }

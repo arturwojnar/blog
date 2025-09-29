@@ -50,9 +50,14 @@ const id = computed(() => {
         </span>
       </div>
       <NuxtLink :to="article._path">
-        <img
+        <NuxtImg
           :src="article.cover"
           :alt="article.title"
+          width="480"
+          height="270"
+          format="webp"
+          quality="95"
+          sizes="sm:640px md:768px lg:480px"
           style="width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; border-radius: 0.5rem;"
         />
       </NuxtLink>

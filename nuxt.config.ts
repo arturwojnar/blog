@@ -11,6 +11,12 @@ export default defineNuxtConfig({
     "@nuxt/image",
   ],
 
+  // Color mode configuration - set default to light
+  colorMode: {
+    preference: "light", // default theme
+    fallback: "light", // fallback theme if preference is not available
+  },
+
   compatibilityDate: "2025-03-01",
   app: {
     head: {
@@ -102,6 +108,13 @@ export default defineNuxtConfig({
   // Enable experimental features for better performance
   experimental: {
     payloadExtraction: false,
+  },
+
+  // MDC configuration for syntax highlighting
+  mdc: {
+    highlight: {
+      langs: ["sql"],
+    },
   },
 
   supabase: {
