@@ -17,7 +17,7 @@ readingTime: 8
 published: true
 ---
 
-<img class="article-image" src="/articles/solution/cover.webp" alt>
+<img class="article-image" src="/articles/solution/cover.webp" alt="" loading="eager" fetchpriority="high" />
 
 _“__**STOP**_ _using it”_
 
@@ -55,7 +55,9 @@ _We tend to follow algorithms (patterns) to solve our problems_. We expect to im
 
 I’ve learned through experience that blindly following rules can be costly regarding time and resources. Instead, I advocate for a more pragmatic approach focused on managing risk effectively._I gathered my most important rules under yet another acronym: 3R_.
 
-**Risk management rule**There’s no infinite time for planning and development, so everybody talks about trade-offs. Not because something is impossible but because we can’t do 100 architecture iterations or work on one story by one year.
+### Risk management rule
+
+There’s no infinite time for planning and development, so everybody talks about trade-offs. Not because something is impossible but because we can’t do 100 architecture iterations or work on one story by one year.
 
 I think about programming and designing architectures as _legacy code management_. Legacy code is always with us, but if it is contained in _predictable boxes, it_ can be manageable, and the overall project’s costs are more satisfying. First things first: for me, legacy code is code that a developer calls “_we have to fix it someday_” — it is an implementation that is not done by the book and, at some point, can cause problems.
 
@@ -80,7 +82,9 @@ It is a fair summary of my thoughts to say that I strive to keep legacy code man
 
 Risk management is broad, but I don’t want to contain everything here. Speaking of that, I encounter two bigger building blocks of my thinking (at least starting from R)
 
-**Redundancy**I’ve liked redundancy after years of trying to be [DRY](https://en.wikipedia.org/wiki/Don't_repeat_yourself). It’s the harmful rule, a relic of the past, yet another example of how thinking is necessary before applying “_good practices_”.
+### Redundancy
+
+I’ve liked redundancy after years of trying to be [DRY](https://en.wikipedia.org/wiki/Don't_repeat_yourself). It’s the harmful rule, a relic of the past, yet another example of how thinking is necessary before applying “_good practices_”.
 
 _WET >> DRY__WET_ stands for _Write Everything Twice_, the opposite of _DRY_. But I don’t use it as a hammer. My rule of thumb is to apply _DRY_ on the module level, but for everything else, think 5 times before making a generalisation (see point 3 in the previous section). Infrastructure-specific and typing utils are probably good candidates for a separate package or a common code in a mono repo.
 
@@ -128,7 +132,9 @@ Neal Ford describes orphaned classes and the Flatten Components Pattern:
 
 I like making refactoring like this because it’s also part of the risk/legacy code management — potential split into separate deployable units will be much simpler, and orphaned files tend to hurt their dependencies by violating of Liskov rule.
 
-**Restrained ocean**If my kid wants to play and sees too many toys, she ends up trying to play with every toy for a few seconds, so eventually, she plays with nothing and gets unfocused. If you’re a parent, you know that for sure 🙂
+### Restrained ocean
+
+If my kid wants to play and sees too many toys, she ends up trying to play with every toy for a few seconds, so eventually, she plays with nothing and gets unfocused. If you’re a parent, you know that for sure 🙂
 
 _A restrained ocean means limiting an ocean of possibilities_. Instead of trying to grasp the whole underwater space and all the creatures living there, it’s better to refrain from absorbing everything to not overload our senses. I purposefully limit the possibilities of plays for my daughter so that she can enjoy her time instead of falling into chaos.
 

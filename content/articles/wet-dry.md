@@ -26,4 +26,4 @@ But still, it is a good practice in _SOME PLACES_. Like, you have a class and an
 
 Check out my simple _diagram_ what is the goal and importance od the WET.
 
-<img class="article-image" src="/articles/dry-wet.webp" alt>
+<img class="article-image" src="/articles/dry-wet.webp" alt="" loading="eager" fetchpriority="high" />

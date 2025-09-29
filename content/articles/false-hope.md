@@ -40,4 +40,4 @@ Giving people hope they magically got an architecture because they implemented X
 
 Go to the whiteboard, take a pen and design YOUR PROJECT's processes and functionalities. After that, make some bold decisions you can call Architecture.
 
-<img class="article-image" src="/articles/false-hope.webp" alt>
+<img class="article-image" src="/articles/false-hope.webp" alt="" loading="eager" fetchpriority="high" />

@@ -42,4 +42,4 @@ How does it help me?
   
 📖 _Example_. During big picture event storming sessions, I allow for sticky notes that are not events because that also helps me to get where I want to be. I don’t force participants to follow strict rules but give them space to express their thoughts.  
 
-<img class="article-image" src="/articles/overengineering.webp" alt>
+<img class="article-image" src="/articles/overengineering.webp" alt="" loading="eager" fetchpriority="high" />

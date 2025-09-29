@@ -18,7 +18,7 @@ readingTime: 12
 published: true
 ---
 
-<img class="article-image" src="/articles/decomposition/cover.webp" alt>
+<img class="article-image" src="/articles/decomposition/cover.webp" alt="" loading="eager" fetchpriority="high" />
 
 Figure 0. A typical emotion when you look at your database schema.
 
@@ -68,14 +68,14 @@ A team, trying to cut down on costs and working on the _MVP_, could agree, not 
 
 may entail the necessity of refactoring other parts of the system depending on these data. Later, the team has to deploy several services and go through test protocols for these services. That results in increased estimations. On the other hand, if we forgot about one of the dependent services then we would face a regression.
 
-![](/articles/decomposition/1.webp)
+<img class="article-image" src="/articles/decomposition/1.webp" alt="" loading="eager" fetchpriority="high" />
 Figure 1. Services A, B, and C depend on one database.
 
 A change in one of the services may impact or even force the change in other services.
 
 Let’s imagine that _Service A_ is responsible for handling nurses, _Service B_ for patients, and _Service C_ for patients’ therapeutical indications and notes provided by nurses. Let’s also assume that this division is the best at the very moment and it’s the result of many analyses. It turns out that, despite having separate tables for nurses and patients, there’s also a table _Users_, because the two entities have a lot in common: e.g. _forename_, _surname_, _phone number_, _email address_, etc.
 
-![](/articles/decomposition/2.webp)
+<img class="article-image" src="/articles/decomposition/2.webp" alt="" loading="eager" fetchpriority="high" />
 Figure 2. Generalization results in one architectural quantum.
 
 As a result, _team A_ and _team B_ or _C_ can affect each other while having separate domain models and seemingly the corresponding tables. That’s a bad thing because the desire was to make the teams much more independent and the communication between them should only occur on the API contract level. So, answering the author’s question — “_how many services are impacted by a database table change?_” — the answer is 2 and we can’t think of those services as independent.
@@ -98,14 +98,14 @@ Fault tolerance & Security
 
 We have N services smiling at us on the production cluster; Teams can work on separate service source codes and deploy them separately (unless you link them by your data — see [Loose coupling](https://medium.com/@arturwojnar.dev/why-make-a-decomposition-of-the-monolith-database-f91aea41af6c#d599)). It’s Sunday morning when, due to maintenance work scheduled by a vendor, your database crashes. It may be because of something — let’s say it’s a matter of deprecated configuration of one of the plugins you use, the plugin that is required only by exactly one of your services (_Service C_). Unfortunately, that scales onto the replica sets, too. As the result, your entire system is down. If we had data split up for _Service C_, kept separately in a dedicated database, the unlucky maintenance upgrade wouldn’t cause this big-scale damage, leading to the frustration of customers and your boss. Then, only one service would be acting up, not all, so only a subset of functionalities would be unreachable as depicted in _Figure 3_ (assuming that the responsibilities of the services are split wisely and the services don’t need each other all time to provide functionalities to end users).
 
-![](/articles/decomposition/3.webp)
+<img class="article-image" src="/articles/decomposition/3.webp" alt="" loading="eager" fetchpriority="high" />
 Figure 3. An outage in database C impacts only Service C.
 
 Similarly, what can happen in the case of a shared database breakdown can also apply to security concerns which is one of the aspects I missed in the book.
 
 If our database gets compromised, then **all data get compromised** off hand, including sensitive and private data of our patients and their medical records. What a mess! If our concern is security and this is one of the important non-functional requirements, then knowing which data are the most valuable, we may decide to move them to a separate database, although it’s not necessary from the domain perspective.Keeping those data separate also may not be sufficient, because our whole network could be hijacked. **The best way to mitigate this possibility is to keep your security-sensitive database in a separate** _**Virtual Private Cloud⁴**_; Then you are guaranteed that traffic is enclosed within each VPC and there’s no room for misconfigured firewalls (security groups, when talking in the context of AWS). You can add an explicit VPC Peering connection between two networks to keep traffic private.
 
-![](/articles/decomposition/4.webp)
+<img class="article-image" src="/articles/decomposition/4.webp" alt="" loading="eager" fetchpriority="high" />
 Figure 4. Two networks. Each is independent with separate addresses pool.
 
 Database type optimization
@@ -150,7 +150,7 @@ So, why exactly should we care about databases?
     
 *   _Scalability_. _Reliability_. _Fault tolerance_.Lots of _buzzwords_, but the younger the age of the NoSQL database is also their leverage. They often have been constructed from scratch, sometimes based e.g. on MySQL database like it is with _Amazon DynamoDB_ or Meta’s database, but their architecture is also often distributed. You can scale out relational databases vertically, and you can have read replica sets, but if you want to have **sharding** (horizontal scaling), this is when the problems start; Fortunately, we can use totally distributed **cloud-native serverless databases** (with completely different philosophy) like AWS DynamoDB.Very short and high-level description of how this database work is: your table gets divided into partitions and DynamoDB “knows” how to get to a partition and its data by the special hash function (see Figure 4). Partitions also get replicated over multiple Availability Zones; In front of partitions are run scaled-out _Request Routers_ (APIs) that handle your requests and deal with “joins” in-flight. _DynamoDB_ defines several access patterns to retrieve and store data and it means there are many constraints on what you can do and it’s easy to get messy if you don’t know what you do or you don’t have a proper design. You can have only a few _Global Secondary Indexes_ which create a new _B-Tree_ structure being a different read model of your data.
 
-![](/articles/decomposition/5.webp)
+<img class="article-image" src="/articles/decomposition/5.webp" alt="" loading="eager" fetchpriority="high" />
 Figure 5. A high-level picture on scalability of DynamoDB.
 
 *   As you see, it is a different approach with the sharding by default in which you have to first have well-defined boundaries and responsibilities within your domain design resulting in data ownership letting to have a reliable and performant data structure.Although _DynamoDB_ supports transactions providing _ACID_ guarantee, it’s not a natural thing for distributed systems and for sure it’s not a performant one; On the contrary to the _ACID_, the distributed systems define _BASE_ (you know, like in chemistry) that focuses mainly on the eventual consistency.If you’re interested you can dive into this topic on [this blog by Alex Debrie.](https://www.alexdebrie.com/posts/dynamodb-no-bad-queries/) Also, you can try one of Reinvent YouTube’s videos [like this one](https://www.youtube.com/watch?v=yvBR71D0nAQ).Remember, that cloud-native database will always be more scalable than on-premise databases.
