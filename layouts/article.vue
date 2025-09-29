@@ -90,16 +90,92 @@ if (process.client) {
 if (page.value) {
   const linkArray = []
   const metaArray = []
-  
-  if (page.value.cover) {
-    metaArray.push({ property: 'og:image', content: page.value.cover })
+  const scriptArray = []
+
+  // Basic meta tags
+  if (page.value.title) {
+    metaArray.push(
+      { name: 'og:title', content: page.value.title },
+      { name: 'twitter:title', content: page.value.title }
+    )
   }
+
+  if (page.value.description) {
+    metaArray.push(
+      { name: 'description', content: page.value.description },
+      { property: 'og:description', content: page.value.description },
+      { name: 'twitter:description', content: page.value.description }
+    )
+  }
+
+  if (page.value.cover) {
+    metaArray.push(
+      { property: 'og:image', content: page.value.cover },
+      { name: 'twitter:image', content: page.value.cover }
+    )
+  }
+
   if (page.value.canonical) {
     linkArray.push({ rel: 'canonical', href: page.value.canonical })
   }
+
+  // Open Graph and Twitter Card meta tags
+  metaArray.push(
+    { property: 'og:type', content: 'article' },
+    { property: 'og:url', content: `https://www.knowhowcode.dev${route.path}` },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:creator', content: '@arturwojnar' }
+  )
+
+  if (page.value.date) {
+    metaArray.push(
+      { property: 'article:published_time', content: new Date(page.value.date).toISOString() },
+      { property: 'article:author', content: 'Artur Wojnar' }
+    )
+  }
+
+  // Structured data for blog post
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": page.value.title,
+    "description": page.value.description,
+    "author": {
+      "@type": "Person",
+      "name": "Artur Wojnar",
+      "url": "https://www.knowhowcode.dev"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Artur Wojnar",
+      "url": "https://www.knowhowcode.dev"
+    },
+    "url": `https://www.knowhowcode.dev${route.path}`,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://www.knowhowcode.dev${route.path}`
+    }
+  }
+
+  if (page.value.date) {
+    structuredData.datePublished = new Date(page.value.date).toISOString()
+    structuredData.dateModified = new Date(page.value.date).toISOString()
+  }
+
+  if (page.value.cover) {
+    structuredData.image = page.value.cover
+  }
+
+  scriptArray.push({
+    type: 'application/ld+json',
+    children: JSON.stringify(structuredData)
+  })
+
   useHead({
+    title: page.value.title,
     meta: metaArray,
-    link: linkArray
+    link: linkArray,
+    script: scriptArray
   })
 }
 

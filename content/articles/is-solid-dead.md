@@ -1,14 +1,25 @@
 ---
-cover: /articles/is-solid-dead.png
+cover: /articles/is-solid-dead.webp
 author:
   name: Artur Wojnar
+  url: https://www.linkedin.com/in/artur-wojnar-a19349a6/
 date: 2025-01-12T00:00:00.000Z
 title: "Is SOLID dead?"
-description: "I'll do a small revision of the SOLID pronciples, shifting it more towards high-level components.  "
+description: "I'll do a small revision of the SOLID principles, shifting it more towards high-level components and modern software development practices."
 layout: article
+tags:
+  - solid-principles
+  - software-architecture
+  - design-principles
+  - best-practices
+  - code-quality
+canonical: https://www.knowhowcode.dev/articles/is-solid-dead
+excerpt: "Revisiting SOLID principles in the context of modern software development and high-level component design"
+readingTime: 6
+published: true
 ---
 
-<img class="article-image" src="/articles/is-solid-dead.png" alt>
+<img class="article-image" src="/articles/is-solid-dead.webp" alt>
 
 In the past year, I've had the chance to work on a skills matrix at my company. It's been a hell of a challenge, and I still feel the burden of potential consequences.  
 I concluded with my colleagues that soft skills comprise at least half of a developer's capabilities. These include communication, independence, and a willingness to work on both front—and back-ends.  

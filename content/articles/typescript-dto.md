@@ -1,10 +1,22 @@
 ---
-cover: /articles/ts-dto.png
+cover: /articles/ts-dto.webp
 author:
   name: Artur Wojnar
+  url: https://www.linkedin.com/in/artur-wojnar-a19349a6/
 date: 2025-03-24T00:00:00.000Z
 title: "How easily get your DTO in TypeScript"
+description: "Learn simple and effective ways to create DTOs in TypeScript for better type safety and data validation in your applications."
 layout: article
+tags:
+  - typescript
+  - dto
+  - data-validation
+  - nodejs
+  - type-safety
+canonical: https://www.knowhowcode.dev/articles/typescript-dto
+excerpt: "A practical guide to creating Data Transfer Objects (DTOs) in TypeScript with simple, effective patterns"
+readingTime: 5
+published: true
 ---
 
 I changed my mind after years of mentally not supporting TypeScript 😈  

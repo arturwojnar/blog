@@ -1,10 +1,21 @@
 ---
-cover: /articles/false-hope.png
+cover: /articles/false-hope.webp
 author:
   name: Artur Wojnar
+  url: https://www.linkedin.com/in/artur-wojnar-a19349a6/
 date: 2024-11-20T00:00:00.000Z
 title: "False hope of various architectures from books"
+description: "Why naming patterns as 'architectures' creates false hope. Learn the difference between implementation patterns and true software architecture."
 layout: article
+tags:
+  - software-architecture
+  - hexagonal-architecture
+  - clean-architecture
+  - design-thinking
+canonical: https://www.knowhowcode.dev/articles/false-hope
+excerpt: "Exploring why calling implementation patterns 'architectures' misleads developers and how to approach true architectural design"
+readingTime: 4
+published: true
 ---
 
 If "_Hexagonal Architecture_" were changed to "_Hexagonal Implementation_", it would be much less confusing, IMHO.
@@ -29,4 +40,4 @@ Giving people hope they magically got an architecture because they implemented X
 
 Go to the whiteboard, take a pen and design YOUR PROJECT's processes and functionalities. After that, make some bold decisions you can call Architecture.
 
-<img class="article-image" src="/articles/false-hope.png" alt>
+<img class="article-image" src="/articles/false-hope.webp" alt>

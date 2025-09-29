@@ -1,14 +1,25 @@
 ---
-cover: /articles/ux-and-architect/cover.png
+cover: /articles/ux-and-architect/cover.webp
 author:
   name: Artur Wojnar
+  url: https://www.linkedin.com/in/artur-wojnar-a19349a6/
 date: 2025-03-09T00:00:00.000Z
 title: "UX and Architect are two sides of the design"
 description: "Programming is not the most essential part of the development process, but the collaboration is."
 layout: article
+tags:
+  - ux-design
+  - software-architecture
+  - collaboration
+  - design-process
+  - team-communication
+canonical: https://www.knowhowcode.dev/articles/ux-and-architect
+excerpt: "Exploring how UX designers and software architects collaborate in the design process and why programming is just a side effect"
+readingTime: 7
+published: true
 ---
 
-<img class="article-image" src="/articles/ux-and-architect/cover.png" alt>
+<img class="article-image" src="/articles/ux-and-architect/cover.webp" alt>
 
 _The more I mature like a wine in a dark software development basement, the more I’m convinced that programming is not the most essential part of the development process, but the **collaboration** is._
 
@@ -50,11 +61,11 @@ All of that contributes to the potential project’s success.
 Below, you can see today’s fruit of my collaboration with [Natalia Milerska](https://www.linkedin.com/in/natalia-milerska). _We squeezed the maximum knowledge into 3 hours of workshops_😃
 
 <p>
-  <img class="article-image" src="/articles/ux-and-architect/image1.png" alt>
+  <img class="article-image" src="/articles/ux-and-architect/image1.webp" alt>
   <em class="image-description">A simple workshop board with a timeline and categorized sets of questions</em>
 </p>
 
 <p>
-  <img class="article-image" src="/articles/ux-and-architect/image2.png" alt>
+  <img class="article-image" src="/articles/ux-and-architect/image2.webp" alt>
   <em class="image-description">I tried for the first time the <b>Domain Storytelling</b> (Stefan Höfer, Henning Schwentner). I liked it!</em>
 </p>
