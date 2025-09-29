@@ -10,19 +10,19 @@
     "lint": "eslint ."
   },
   "devDependencies": {
-    "@nuxt-themes/alpine": "latest",
-    "@nuxt/devtools": "~1.0.8",
-    "@nuxt/eslint-config": "~0.2.0",
-    "@nuxt/ui-templates": "1.3.4",
-    "@nuxtjs/plausible": "~0.2.4",
-    "@nuxtjs/supabase": "1.5.0",
-    "@types/node": "~20.11.24",
-    "eslint": "~8.57.0",
-    "nuxt": "~3.10.3"
+    "@nuxt-themes/alpine": "~1.6.2",
+    "@nuxt/devtools": "latest",
+    "@nuxt/eslint-config": "latest",
+    "@nuxt/ui-templates": "latest",
+    "@nuxtjs/plausible": "latest",
+    "@nuxtjs/supabase": "latest",
+    "@types/node": "latest",
+    "eslint": "latest",
+    "nuxt": "latest"
   },
   "dependencies": {
-    "@nuxt/image": "~1.11.0",
-    "@nuxtjs/sitemap": "~7.4.7",
-    "@vercel/analytics": "1.5.0"
+    "@nuxt/image": "latest",
+    "@nuxtjs/sitemap": "latest",
+    "@vercel/analytics": "latest"
   }
 }
