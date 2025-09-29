@@ -54,7 +54,6 @@ export default defineNuxtConfig({
       link: [
         { rel: "icon", type: "image/x-icon", href: "/icons/favicon.ico" },
         { rel: "manifest", href: "/manifest.json" },
-        { rel: "canonical", href: "https://www.knowhowcode.dev" },
       ],
       script: [
         {
