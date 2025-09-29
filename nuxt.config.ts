@@ -92,18 +92,18 @@ export default defineNuxtConfig({
 
   // Image optimization
   image: {
-    provider: "ipx",
+    provider: "vercel",
     quality: 95,
-    format: ["webp", "png", "jpg"],
     screens: {
       xs: 320,
-      sm: 640,
-      md: 768,
-      lg: 1024,
-      xl: 1280,
-      xxl: 1536,
+      sm: 480,
+      md: 640,
+      lg: 768,
+      xl: 960,
+      '2xl': 1024,
+      '3xl': 1280,
+      '4xl': 1536,
     },
-    dir: "public",
   },
 
   // Enable experimental features for better performance

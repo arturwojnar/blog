@@ -19,15 +19,15 @@ published: true
 
 <img class="article-image" src="/articles/solution/cover.webp" alt="" loading="eager" fetchpriority="high" />
 
-_“__**STOP**_ _using it”_
+“**STOP**_ _using it”_
 
-_“If you do_ _**THAT, THEN YOU DO IT WRONG!**__”_
+_“If you do_ _**THAT, THEN YOU DO IT WRONG!**”_
 
 _“A technique you_ _**must**_ _know”_
 
-_“The X framework is_ _**DEAD**__”_
+_“The X framework is_ _**DEAD**”_
 
-_“__**The rise**_ _of Y framework”_
+_“**The rise**_ _of Y framework”_
 
 If you roll your eyes or, worse, you feel troubled whenever you read an eye-catching, heart-breaking, and click-bait title like one of those above, you’ve finally found a good place for you (I hope so). Let’s delve into a discourse on how we approach problem-solving.
 
