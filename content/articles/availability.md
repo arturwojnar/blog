@@ -49,9 +49,11 @@ _**We all came together to question how slow the other two solutions are compare
 
 _An Archetype_ is a defined **solution to a business problem**._The Time Availability_ answers the question: “_Can I schedule resource X between D1 and D2?_”.
 
-<img class="article-image" src="/articles/availability/1.webp" alt="" loading="eager" fetchpriority="high" />
+<p>
+  <img class="article-image" src="/articles/availability/1.webp" alt="" loading="eager" fetchpriority="high" />
+  <em class="image-description">Image 1. Oops! Can't be in two places at the same time!</em>
+</p>
 
-Image 1. Oops! Can't be in two places at the same time!
 
 Certainly, you bumped into this problem class. *Can I book that cottage house for the upcoming weekend? Can I "book" the babysitter, Alice, for this evening? Can I schedule a Bali massage with Nu Luh next Wednesday at 16:00? Can I have this doctor's call at 14:15-14:30?*
 
