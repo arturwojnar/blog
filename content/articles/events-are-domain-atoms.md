@@ -26,6 +26,8 @@ What detail was that? I realised that events are atoms in the domain world.
 
 If you wonder how to take another step towards business language and its technical representation, then you should definitely read this article. You will learn how discovering business capabilities combined with event sourcing and the decider pattern helps you in this challenge.
 
+> PS. That wouldn't happen without Oskar Dudycz, who testified with authority that event sourcing is the thing 😀 Also, that wouldn't happen without [Emmett](https://event-driven-io.github.io/emmett/getting-started.html) and its rapidly growing and thriving community. If you use NodeJS, then use Emmett for the event sourcing!
+
 ## Focus on events
 
 👉 Events let you focus more on the domain rather than fixate on nouns and lastly-updated states.
