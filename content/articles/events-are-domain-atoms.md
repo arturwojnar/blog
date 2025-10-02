@@ -20,7 +20,7 @@ published: true
 <img class="article-image" src="/articles/events-are-domain-atoms/cover.webp" alt="" loading="eager" fetchpriority="high" />
 
 Last year was a marathon of learning for me. I've finally tried event sourcing, and I love it! ❤️
-The shift towards it may not have been difficult, because I was already deep in event-driven architecture. Realising one tiny detail convinced me I can be more business-oriented and closer to the domain language than I was.
+The shift towards it may not have been difficult, because I was already deep in event-driven architecture. I decided to do so after realising one tiny detail, which convinced me I could be more business-oriented and closer to the domain language than I was.
 
 What detail was that? I realised that events are atoms in the domain world.
 
