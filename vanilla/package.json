@@ -1,0 +1,47 @@
+{
+  "name": "know-how-code",
+  "version": "1.0.0",
+  "description": "Know-How Code blog by Artur Wojnar.",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc",
+    "build": "tsc && node ./node_modules/.bin/eleventy",
+    "build:ts": "tsc",
+    "build:11ty": "node ./node_modules/.bin/eleventy",
+    "dev:ts": "nodemon --watch server --ext ts --exec \"node server/index.ts\"",
+    "dev:11ty": "node ./node_modules/.bin/eleventy --watch",
+    "dev": "concurrently \"npm:dev:11ty\" \"npm:dev:ts\"",
+    "start": "node server/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/arturwojnar/blog.git"
+  },
+  "keywords": [
+    "blog",
+    "arturwojnar",
+    "knowhowcode",
+    "softwarearchitecture",
+    "ddd"
+  ],
+  "author": "Artur Wojnar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arturwojnar/blog/issues"
+  },
+  "homepage": "https://github.com/arturwojnar/blog#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "~3.1.2",
+    "@11ty/eleventy-plugin-syntaxhighlight": "~5.0.2",
+    "@types/express": "~5.0.3",
+    "concurrently": "~9.2.1",
+    "nodemon": "~3.1.10",
+    "typescript": "~5.9.3"
+  },
+  "dependencies": {
+    "express": "~5.1.0",
+    "lit": "~3.3.1"
+  }
+}

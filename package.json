@@ -10,13 +10,14 @@
     "lint": "eslint ."
   },
   "devDependencies": {
+    "@11ty/eleventy": "~3.1.2",
     "@nuxt-themes/alpine": "~1.6.2",
     "@nuxt/devtools": "latest",
     "@nuxt/eslint-config": "latest",
     "@nuxt/ui-templates": "latest",
     "@nuxtjs/plausible": "latest",
     "@nuxtjs/supabase": "latest",
-    "@types/node": "latest",
+    "@types/node": "~24.7.1",
     "eslint": "latest",
     "nuxt": "latest"
   },
