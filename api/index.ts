@@ -24,7 +24,11 @@ const sendHtml = async (uri: string, res: Response) => {
   res.send(html.result);
 };
 
-app.use(express.static(path.join(__dirname, "../public")));
+// In production (Vercel), static files are served directly from outputDirectory
+// In development, serve from public directory
+if (process.env.NODE_ENV !== 'production') {
+  app.use(express.static(path.join(__dirname, "../public")));
+}
 
 // API endpoints for likes
 app.get("/api/likes/:slug", async (req: Request, res: Response) => {
