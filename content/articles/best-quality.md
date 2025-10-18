@@ -1,11 +1,22 @@
 ---
-cover: /articles/best-quality.png
+cover: /articles/best-quality.webp
 author:
   name: Artur Wojnar
+  url: https://www.linkedin.com/in/artur-wojnar-a19349a6/
 date: 2024-12-10T00:00:00.000Z
 title: "How teams fail to provide adequate quality"
-description: "very system you develop is distributed. Pretending it is not exposes your client’s system to the unpredictability of the world’s reality."
+description: "Learn why teams waste time applying unnecessary quality attributes and how to determine the right level of quality for your system's actual needs."
 layout: article
+tags:
+  - software-quality
+  - system-design
+  - quality-attributes
+  - team-management
+  - software-development
+canonical: https://www.knowhowcode.dev/articles/best-quality
+excerpt: "Understanding how teams often over-engineer quality attributes and how to find the right balance for your specific requirements"
+readingTime: 5
+published: true
 ---
 
 I've seen many teams waste their time and budget applying quality attributes they are not obligated to follow.  

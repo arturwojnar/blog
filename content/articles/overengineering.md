@@ -1,10 +1,22 @@
 ---
-cover: /articles/overengineering.png
+cover: /articles/overengineering.webp
 author:
   name: Artur Wojnar
+  url: https://www.linkedin.com/in/artur-wojnar-a19349a6/
 date: 2024-12-05T00:00:00.000Z
 title: "Overengineering by being a prisoner of patterns"
+description: "Learn how being trapped by design patterns leads to overengineering. Discover the balance between coupling control and communication in software development."
 layout: article
+tags:
+  - overengineering
+  - design-patterns
+  - software-architecture
+  - coupling
+  - communication
+canonical: https://www.knowhowcode.dev/articles/overengineering
+excerpt: "Understanding how rigid adherence to patterns can trap developers and lead to unnecessarily complex solutions"
+readingTime: 4
+published: true
 ---
 
 Yesterday, I wrote about magic components 🥩🥕 consisting of most of the patterns, approaches, strategies, processes and workshop methodologies.  
@@ -30,4 +42,4 @@ How does it help me?
   
 📖 _Example_. During big picture event storming sessions, I allow for sticky notes that are not events because that also helps me to get where I want to be. I don’t force participants to follow strict rules but give them space to express their thoughts.  
 
-<img class="article-image" src="/articles/overengineering.png" alt>
+<img class="article-image" src="/articles/overengineering.webp" alt="" loading="eager" fetchpriority="high" />

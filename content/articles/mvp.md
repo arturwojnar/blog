@@ -8,6 +8,6 @@ description: "My thoughts on how we can help ourselves to successfully deliver t
 layout: article
 ---
 
-<img class="article-image" src="/articles/mvp/cover.webp" alt>
+<img class="article-image" src="/articles/mvp/cover.webp" alt="" loading="eager" fetchpriority="high" />
 
 [Link to the article](https://medium.com/@arturwojnar.dev/how-to-successfully-deliver-an-mvp-to-the-market-56c14bbe35dd)

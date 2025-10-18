@@ -1,17 +1,29 @@
 ---
-cover: /articles/outbox/cover.png
+cover: /articles/outbox/cover.webp
 author:
   name: Artur Wojnar
+  url: https://www.linkedin.com/in/artur-wojnar-a19349a6/
 date: 2025-03-03T00:00:00.000Z
 title: Every* system you develop is distributed, and Hermes PostgreSQL supports you in that
 description: Pretending it is not exposes your client’s system to the unpredictability of the world’s reality.
 layout: article
+tags:
+  - distributed-systems
+  - postgresql
+  - outbox-pattern
+  - nodejs
+  - typescript
+  - hermesjs
+canonical: https://www.knowhowcode.dev/articles/outbox
+excerpt: "A comprehensive introduction to distributed systems and how Hermes PostgreSQL implements the Outbox pattern for reliable message publishing"
+readingTime: 15
+published: true
 ---
 
 <h1>Every* system you develop is distributed, and Hermes PostgreSQL supports you in that</h1>
 <h3>A comprehensive introduction to distributed systems</h3>
 
-<img class="article-image" src="/articles/outbox/cover.png" alt>
+<img class="article-image" src="/articles/outbox/cover.webp" alt="" loading="eager" fetchpriority="high" />
 
 **Every system you develop is distributed. Pretending it is not exposes your client’s system to the unpredictability of the world’s reality.**
 
@@ -64,7 +76,7 @@ Moreover, the database will be inconsistent due to a lack of knowledge of what o
 It seems natural that databases store information about incoming transactions somewhere else. This “_somewhere else_” is the _Write-Ahead Log (WAL)_.
 
 <p>
-  <img class="article-image" src="/articles/outbox/outbox-1.png" alt>
+  <img class="article-image" src="/articles/outbox/outbox-1.webp" alt="" loading="eager" fetchpriority="high" />
   <em class="image-description">Image 1. Simple perspective on Write-Ahead Log.</em>
 </p>
 
@@ -86,7 +98,7 @@ It is visualised in the _Image 2_.
 > 💡You can think of any variation of that process. You can generate the sub upfront and call two simultaneous requests. You can make more steps like updating OIDC’s user with the database ID to contain it in access tokens, etc.
 
 <p>
-  <img class="article-image" src="/articles/outbox/outbox-2.png" alt>
+  <img class="article-image" src="/articles/outbox/outbox-2.webp" alt="" loading="eager" fetchpriority="high" />
   <em class="image-description">Image 2. Diagram of the registration process.</em>
 </p>
 
@@ -136,7 +148,7 @@ But, as you know or suspect, we can encounter potential problems here. Let’s t
 ➡️ **Problem 2**. What if the execution of the `addUserToIdentityProvider`  finishes with the OK, but the `storePatient`  **fails**, or it is not reached at all?
 
 <p>
-  <img class="article-image" src="/articles/outbox/hmm.png" alt>
+  <img class="article-image" src="/articles/outbox/hmm.webp" alt="" loading="eager" fetchpriority="high" />
   <em class="image-description">Image 3. A developer giving it a quick thought.</em>
 </p>
 
@@ -247,7 +259,7 @@ try {
 I can go and go with the successive iterations of attempts to make things right. But the proper reaction right now should be:
 
 <p>
-  <img class="article-image" src="/articles/outbox/fck.png" alt>
+  <img class="article-image" src="/articles/outbox/fck.webp" alt="" loading="eager" fetchpriority="high" />
   <em class="image-description">Image 4. A brave developer overwhelmed by piling-up problems.</em>
 </p>
 
@@ -286,7 +298,7 @@ The publishing party is not interested in a result of the event publication.
 The sending party is usually inserted in the command’s result.
 
 <p>
-  <img class="article-image" src="/articles/outbox/events.png" alt>
+  <img class="article-image" src="/articles/outbox/events.webp" alt="" loading="eager" fetchpriority="high" />
   <em class="image-description">Image 5. Revision of commands and events.</em>
 </p>
 
@@ -330,7 +342,7 @@ The specific implementation of the Outbox pattern does matter. This is often a _
 See the image that visualises how we can utilise the WAL pattern to achieve _durability_ and _atomicity_, which will increase the _reliability_ of our solution.
 
 <p>
-  <img class="article-image" src="/articles/outbox/outbox-3.png" alt>
+  <img class="article-image" src="/articles/outbox/outbox-3.webp" alt="" loading="eager" fetchpriority="high" />
   <em class="image-description">Image 6. WAL + in-app processing.</em>
 </p>
 
@@ -428,7 +440,7 @@ Now, I have to put out the difference it makes.
 If we were using a message broker, then the high-level architecture would look like this:
 
 <p>
-  <img class="article-image" src="/articles/outbox/outbox-4.png" alt>
+  <img class="article-image" src="/articles/outbox/outbox-4.webp" alt="" loading="eager" fetchpriority="high" />
   <em class="image-description">Image 7. Combination of Hermes PostgreSQL and a message broker.</em>
 </p>
 
@@ -441,7 +453,7 @@ In our example, we’re going to use an _in-memory message_ queue. It works like
 Look how our case will work:
 
 <p>
-  <img class="article-image" src="/articles/outbox/outbox-6.png" alt>
+  <img class="article-image" src="/articles/outbox/outbox-6.webp" alt="" loading="eager" fetchpriority="high" />
   <em class="image-description">Image 8. With an in-memory queue, Hermes PostgreSQL confirms a message when that message gets successfully processed by a related message handler.</em>
 </p>
 
@@ -461,7 +473,7 @@ Messages arrive, and Hermes PostgreSQL calls the `publish`callback for each mess
 Is it clear? Let’s modify _Image 8_ a bit to make it more detailed and generic.
 
 <p>
-  <img class="article-image" src="/articles/outbox/outbox-concept.png" alt>
+  <img class="article-image" src="/articles/outbox/outbox-concept.webp" alt="" loading="eager" fetchpriority="high" />
   <em class="image-description">Image 9. General overview how Hermes PostgreSQL works.</em>
 </p>
 
@@ -492,7 +504,7 @@ Messages will be propagated only to the instance in charge of the Hermes instanc
 If we want to scale more, we must use a message broker.
 
 <p>
-  <img class="article-image" src="/articles/outbox/outbox-messages-scaling.png" alt>
+  <img class="article-image" src="/articles/outbox/outbox-messages-scaling.webp" alt="" loading="eager" fetchpriority="high" />
   <em class="image-description">Image 10. A message broker like AWS SQS or Apache Pulsar can spread messages over your app's instances.</em>
 </p>
 
@@ -612,7 +624,7 @@ As I said earlier, we kinda create an imitation of a transaction spanned two ind
 This is because when we manage to register a new user in the OIDC provider but not yet the corresponding entity in the database, we’ll be temporarily in an inconsistent state.
 
 <p>
-  <img class="article-image" src="/articles/outbox/outbox-7.png" alt>
+  <img class="article-image" src="/articles/outbox/outbox-7.webp" alt="" loading="eager" fetchpriority="high" />
   <em class="image-description">Image 11. Business transactions are not ACID-compliant. During Δt the system state will be temporarily inconsistent. When the business transaction is over, the state will be consistent.</em>
 </p>
 
@@ -928,7 +940,7 @@ Hermes PostgreSQL is built on top of PostgreSQL’s Logical Replication.
 See the image below to get a better understanding of PostgreSQL’s feature.
 
 <p>
-  <img class="article-image" src="/articles/outbox/replication.png" alt>
+  <img class="article-image" src="/articles/outbox/replication.webp" alt="" loading="eager" fetchpriority="high" />
   <em class="image-description">Image 11. It shows how PostgreSQL Logical Replication works.</em>
 </p>
 
@@ -988,7 +1000,7 @@ We can also update the messages and mark them as delivered, which would cause ma
 The solution based on pulling brings one tricky problem. Look at the image below.
 
 <p>
-  <img class="article-image" src="/articles/outbox/outbox-gap.png" alt>
+  <img class="article-image" src="/articles/outbox/outbox-gap.webp" alt="" loading="eager" fetchpriority="high" />
   <em class="image-description">Image 12. Tuple auto-increment identifiers are figured out before transactions start.</em>
 </p>
 

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ title }} | KnowHowCode.dev</title>
+
+  <meta name="description" content="{{ description }}">
+  <meta name="author" content="KnowHowCode.dev" />
+
+  <!-- Open Graph / SEO -->
+  <meta property="og:title" content="{{ title }}" />
+  <meta property="og:description" content="{{ description }}" />
+  <meta property="og:type" content="article" />
+  {% if ogUrl %}<meta property="og:url" content="{{ ogUrl }}" />{% endif %}
+  <meta property="og:site_name" content="KnowHowCode.dev" />
+
+  <!-- Favicons -->
+  <link rel="icon" href="/icons/favicon.ico" sizes="32x32" />
+  <link rel="icon" href="/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+  <link rel="manifest" href="/manifest.json" />
+
+  <!-- Shoelace (Web Components) -->
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.1/cdn/shoelace.js"></script>
+
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/light.css" />
+  <link
+    href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css"
+    rel="stylesheet"
+  />
+  <script type="module" src="/js/main.js"></script>
+</head>
+<body>
+  <header class="main-header">
+    <nav class="main-nav">
+      <div class="nav-menu">
+        <a class="nav-link {% if page.url == '/' or page.url.startsWith('/about') %}active{% endif %}" href="/">💡 <span class="main-link-text">About</span></a>
+        <a class="nav-link {% if page.url.startsWith('/articles') %}active{% endif %}" href="/articles">📖 <span class="main-link-text">Articles</span></a>
+        <a class="nav-link {% if page.url.startsWith('/trainings') %}active{% endif %}" href="/trainings">🤝 <span class="main-link-text">Trainings</span></a>
+        <a class="nav-link {% if page.url.startsWith('/talks') %}active{% endif %}" href="/talks">🎤 <span class="main-link-text">Talks</span></a>
+      </div>
+      <a href="/" class="logo-link">
+        <img src="/logo.svg" alt="KnowHowCode" class="logo" />
+      </a>
+    </nav>
+    
+    {# <sl-breadcrumb class="breadcrumb">
+      <sl-breadcrumb-item href="/">Home</sl-breadcrumb-item>
+      <sl-breadcrumb-item href="/articles/">Articles</sl-breadcrumb-item>
+      {% if title %}<sl-breadcrumb-item>{{ title }}</sl-breadcrumb-item>{% endif %}
+    </sl-breadcrumb> #}
+  </header>
+
+  <main class="main-content">
+    {{ content | safe }}
+  </main>
+
+  <footer>
+    <div class="footer-social">
+      <p>Contact with me by</p>
+      <div class="social-icons">
+        <a href="https://github.com/arturwojnar" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <sl-icon name="github" style="font-size: 2rem;"></sl-icon>
+        </a>
+        <a href="https://www.linkedin.com/in/artur-wojnar-a19349a6/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <sl-icon name="linkedin" style="font-size: 2rem;"></sl-icon>
+        </a>
+        <a href="mailto:contact@arturwojnar.dev" aria-label="Email">
+          <sl-icon name="envelope" style="font-size: 2rem;"></sl-icon>
+        </a>
+      </div>
+    </div>
+    &copy; {{ "now" | year() }} KnowHowCode
+  </footer>
+</body>
+</html>

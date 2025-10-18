@@ -1,10 +1,22 @@
 ---
-cover: /articles/nhibernate.png
+cover: /articles/nhibernate.webp
 author:
   name: Artur Wojnar
+  url: https://www.linkedin.com/in/artur-wojnar-a19349a6/
 date: 2024-10-15T00:00:00.000Z
 title: "Do not trust docs... and ORMs"
 layout: article
+description: "Many documentations of different frameworks can deceive you because their creators are primarily interested in their interests, and sometimes, their knowledge and experience are limited. Read this article to prepare!"
+tags:
+  - orm
+  - database
+  - frameworks
+  - documentation
+  - best-practices
+canonical: https://www.knowhowcode.dev/articles/do-not-trust-orms
+excerpt: "Why you should be skeptical of framework documentation and ORMs, and how to make better architectural decisions"
+readingTime: 8
+published: true
 ---
 
 I temporarily joined a team working with a modular monolith and single database. This is the most common case in our software house, and I believe it's the best way to start many projects.
@@ -33,7 +45,7 @@ This mechanism makes sense only when it's part of a root aggregate representatio
 
 But I blame the documentation of many ORMs for being part of the problem. Look first at _NHibernate's_ docs cutout ([see the docs](https://nhibernate.info/doc/howto/various/lazy-loading-eager-loading.html)).
 
-<img class="article-image" src="/articles/nhibernate.png" alt>
+<img class="article-image" src="/articles/nhibernate.webp" alt="" loading="eager" fetchpriority="high" />
 
 _NHibernate_ is a mature framework, and its docs are fully-fledged, so it raises the issue of distilling the Order and the OrderLine as a root aggregate. However, it doesn't seem to see a problem with creating a OneToMany relationship to the Customer. It says we shouldn't modify the Order and the Customer simultaneously because the two actions would be separate use cases. Huh? If so, why is the 1:N relation if the actions are separate?
 
@@ -59,7 +71,7 @@ This time, I will try to plant a seed of doubt about the vivid sense of using OR
 Look at the image below. It’s a screenshot of part of the NHibernate’s table of contents.  
 I remember from the time I worked in the .NET tech stack, we spent lots of hours composing proper ORM queries. There was a big learning curve.
 
-<img class="article-image" src="/articles/nhibernate2.png" alt>
+<img class="article-image" src="/articles/nhibernate2.webp" alt="" loading="eager" fetchpriority="high" />
   
 ➡️ Second thing - hidden complexity  
   

@@ -1,10 +1,21 @@
 ---
-cover: /articles/everything-is-monolith.png
+cover: /articles/everything-is-monolith.webp
 author:
   name: Artur Wojnar
+  url: https://www.linkedin.com/in/artur-wojnar-a19349a6/
 date: 2024-12-15T00:00:00.000Z
 title: "Everything is a monolith"
 layout: article
+description: "Do not harm yourself by thinking that you create a system with independent components"
+tags:
+  - monolith-systems
+  - microservices
+  - software-architecture
+  - distributed-systems
+canonical: https://www.knowhowcode.dev/articles/everything-is-monolith
+excerpt: "Understanding why even distributed systems are fundamentally monolithic and how coupling management is the key to software development"
+readingTime: 4
+published: true
 ---
 
 Software development, in a nutshell, is about coupling management.

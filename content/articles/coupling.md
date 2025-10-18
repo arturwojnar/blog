@@ -1,10 +1,22 @@
 ---
-cover: /articles/overengineering.png
+cover: /articles/overengineering.webp
 author:
   name: Artur Wojnar
+  url: https://www.linkedin.com/in/artur-wojnar-a19349a6/
 date: 2024-11-03T00:00:00.000Z
 title: "Coupling management + Communication = Our job"
+description: "Most of the known patterns can be reduced to the coupling control. Get to know how this reasoning can help you simplify your solutions."
 layout: article
+tags:
+  - software-architecture
+  - coupling
+  - communication
+  - design-patterns
+  - domain-driven-design
+canonical: https://www.knowhowcode.dev/articles/coupling
+excerpt: "Discover how coupling management and communication are the fundamental building blocks of all software development methodologies and patterns"
+readingTime: 6
+published: true
 ---
 
 
@@ -46,4 +58,4 @@ But this is good news, right? Otherwise, systems would be designed by ChatGPT by
   
 All patterns are to look at problems from different perspectives. By the end of the day, you must deliver a product close to a customer’s domain and a product that can evolve.
 
-<img class="article-image" src="/articles/overengineering.png" alt>
+<img class="article-image" src="/articles/overengineering.webp" alt="" loading="eager" fetchpriority="high" />

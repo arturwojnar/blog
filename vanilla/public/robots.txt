@@ -1,0 +1,12 @@
+# robots.txt - fallback for both domains
+# Domain-specific robots.txt files: robots-knowhowcode.txt, robots-arturwojnar.txt
+
+User-agent: *
+Allow: /
+
+# Sitemap locations (contains all articles listed individually)
+Sitemap: https://www.knowhowcode.dev/sitemap-knowhowcode.xml
+Sitemap: https://www.arturwojnar.dev/sitemap-arturwojnar.xml
+
+# Disallow dependencies (defensive measure)
+Disallow: /node_modules/

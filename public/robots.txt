@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.knowhowcode.dev/sitemap.xml
+
+# Block access to admin/private areas if any
+Disallow: /admin/
+Disallow: /.nuxt/
+Disallow: /node_modules/
+
+# Allow search engines to crawl everything else
+Allow: /articles/
+Allow: /talks/
+Allow: /trainings/
