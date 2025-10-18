@@ -8,15 +8,18 @@ const pages = new Map<string, string>();
 export const getPage = async (
   uri: string
 ): Promise<Result<"NOT_FOUND", string>> => {
-  const pagePath = path.join(htmlPath, uri);
-
-  if (pages.has(pagePath)) {
-    return error("NOT_FOUND");
+  // Check cache first
+  if (pages.has(uri)) {
+    return result(pages.get(uri)!);
   }
 
-  const page = (await fs.readFile(pagePath)).toString();
+  const pagePath = path.join(htmlPath, uri);
 
-  pages.set(uri, page);
-
-  return result(page);
+  try {
+    const page = (await fs.readFile(pagePath)).toString();
+    pages.set(uri, page);
+    return result(page);
+  } catch (err) {
+    return error("NOT_FOUND");
+  }
 };
