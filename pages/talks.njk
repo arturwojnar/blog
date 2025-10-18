@@ -1,0 +1,53 @@
+---
+title: "Talks"
+layout: "../layouts/main.njk"
+permalink: "/talks.html"
+ogUrl: "https://www.knowhowcode.dev/talks/"
+talks:
+  - date: "2025-06-05"
+    time: "14:00 - 14:45"
+    conference: "4Dev Warszawa 2025"
+    title: "Każdy* system jest rozproszony"
+    emoji: "🤝"
+    description: |
+      Każdy* system oprogramowania jest rozproszony. Udawanie, że tak nie jest, naraża system Twojego klienta na nieprzewidywalność rzeczywistości. Współczesny rozwój oprogramowania opiera się w dużej mierze na podmiotach trzecich — generycznych subdomenach pakowanych jako usługi SaaS: delegowane uwierzytelnianie, zarządzanie RBAC, powiadomienia itp. Połączenie tych komponentów z przewagą rynkową Twojego klienta tworzy produkt.
+
+      W mojej prezentacji przedstawię dlaczego praktycznie zawsze powinniśmy się przejmować problemami architektur rozproszonych. Omówię to na teoretycznie prostym przypadku - rejestracji użytkowników.
+  - date: "2024-11-18"
+    conference: "DevFest Poznań 2024"
+    title: "Porównanie implementacji Archetypu Dostępności Czasowej"
+    emoji: "🤝"
+    description: |
+      Archetypy architektoniczne to rozwiązania problemów biznesowych. Dzięki ich znajomości łatwiej rozpoznamy elementy składowe naszego projektu - klocki, z których budujemy architekturę. Jednym z najbardziej popularnych archetypów jest archetyp Dostępności. Podczas mojej prelekcji opowiem o wariacji tego problemu - Dostępności Czasowej (ang. Time Availability). Omówię definicję obiektową archetypu i szczegółowo opiszę trzy różne implementacje pod kątem ich wydajności w systemach gdzie spodziewamy się dużego ruchu.
+  - date: "2024-10-08"
+    conference: "4Developers Katowice"
+    title: "Porównanie implementacji Archetypu Dostępności Czasowej"
+    emoji: "🤝"
+    description: |
+      Archetypy architektoniczne to rozwiązania problemów biznesowych. Dzięki ich znajomości łatwiej rozpoznamy elementy składowe naszego projektu - klocki, z których budujemy architekturę. Jednym z najbardziej popularnych archetypów jest archetyp Dostępności. Podczas mojej prelekcji opowiem o wariacji tego problemu - Dostępności Czasowej (ang. Time Availability). Omówię definicję obiektową archetypu i szczegółowo opiszę trzy różne implementacje pod kątem ich wydajności w systemach gdzie spodziewamy się dużego ruchu.
+---
+<img class="talks-cover" src="/talks-cover.jpg" alt="">
+<div class="talks-list">
+  {% for talk in talks %}
+    <article class="talk-item">
+      <div class="talk-header">
+        <sl-icon name="calendar3" class="talk-date-icon"></sl-icon>
+        <div class="talk-date-info">
+          <time datetime="{{ talk.date }}">{{ talk.date | date('DD.MM.YYYY') }}</time>
+          <span class="talk-separator">-</span>
+          <span class="talk-conference">{{ talk.conference }}</span>
+          {% if talk.time %}<span class="talk-time">({{ talk.time }})</span>{% endif %}
+        </div>
+      </div>
+
+      <h2 class="talk-title">
+        <span class="talk-emoji">{{ talk.emoji }}</span>
+        "{{ talk.title }}"
+      </h2>
+
+      <div class="talk-description">
+        {{ talk.description | safe }}
+      </div>
+    </article>
+  {% endfor %}
+</div>
