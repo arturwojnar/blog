@@ -7,10 +7,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "tsc",
-    "build": "tsc && node ./node_modules/.bin/eleventy",
+    "build": "tsc && npm run build:11ty && npm run build:sitemap",
     "build:ts": "tsc",
-    "build:11ty": "node ./node_modules/.bin/eleventy",
     "dev:ts": "nodemon --watch server --ext ts --exec \"node server/index.ts\"",
+    "build:11ty": "node ./node_modules/.bin/eleventy",
+    "build:sitemap": "node ./generate-sitemap.ts",
     "dev:11ty": "node ./node_modules/.bin/eleventy --watch",
     "dev": "concurrently \"npm:dev:11ty\" \"npm:dev:ts\"",
     "start": "node server/index.ts"
@@ -41,6 +42,8 @@
     "typescript": "~5.9.3"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.75.1",
+    "dotenv": "^16.6.1",
     "express": "~5.1.0",
     "lit": "~3.3.1"
   }

@@ -5,6 +5,7 @@ eleventyComputed:
 ---
 
 <sl-card>
+  <like-container slug="{{ slug or page.fileSlug }}"></like-container>
   <h1>{{ title }}</h1>
   {{ content | safe }}
 </sl-card>

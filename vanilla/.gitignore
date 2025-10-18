@@ -12,3 +12,4 @@ sw.*
 .env
 .output
 .vercel/
+sitemap*.xml
