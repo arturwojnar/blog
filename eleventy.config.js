@@ -35,4 +35,10 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("year", () => {
     return new Date().getFullYear().toString();
   });
+
+  return {
+    dir: {
+      output: "dist"
+    }
+  };
 }
