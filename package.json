@@ -2,19 +2,18 @@
   "name": "know-how-code",
   "version": "1.0.0",
   "description": "Know-How Code blog by Artur Wojnar.",
-  "main": "api/index.ts",
+  "main": "api/server.ts",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "tsc",
-    "build": "tsc && npm run build:11ty && npm run build:sitemap",
-    "build:ts": "tsc",
-    "dev:ts": "nodemon --watch api --ext ts --exec \"node api/index.ts\"",
+    "build": "npm run build:11ty && npm run build:sitemap",
+    "dev:server": "nodemon --watch api --ext ts --exec \"node api/server.ts\"",
     "build:11ty": "node ./node_modules/.bin/eleventy",
     "build:sitemap": "node ./generate-sitemap.ts",
     "dev:11ty": "node ./node_modules/.bin/eleventy --watch",
-    "dev": "concurrently \"npm:dev:11ty\" \"npm:dev:ts\"",
-    "start": "node api/index.ts"
+    "dev": "concurrently \"npm:dev:11ty\" \"npm:dev:server\"",
+    "start": "node api/server.ts"
   },
   "repository": {
     "type": "git",

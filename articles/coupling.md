@@ -58,4 +58,4 @@ But this is good news, right? Otherwise, systems would be designed by ChatGPT by
   
 All patterns are to look at problems from different perspectives. By the end of the day, you must deliver a product close to a customer’s domain and a product that can evolve.
 
-<img class="article-image" src="/articles/overengineering.webp" alt="" loading="eager" fetchpriority="high" />
+<img class="article-image" src="/public/articles/overengineering.webp" alt="" loading="eager" fetchpriority="high" />

@@ -8,7 +8,7 @@ description: "My thoughts on how we can help ourselves to successfully deliver t
 layout: ../layouts/article.njk
 ---
 
-<img class="cover-image article-image" src="/articles/mvp/cover.webp" alt="" loading="eager" fetchpriority="high" />
+<img class="cover-image article-image" src="/public/articles/mvp/cover.webp" alt="" loading="eager" fetchpriority="high" />
 
 **I’ve only worked in software houses, where we usually kick off startup projects**. So we begin tiny, without guaranteeing that the market will appreciate our effort and the client’s plan. This situation also indirectly implies the non-functional requirement — the budget is not a bottomless pit, so we have to thoroughly plan our work to not sink all the client’s money into a product **yet to be released.**
 

@@ -17,7 +17,7 @@ readingTime: 12
 published: true
 ---
 
-<img class="cover-image article-image" src="/articles/events-are-domain-atoms/cover.webp" alt="" loading="eager" fetchpriority="high" />
+<img class="cover-image article-image" src="/public/articles/events-are-domain-atoms/cover.webp" alt="" loading="eager" fetchpriority="high" />
 
 Last year was a marathon of learning for me. I've finally tried event sourcing, and I love it! ❤️
 The shift towards it may not have been difficult, because I was already deep in event-driven architecture. I decided to do so after realising one tiny detail, which convinced me I could be more business-oriented and closer to the domain language than I was.
@@ -43,7 +43,7 @@ In the Image 1 🖼️, you see some commands that can occur in the system. The 
 These commands modify the state. This is the patient condition that evaluates some risk as a discrete number 🔟.
 
 <p>
-  <img class="article-image" src="/articles/events-are-domain-atoms/comparison.webp" alt="" loading="eager" fetchpriority="high" />
+  <img class="article-image" src="/public/articles/events-are-domain-atoms/comparison.webp" alt="" loading="eager" fetchpriority="high" />
   <em class="image-description">Image 1. Comparison of the fixed-state approach and the event-sourced one.</em>
 </p>
 
@@ -63,7 +63,7 @@ That opens a new door in the software architecture and Domain-Driven Design. **D
 The Image 2 👇👀👇 shows the full path from the request (command) to the commit.
 
 <p>
-  <img class="article-image" src="/articles/events-are-domain-atoms/event-stream.webp" alt="" loading="eager" fetchpriority="high" />
+  <img class="article-image" src="/public/articles/events-are-domain-atoms/event-stream.webp" alt="" loading="eager" fetchpriority="high" />
   <em class="image-description">Image 2. The flow explaining how to construct loosely coupled system, from events to read models.</em>
 </p>
 
@@ -106,7 +106,7 @@ Various things trigger domain processes. In the example below, this is either a 
 Regardless of the source, a command is published.
 
 <p>
-  <img class="article-image" src="/articles/events-are-domain-atoms/capability.webp" alt="" loading="eager" fetchpriority="high" />
+  <img class="article-image" src="/public/articles/events-are-domain-atoms/capability.webp" alt="" loading="eager" fetchpriority="high" />
   <em class="image-description">Image 3. First, discover business capabilities and later map their properties to business processes.</em>
 </p>
 

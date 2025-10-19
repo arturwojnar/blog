@@ -14,3 +14,4 @@ sw.*
 _site/
 dist/
 sitemap*.xml
+.vercel

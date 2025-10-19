@@ -20,7 +20,7 @@ readingTime: 20
 slug: availability
 ---
 
-<img class="cover-image article-image" src="/articles/availability/cover.webp" alt="" loading="eager" fetchpriority="high" />
+<img class="cover-image article-image" src="/public/articles/availability/cover.webp" alt="" loading="eager" fetchpriority="high" />
 
 ### Comparing Time Availability archetype implementations
 
@@ -50,7 +50,7 @@ _**We all came together to question how slow the other two solutions are compare
 _An Archetype_ is a defined **solution to a business problem**._The Time Availability_ answers the question: “_Can I schedule resource X between D1 and D2?_”.
 
 <p>
-  <img class="article-image" src="/articles/availability/1.webp" alt="" loading="eager" fetchpriority="high" />
+  <img class="article-image" src="/public/articles/availability/1.webp" alt="" loading="eager" fetchpriority="high" />
   <em class="image-description">Image 1. Oops! Can't be in two places at the same time!</em>
 </p>
 
@@ -66,7 +66,7 @@ For instance, if we are interested in reservations of doctors' visits, which dep
 
 Here, I will focus on the latter case. Our primary technical challenge is *multiple simultaneous attempts to lock or unlock* the same resource.
 
-<img class="article-image" src="/articles/availability/2.webp" alt="" loading="eager" fetchpriority="high" />
+<img class="article-image" src="/public/articles/availability/2.webp" alt="" loading="eager" fetchpriority="high" />
 
 Image 2. Object-oriented representation of the TimeAvailability archetype.
 
@@ -222,7 +222,7 @@ describe(`time slots`, () => {
 
 **This solution is well-suited for reading and writing because it's backed by a simple index**, as seen in *Image 3*. Locks are split into 15-minute (the size is just an example) time slots, allowing us to build a unique *B-tree* (*non-clustered*) index on the `resourceId` and the `startTime`. This enables us to catch collisions since only 15-minute time slots can be saved.
 
-<img class="article-image" src="/articles/availability/3.webp" alt="" loading="eager" fetchpriority="high" />
+<img class="article-image" src="/public/articles/availability/3.webp" alt="" loading="eager" fetchpriority="high" />
 
 Image 3. Unique index handles "conflicts".
 
@@ -415,7 +415,7 @@ The query analysis shows that the database engine utilized the *B-tree index* pl
 
 > The bitmap index scan actually operates in tandem with a Bitmap Heap Scan: it does not fetch the data itself. Instead of producing the rows directly, the bitmap index scan constructs a bitmap of potential row locations. It feeds this data to a parent Bitmap Heap Scan, which can decode the bitmap to fetch the underlying data, grabbing data page by page.
 
-<img class="article-image" src="/articles/availability/4.webp" alt="" loading="eager" fetchpriority="high" />
+<img class="article-image" src="/public/articles/availability/4.webp" alt="" loading="eager" fetchpriority="high" />
 
 Image 4. Bitmap Index Scan for the *SELECT FOR UPDATE* query.
 
@@ -521,7 +521,7 @@ Initially, I generated 10,000 locks and obtained comparable results for all thre
 
 That gives 120 million rows for the first solution and a million for the other two.
 
-<img class="article-image" src="/articles/availability/5.webp" alt="" loading="eager" fetchpriority="high" />
+<img class="article-image" src="/public/articles/availability/5.webp" alt="" loading="eager" fetchpriority="high" />
 
 Image 5. Comparison of the average time of operations of all three solutions for a million reservations.
 
@@ -535,7 +535,7 @@ Unfortunately, this means I have to do more tests. Nothing proves more about the
 
 Let's test how our solutions will cope under medium load. Imagine that 10-thousand simultaneous requests to lock a resource happen.
 
-<img class="article-image" src="/articles/availability/6.webp" alt="" loading="eager" fetchpriority="high" />
+<img class="article-image" src="/public/articles/availability/6.webp" alt="" loading="eager" fetchpriority="high" />
 
 Image 6. 10000 new reservations done concurrently.
 
@@ -547,7 +547,7 @@ In that situation, you can test your implementation on *a* *vertically scaled Po
 
 Additionally, consider tailoring your solution to your specific business case, which may have particular requirements to help narrow down some scenarios, such as predefined appointments. Lastly, you can explore a solution based on specialized tooling (see the next chapter).
 
-<img class="article-image" src="/articles/availability/7.webp" alt="" loading="eager" fetchpriority="high" />
+<img class="article-image" src="/public/articles/availability/7.webp" alt="" loading="eager" fetchpriority="high" />
 
 *Image 7. A million new reservations done concurrently.*
 
