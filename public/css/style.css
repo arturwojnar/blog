@@ -509,25 +509,74 @@ article-image.thumbnail-article-image .article-image-container {
 
 .product {
   display: flex;
-  align-items: center; /* Vertically center the image and content */
-  justify-content: center; /* Center the entire content */
+  flex-wrap: wrap; /* Allow wrapping for responsive layout */
+  align-items: flex-start;
   width: 100%;
 }
 
+.product-title {
+  order: -1; /* Ensure title always comes first */
+  flex-basis: 100%; /* Title takes full width */
+  margin-bottom: 1em;
+}
+
 .product img {
-  align-self: center; /* Ensures the image is vertically centered */
-  margin-right: auto; /* Pushes everything else to the right */
+  flex-shrink: 0; /* Don't shrink the image */
+  margin-right: 2em; /* Space between image and content */
   display: block;
+  align-self: center; /* Center vertically in the column */
 }
 
 .product-content {
-  flex-grow: 1; /* Takes up remaining space */
+  flex: 1; /* Take remaining space */
   display: flex;
-  flex-direction: column; /* Aligns items in rows (stacked) */
-  justify-content: center; /* Centers the content vertically */
-  text-align: left; /* Centers text inside */
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
   font-size: 0.8em;
-  padding-left: 4em;
+  min-width: 0; /* Allow content to shrink if needed */
+}
+
+.logo-about {
+  float: left;
+  width: 20em;
+  padding-right: 1em;
+  aspect-ratio: auto;
+}
+
+.profile-about {
+  float: right;
+  width: 6em;
+  margin-left: 1em;
+}
+
+@media (max-width: 479px) {
+  .product {
+    flex-direction: column;
+    align-items: center; /* Center all children horizontally */
+  }
+
+  .product-content {
+    padding-top: 1em;
+    width: 100%;
+  }
+
+  .product img {
+    margin-right: 0;
+    margin-bottom: 1em;
+    align-self: center; /* Center the image */
+  }
+
+  .decorated-section {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .logo-about {
+    float: none;
+    margin: 0 auto;
+    display: block;
+  }
 }
 
 .product-description {

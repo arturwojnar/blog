@@ -188,7 +188,7 @@ class LikeContainer extends HTMLElement {
 
   async fetchLikes(slug) {
     try {
-      const response = await fetch(`/api/likes/${slug}`);
+      const response = await fetch(`/api/likes?article=${slug}`);
       const data = await response.json();
       this.likes = data.likes || 0;
       this.updateLikesDisplay();
@@ -205,7 +205,7 @@ class LikeContainer extends HTMLElement {
     button.disabled = true;
 
     try {
-      const response = await fetch(`/api/likes/${slug}`, {
+      const response = await fetch(`/api/likes?article=${slug}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

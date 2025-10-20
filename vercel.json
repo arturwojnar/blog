@@ -2,11 +2,12 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "functions": {
+    "api/**/*.ts": {
+      "includeFiles": "dist/**"
+    }
+  },
   "rewrites": [
-    {
-      "source": "/api/likes/:slug",
-      "destination": "/api/likes/[slug]"
-    },
     {
       "source": "/talks",
       "destination": "/talks.html"
@@ -16,7 +17,7 @@
       "destination": "/trainings.html"
     },
     {
-      "source": "/(.*)",
+      "source": "/((?!api).*)",
       "destination": "/api/index"
     }
   ]

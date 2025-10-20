@@ -96,7 +96,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const notFound = await getPage('/404.html');
     return res.status(404).send(isError(notFound) ? '404 Not Found' : notFound.result);
   } catch (error) {
-    console.error('Handler error:', error);
-    return res.status(500).send(`Internal Server Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    const notFound = await getPage('/error.html');
+    return res.status(500).send(isError(notFound) ? '500 Internal Server Error' : notFound.result);
   }
 }

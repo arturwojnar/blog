@@ -1,12 +1,12 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import 'dotenv/config';
-import { supabase } from '../supabaseClient.ts';
+import { supabase } from './supabaseClient.ts';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  const { slug } = req.query;
+  const { article } = req.query;
 
-  if (typeof slug !== 'string') {
-    return res.status(400).json({ error: 'Invalid slug' });
+  if (!article || typeof article !== 'string') {
+    return res.status(400).json({ error: 'Article parameter is required' });
   }
 
   if (req.method === 'GET') {
@@ -14,7 +14,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       const { data, error } = await supabase
         .from('likes')
         .select('likes')
-        .eq('article_slug', slug)
+        .eq('article_slug', article)
         .maybeSingle();
 
       if (error) {
@@ -31,7 +31,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   if (req.method === 'POST') {
     try {
-      const { data, error } = await supabase.rpc('increment_likes', { slug });
+      const { data, error } = await supabase.rpc('increment_likes', { slug: article });
 
       if (error) {
         console.error('Error incrementing likes:', error);
