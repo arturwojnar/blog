@@ -4,9 +4,8 @@
 User-agent: *
 Allow: /
 
-# Sitemap locations (contains all articles listed individually)
-Sitemap: https://www.knowhowcode.dev/sitemap-knowhowcode.xml
-Sitemap: https://www.arturwojnar.dev/sitemap-arturwojnar.xml
+# Sitemap location (contains all articles listed individually)
+Sitemap: https://www.knowhowcode.dev/sitemap.xml
 
 # Disallow dependencies (defensive measure)
 Disallow: /node_modules/

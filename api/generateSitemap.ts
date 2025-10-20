@@ -133,12 +133,24 @@ export async function generateSitemap(): Promise<void> {
   for (const [domainKey, domainUrl] of Object.entries(DOMAINS)) {
     const xml = generateSitemapXML(articles, STATIC_PAGES, domainUrl);
 
-    // Save to public directory with domain-specific filename
-    const outputPath = path.join(__dirname, `../public/sitemap-${domainKey}.xml`);
-    await fs.writeFile(outputPath, xml, "utf-8");
+    // Save to public directory with domain-specific filename for reference
+    const publicOutputPath = path.join(__dirname, `../public/sitemap-${domainKey}.xml`);
+    await fs.writeFile(publicOutputPath, xml, "utf-8");
 
-    console.log(`✅ Sitemap generated for ${domainUrl} with ${articles.length} articles at ${outputPath}`);
+    console.log(`✅ Sitemap generated for ${domainUrl} with ${articles.length} articles at ${publicOutputPath}`);
   }
+
+  // Also save the primary domain sitemap as sitemap.xml in dist root
+  const primaryXml = generateSitemapXML(articles, STATIC_PAGES, DOMAINS.knowhowcode);
+  const rootOutputPath = path.join(__dirname, `../dist/sitemap.xml`);
+
+  // Ensure dist directory exists
+  const distDir = path.join(__dirname, `../dist`);
+  await fs.mkdir(distDir, { recursive: true });
+
+  await fs.writeFile(rootOutputPath, primaryXml, "utf-8");
+
+  console.log(`✅ Primary sitemap copied to ${rootOutputPath}`);
 }
 
 /**

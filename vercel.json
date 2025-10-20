@@ -8,8 +8,12 @@
       "destination": "/api/likes/[slug]"
     },
     {
-      "source": "/sitemap.xml",
-      "destination": "/api/sitemap.xml"
+      "source": "/talks",
+      "destination": "/talks.html"
+    },
+    {
+      "source": "/trainings",
+      "destination": "/trainings.html"
     },
     {
       "source": "/(.*)",

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <name>Know-How Code</name>
+  <short_name>Know-How Code</short_name>
+  <description>Know-How Code blog by Artur Wojnar</description>
+  <start_url>/</start_url>
+  <display>standalone</display>
+  <theme_color>#ffffff</theme_color>
+  <background_color>#ffffff</background_color>
+  <icons>
+    <icon>
+      <src>/icons/web-app-manifest-192x192.png</src>
+      <sizes>192x192</sizes>
+      <type>image/png</type>
+      <purpose>maskable</purpose>
+    </icon>
+    <icon>
+      <src>/icons/web-app-manifest-512x512.png</src>
+      <sizes>512x512</sizes>
+      <type>image/png</type>
+      <purpose>maskable</purpose>
+    </icon>
+  </icons>
+</manifest>

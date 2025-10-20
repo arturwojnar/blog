@@ -8,12 +8,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "tsc",
     "build": "npm run build:11ty && npm run build:sitemap",
-    "dev:server": "nodemon --watch api --ext ts --exec \"node api/server.ts\"",
     "build:11ty": "node ./node_modules/.bin/eleventy",
     "build:sitemap": "node ./generate-sitemap.ts",
     "dev:11ty": "node ./node_modules/.bin/eleventy --watch",
-    "dev": "concurrently \"npm:dev:11ty\" \"npm:dev:server\"",
-    "start": "node api/server.ts"
+    "start": "vercel dev"
   },
   "repository": {
     "type": "git",
@@ -39,7 +37,8 @@
     "@vercel/node": "^3.2.29",
     "concurrently": "~9.2.1",
     "nodemon": "~3.1.10",
-    "typescript": "~5.9.3"
+    "typescript": "~5.9.3",
+    "vercel": "^48.4.0"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.75.1",

@@ -14,12 +14,16 @@ export const getPage = async (
   }
 
   const pagePath = path.join(htmlPath, uri);
+  console.log('getPage - htmlPath:', htmlPath);
+  console.log('getPage - uri:', uri);
+  console.log('getPage - pagePath:', pagePath);
 
   try {
     const page = (await fs.readFile(pagePath)).toString();
     pages.set(uri, page);
     return result(page);
   } catch (err) {
+    console.error('getPage error:', err);
     return error("NOT_FOUND");
   }
 };
