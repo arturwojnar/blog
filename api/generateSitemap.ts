@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
-import { __dirname } from "./consts.ts";
+import { __dirname } from "./consts.js";
 
 type Article = {
   url: string;

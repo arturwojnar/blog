@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import 'dotenv/config';
-import { generateSitemapDynamic } from './generateSitemap.ts';
+import { generateSitemapDynamic } from './generateSitemap.js';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {

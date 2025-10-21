@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import 'dotenv/config';
-import { getPage } from "./getPage.ts";
-import { isError } from "./helpers.ts";
+import { getPage } from "./getPage.js";
+import { isError } from "./helpers.js";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {

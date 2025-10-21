@@ -7,9 +7,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "tsc",
-    "build": "npm run build:11ty && npm run build:sitemap",
+    "build": "npm run build:11ty && npm run build:tsc && npm run build:sitemap",
+    "build:tsc": "tsc",
     "build:11ty": "node ./node_modules/.bin/eleventy",
-    "build:sitemap": "node ./generate-sitemap.ts",
+    "build:sitemap": "node ./generate-sitemap.js",
     "dev:11ty": "node ./node_modules/.bin/eleventy --watch",
     "start": "vercel dev"
   },

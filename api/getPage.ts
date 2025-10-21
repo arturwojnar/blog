@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
-import { type Result, error, result } from "./helpers.ts";
-import { htmlPath } from "./consts.ts";
+import { type Result, error, result } from "./helpers.js";
+import { htmlPath } from "./consts.js";
 
 const pages = new Map<string, string>();
 

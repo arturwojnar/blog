@@ -5,7 +5,7 @@
   "compilerOptions": {
     // File Layout
     "rootDir": "./api",
-    "outDir": "./dist",
+    "outDir": "./dist/api",
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
@@ -42,7 +42,7 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
-    "noEmit": true,
-    "allowImportingTsExtensions": true,
+    "noEmit": false,
+    "allowImportingTsExtensions": false,
   }
 }
