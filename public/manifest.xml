@@ -9,13 +9,13 @@
   <background_color>#ffffff</background_color>
   <icons>
     <icon>
-      <src>/icons/web-app-manifest-192x192.png</src>
+      <src>/public/icons/web-app-manifest-192x192.png</src>
       <sizes>192x192</sizes>
       <type>image/png</type>
       <purpose>maskable</purpose>
     </icon>
     <icon>
-      <src>/icons/web-app-manifest-512x512.png</src>
+      <src>/public/icons/web-app-manifest-512x512.png</src>
       <sizes>512x512</sizes>
       <type>image/png</type>
       <purpose>maskable</purpose>
