@@ -142,7 +142,7 @@ export async function generateSitemap(): Promise<void> {
 
   // Also save the primary domain sitemap as sitemap.xml in dist root
   const primaryXml = generateSitemapXML(articles, STATIC_PAGES, DOMAINS.knowhowcode);
-  const rootOutputPath = path.join(__dirname, `../dist/sitemap.xml`);
+  const rootOutputPath = path.join(__dirname, `../sitemap.xml`);
 
   // Ensure dist directory exists
   const distDir = path.join(__dirname, `../dist`);

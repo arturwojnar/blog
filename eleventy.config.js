@@ -13,6 +13,7 @@ export default function (eleventyConfig) {
   // Copy robots.txt and manifest.xml to root
   eleventyConfig.addPassthroughCopy({ "public/robots.txt": "robots.txt" });
   eleventyConfig.addPassthroughCopy({ "public/manifest.xml": "manifest.xml" });
+  eleventyConfig.addPassthroughCopy({ "public/manifest.json": "manifest.json" });
 
   // Default layout for Markdown files if not defined
   eleventyConfig.addGlobalData("layout", "layouts/layout.njk");

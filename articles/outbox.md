@@ -20,7 +20,6 @@ readingTime: 15
 published: true
 ---
 
-<h1>Every* system you develop is distributed, and Hermes PostgreSQL supports you in that</h1>
 <h3>A comprehensive introduction to distributed systems</h3>
 
 <img class="article-image" src="/public/articles/outbox/cover.webp" alt="" loading="eager" fetchpriority="high" />
