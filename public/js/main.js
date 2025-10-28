@@ -1,20 +1,29 @@
 class ArticleImage extends HTMLElement {
   connectedCallback() {
     const src = this.getAttribute("src");
-    const alt = this.getAttribute("alt") || "";
+    const alt = this.getAttribute("alt") || this.getAttribute("label") || "";
     const loading = this.getAttribute("loading") || "lazy";
+    const isThumbnail = this.getAttribute("thumbnail") === 'true';
+    const label = this.getAttribute("label") || '';
 
     // Create container with spinner
-    this.innerHTML = `
-      <div class="article-image-container">
+    this.innerHTML = isThumbnail ? `
+      <div class="article-thumbnail-container">
         <sl-spinner class="article-image-spinner"></sl-spinner>
         <img class="article-image-img" alt="${alt}" loading="${loading}" />
       </div>
+    ` : `
+      <p class="article-image-container">
+        <sl-spinner class="article-image-spinner"></sl-spinner>
+        <a href="" target="_blank"><img class="article-image" alt="${alt}" loading="${loading}" /></a>
+        <em class="image-description">${label}</em>
+      </p>
     `;
 
     const img = this.querySelector("img");
+    const a = this.querySelector("a");
     const spinner = this.querySelector("sl-spinner");
-    const container = this.querySelector(".article-image-container");
+    const container = this.querySelector(".article-thumbnail-container");
 
     let loaded = false;
 
@@ -36,6 +45,7 @@ class ArticleImage extends HTMLElement {
 
     // Set src after adding listeners
     img.src = src;
+    a.href = src;
 
     // Check if image loaded synchronously (cached)
     setTimeout(() => {

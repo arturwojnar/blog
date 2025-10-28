@@ -21,7 +21,7 @@ published: true
 
 > Homo Sovieticus's mantra was "**Everything belongs to the kolkhoz, everything belongs to me**". In the context of this text I want to rephrase it to: **Everything belongs to the app, everything belongs to users**.
 
-<img src="/public/articles/kolkhoz.webp" alt="" loading="eager" fetchpriority="high" />
+<img class="cover-image article-image" src="/public/articles/kolkhoz.webp" alt="" loading="eager" fetchpriority="high" />
   
 I often hear we _can't_ modularise the app when everything depends on _users_. I hear it's a mirage, overcomplication in the name of self-indulgence.  
   
@@ -49,11 +49,7 @@ If you see a folder structure in your project like on the _Image 1_, there is a 
 
 Of course, **folder structure is not an architecture**, but often is an explicit manifestation of it.
 
-<p>
-  <img class="article-image" src="/public/articles/kolhkoz/folders.webp" width="350px" alt="" loading="eager" fetchpriority="high" />
-  <em class="image-description">Image 1. "We can't separate anything because all features link to the users".</em>
-</p>
-
+<article-image src="/public/articles/kolhkoz/folders.webp" width="350px" label="Image 1. "We can't separate anything because all features link to the users"."></article-image>
 It's a classical _ubiquitous language_ [problem](https://martinfowler.com/bliki/UbiquitousLanguage.html).
 
 Without a proper design phase we can't discover subtle differences between actual entities.
@@ -62,11 +58,7 @@ Without a proper design phase we can't discover subtle differences between actua
   
 Imagine we have _patients_ registered in our app. Patients can be evaluated according to different test results.  
   
-<p>
-  <img class="article-image" src="/public/articles/kolhkoz/tests.webp" alt="" loading="eager" fetchpriority="high" />
-  <em class="image-description">Image 2. Two modules referencing a patient.</em>
-</p>
-  
+<article-image src="/public/articles/kolhkoz/tests.webp" label="Image 2. Two modules referencing a patient."></article-image>  
 We defined two [_business capabilities_](https://www.leanix.net/en/wiki/ea/business-capability) - evaluation of test A or B results.
 
 Test A needs an _age_, and test B needs a patient’s _weight_ and _height_ of.
@@ -83,11 +75,7 @@ Let's picture creating explicit coupling between patients and the two evaluation
 
 It's presented in the _Image 3_.
 
-<p>
-  <img class="article-image" src="/public/articles/kolhkoz/folders2.webp" width="350px" alt="" loading="eager" fetchpriority="high" />
-  <em class="image-description">Image 3. Coupling by generalisation.</em>
-</p>
-
+<article-image src="/public/articles/kolhkoz/folders2.webp" width="350px" label="Image 3. Coupling by generalisation."></article-image>
 > 💡 By the way - `patient.entity` is hanging, it doesn't belong to any specific module. This situation is called _orphan classes_, initially described by Neal Ford. I wrote more about that [here](https://www.knowhowcode.dev/articles/solution).
 
 In fact, the two features are fueled by two _projections_ of who the patient is and by what behaviours and properties are represented.
@@ -111,18 +99,10 @@ With simple context separation, we increase the overall reliability of the syste
 
 Look at the _Image 4_ that shows the correct design.
 
-<p>
-  <img class="article-image" src="/public/articles/kolhkoz/separation.webp" alt="" loading="eager" fetchpriority="high" />
-  <em class="image-description">Image 4. Each "module"/"slice"/"feature" knows a different patient entity.</em>
-</p>
-
+<article-image src="/public/articles/kolhkoz/separation.webp" label="Image 4. Each "module"/"slice"/"feature" knows a different patient entity."></article-image>
 Also, look at the _Image 5_ below how the bad design is.
 
-<p>
-  <img class="article-image" src="/public/articles/kolhkoz/no-separation.webp" alt="" loading="eager" fetchpriority="high" />
-  <em class="image-description">Image 5. Each "module"/"slice"/"feature" knows a different patient entity.</em>
-</p>
-  
+<article-image src="/public/articles/kolhkoz/no-separation.webp" label="Image 5. Each "module"/"slice"/"feature" knows a different patient entity."></article-image>  
 **Each capability understands the patient differently, using the same identifiers to uniquely identify and link patients if needed.**
 
 #### Database also does matter

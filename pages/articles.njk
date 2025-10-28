@@ -11,7 +11,7 @@ ogUrl: "https://www.knowhowcode.dev/articles/"
     <article class="article-card {% if loop.first %}article-featured{% endif %}">
       <a href="{{ a.url }}" class="article-link">
         {% if a.data.cover %}
-          <article-image src="/public{{ a.data.cover }}" alt="{{ a.data.title }}" class="thumbnail-article-image" {% if loop.first %}featured{% endif %}></article-image>
+          <article-image src="/public{{ a.data.cover }}" alt="{{ a.data.title }}" thumbnail="true" class="thumbnail-article-image" {% if loop.first %}featured{% endif %}></article-image>
         {% else %}
           <div class="article-image"></div>
         {% endif %}

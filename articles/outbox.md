@@ -22,7 +22,7 @@ published: true
 
 <h3>A comprehensive introduction to distributed systems</h3>
 
-<img class="article-image" src="/public/articles/outbox/cover.webp" alt="" loading="eager" fetchpriority="high" />
+<img class="cover-image article-image" src="/public/articles/outbox/cover.webp" alt="" loading="eager" fetchpriority="high" />
 
 **Every system you develop is distributed. Pretending it is not exposes your client’s system to the unpredictability of the world’s reality.**
 
@@ -74,11 +74,7 @@ Moreover, the database will be inconsistent due to a lack of knowledge of what o
 
 It seems natural that databases store information about incoming transactions somewhere else. This “_somewhere else_” is the _Write-Ahead Log (WAL)_.
 
-<p>
-  <img class="article-image" src="/public/articles/outbox/outbox-1.webp" alt="" loading="eager" fetchpriority="high" />
-  <em class="image-description">Image 1. Simple perspective on Write-Ahead Log.</em>
-</p>
-
+<article-image src="/public/articles/outbox/outbox-1.webp" label="Image 1. Simple perspective on Write-Ahead Log."></article-image>
 **Let’s leave the theory for a while and skip straight to an example! 🙂**
 
 #### Registration process, as you may know it
@@ -96,11 +92,7 @@ It is visualised in the _Image 2_.
 
 > 💡You can think of any variation of that process. You can generate the sub upfront and call two simultaneous requests. You can make more steps like updating OIDC’s user with the database ID to contain it in access tokens, etc.
 
-<p>
-  <img class="article-image" src="/public/articles/outbox/outbox-2.webp" alt="" loading="eager" fetchpriority="high" />
-  <em class="image-description">Image 2. Diagram of the registration process.</em>
-</p>
-
+<article-image src="/public/articles/outbox/outbox-2.webp" label="Image 2. Diagram of the registration process."></article-image>
 
 I almost forgot. Since we model our system with events, we want to publish either the `PatientSuccessfullyRegistered`or `PatientRegistrationFailed`as the result of the process.
 
@@ -146,11 +138,7 @@ But, as you know or suspect, we can encounter potential problems here. Let’s t
 
 ➡️ **Problem 2**. What if the execution of the `addUserToIdentityProvider`  finishes with the OK, but the `storePatient`  **fails**, or it is not reached at all?
 
-<p>
-  <img class="article-image" src="/public/articles/outbox/hmm.webp" alt="" loading="eager" fetchpriority="high" />
-  <em class="image-description">Image 3. A developer giving it a quick thought.</em>
-</p>
-
+<article-image src="/public/articles/outbox/hmm.webp" label="Image 3. A developer giving it a quick thought."></article-image>
 The next version of the implementation is better. (I shortened it a bit to highlight what’s the most important).
 
 ```ts
@@ -257,11 +245,7 @@ try {
 
 I can go and go with the successive iterations of attempts to make things right. But the proper reaction right now should be:
 
-<p>
-  <img class="article-image" src="/public/articles/outbox/fck.webp" alt="" loading="eager" fetchpriority="high" />
-  <em class="image-description">Image 4. A brave developer overwhelmed by piling-up problems.</em>
-</p>
-
+<article-image src="/public/articles/outbox/fck.webp" label="Image 4. A brave developer overwhelmed by piling-up problems."></article-image>
 
 #### WAL for the rescue
 
@@ -296,11 +280,7 @@ The publishing party is not interested in a result of the event publication.
 ➡️A command is a message describing an intention to change a state of the system. One dedicated party consumes a command, which can eventually lead to engaging more components in the process. Commands result in facts (events).  
 The sending party is usually inserted in the command’s result.
 
-<p>
-  <img class="article-image" src="/public/articles/outbox/events.webp" alt="" loading="eager" fetchpriority="high" />
-  <em class="image-description">Image 5. Revision of commands and events.</em>
-</p>
-
+<article-image src="/public/articles/outbox/events.webp" label="Image 5. Revision of commands and events."></article-image>
 
 Once the intentions are saved in the database, we can pull them back from it (by checking periodically), and when they are delivered, we have to remember that it happened. So, before going into the distributed transaction, we save the information we want to execute `addUserToIdentityProvider`_._ Unfortunately, we can’t do the save at the time with the `storePatient`because it depends on the result of the first one. When the first command is delivered and executed successfully, we only save the information we want to send to the command. When this is completed, we can save the information we want to send about the event, saying everything is as expected.
 
@@ -340,11 +320,7 @@ The specific implementation of the Outbox pattern does matter. This is often a _
 
 See the image that visualises how we can utilise the WAL pattern to achieve _durability_ and _atomicity_, which will increase the _reliability_ of our solution.
 
-<p>
-  <img class="article-image" src="/public/articles/outbox/outbox-3.webp" alt="" loading="eager" fetchpriority="high" />
-  <em class="image-description">Image 6. WAL + in-app processing.</em>
-</p>
-
+<article-image src="/public/articles/outbox/outbox-3.webp" label="Image 6. WAL + in-app processing."></article-image>
 Before the final implementation, let’s consider why we are even doing this.
 
 #### How often do apps crash, leaving the system in an inconsistent state?
@@ -438,11 +414,7 @@ Now, I have to put out the difference it makes.
 
 If we were using a message broker, then the high-level architecture would look like this:
 
-<p>
-  <img class="article-image" src="/public/articles/outbox/outbox-4.webp" alt="" loading="eager" fetchpriority="high" />
-  <em class="image-description">Image 7. Combination of Hermes PostgreSQL and a message broker.</em>
-</p>
-
+<article-image src="/public/articles/outbox/outbox-4.webp" label="Image 7. Combination of Hermes PostgreSQL and a message broker."></article-image>
 As an Outbox pattern implementation, the Hermes PostgreSQL ensures that a message is _delivered at least once_. In this case, it is responsible for successfully delivering messages to an external component, a _message broker._ From that very moment, it is the _message broker’s_ responsibility to deliver that message to _subscribers_. **So, basically, there are two queues** (to be precise, Hermes PostgreSQL queue and whatever _message broker_ is). One can span several messages into one logical transaction and deliver these messages in _at-least-once_ assurance. The latter is responsible for delivering messages independently from the first to the app. _This is how you usually want that to work_.
 
 So, Hermes PostgreSQL guarantees that messages you save within a transaction will be eventually delivered to the _message broker_ (a message will be acknowledged if the broker confirms it took over that message). Hermes PostgreSQL sends the subsequent messages to the broker in order, and the broker guarantees a bunch of stuff (depending on the configuration). But above all, _it ensures the messages will get to subscribers._ If a subscriber acknowledges a message, analogously how Hermes PostgreSQL works, it considers it delivered.
@@ -451,11 +423,7 @@ In our example, we’re going to use an _in-memory message_ queue. It works like
 
 Look how our case will work:
 
-<p>
-  <img class="article-image" src="/public/articles/outbox/outbox-6.webp" alt="" loading="eager" fetchpriority="high" />
-  <em class="image-description">Image 8. With an in-memory queue, Hermes PostgreSQL confirms a message when that message gets successfully processed by a related message handler.</em>
-</p>
-
+<article-image src="/public/articles/outbox/outbox-6.webp" label="Image 8. With an in-memory queue, Hermes PostgreSQL confirms a message when that message gets successfully processed by a related message handler."></article-image>
 
 _PostgreSQL Replication Stream_ sends messages to _Hermes PostgreSQL_. Hermes internally keeps a _message ID_ (here called _LSN_, which is explained later) for the last confirmed message.
 
@@ -471,11 +439,7 @@ Messages arrive, and Hermes PostgreSQL calls the `publish`callback for each mess
 
 Is it clear? Let’s modify _Image 8_ a bit to make it more detailed and generic.
 
-<p>
-  <img class="article-image" src="/public/articles/outbox/outbox-concept.webp" alt="" loading="eager" fetchpriority="high" />
-  <em class="image-description">Image 9. General overview how Hermes PostgreSQL works.</em>
-</p>
-
+<article-image src="/public/articles/outbox/outbox-concept.webp" label="Image 9. General overview how Hermes PostgreSQL works."></article-image>
 By default, Hermes PostgreSQL _sends messages in the order the messages have been committed_, but it doesn’t block the next messages that arrive.
 
 If delivering (and processing in this case) _message 1_ takes _200 milliseconds_, and the _second message_ is _10 milliseconds_, then processing of the first message finishes when processing the second message is already done. _This also means that handlers are called simultaneously_.
@@ -502,11 +466,7 @@ Messages will be propagated only to the instance in charge of the Hermes instanc
 
 If we want to scale more, we must use a message broker.
 
-<p>
-  <img class="article-image" src="/public/articles/outbox/outbox-messages-scaling.webp" alt="" loading="eager" fetchpriority="high" />
-  <em class="image-description">Image 10. A message broker like AWS SQS or Apache Pulsar can spread messages over your app's instances.</em>
-</p>
-
+<article-image src="/public/articles/outbox/outbox-messages-scaling.webp" label="Image 10. A message broker like AWS SQS or Apache Pulsar can spread messages over your app's instances."></article-image>
 
 In the above image, the first instance of the app that owns an _exclusively_ Hermes instance and queues all messages in a message broker.
 
@@ -622,11 +582,7 @@ As I said earlier, we kinda create an imitation of a transaction spanned two ind
 
 This is because when we manage to register a new user in the OIDC provider but not yet the corresponding entity in the database, we’ll be temporarily in an inconsistent state.
 
-<p>
-  <img class="article-image" src="/public/articles/outbox/outbox-7.webp" alt="" loading="eager" fetchpriority="high" />
-  <em class="image-description">Image 11. Business transactions are not ACID-compliant. During Δt the system state will be temporarily inconsistent. When the business transaction is over, the state will be consistent.</em>
-</p>
-
+<article-image src="/public/articles/outbox/outbox-7.webp" label="Image 11. Business transactions are not ACID-compliant. During Δt the system state will be temporarily inconsistent. When the business transaction is over, the state will be consistent."></article-image>
 Going back to the implementation. Let's model the command and the events.
 
 ```ts
@@ -938,11 +894,7 @@ Hermes PostgreSQL is built on top of PostgreSQL’s Logical Replication.
 
 See the image below to get a better understanding of PostgreSQL’s feature.
 
-<p>
-  <img class="article-image" src="/public/articles/outbox/replication.webp" alt="" loading="eager" fetchpriority="high" />
-  <em class="image-description">Image 11. It shows how PostgreSQL Logical Replication works.</em>
-</p>
-
+<article-image src="/public/articles/outbox/replication.webp" label="Image 11. It shows how PostgreSQL Logical Replication works."></article-image>
 
 ➡️ Logical Replication is a mode of how the WAL decodes data — we can read WAL data as logical operations constituting the following transactions
 
@@ -998,11 +950,7 @@ We can also update the messages and mark them as delivered, which would cause ma
 
 The solution based on pulling brings one tricky problem. Look at the image below.
 
-<p>
-  <img class="article-image" src="/public/articles/outbox/outbox-gap.webp" alt="" loading="eager" fetchpriority="high" />
-  <em class="image-description">Image 12. Tuple auto-increment identifiers are figured out before transactions start.</em>
-</p>
-
+<article-image src="/public/articles/outbox/outbox-gap.webp" label="Image 12. Tuple auto-increment identifiers are figured out before transactions start."></article-image>
 
 Autoincremented identifiers of PostgreSQL are calculated when a transaction begins. In Image 9, three transactions start on the left, one after another. The first one gets ID of value 1, the second is 2, and the third is 3.
 

@@ -42,10 +42,7 @@ In the Image 1 🖼️, you see some commands that can occur in the system. The 
 
 These commands modify the state. This is the patient condition that evaluates some risk as a discrete number 🔟.
 
-<p>
-  <img class="article-image" src="/public/articles/events-are-domain-atoms/comparison.webp" alt="" loading="eager" fetchpriority="high" />
-  <em class="image-description">Image 1. Comparison of the fixed-state approach and the event-sourced one.</em>
-</p>
+<article-image src="/public/articles/events-are-domain-atoms/comparison.webp" label="Image 1. Comparison of the fixed-state approach and the event-sourced one."></article-image>
 
 But the **interpretation can change**. Because _panta rhei_ 🌊
 
@@ -62,11 +59,7 @@ That opens a new door in the software architecture and Domain-Driven Design. **D
 
 The Image 2 👇👀👇 shows the full path from the request (command) to the commit.
 
-<p>
-  <img class="article-image" src="/public/articles/events-are-domain-atoms/event-stream.webp" alt="" loading="eager" fetchpriority="high" />
-  <em class="image-description">Image 2. The flow explaining how to construct loosely coupled system, from events to read models.</em>
-</p>
-
+<article-image src="/public/articles/events-are-domain-atoms/event-stream.webp" label="Image 2. The flow explaining how to construct loosely coupled system, from events to read models."></article-image>
 1️⃣ The command comes in - "_Resolve the big alert_"
 
 2️⃣ To know what steps shall be taken, we aggregate the state from the events stream
@@ -105,11 +98,7 @@ Various things trigger domain processes. In the example below, this is either a 
 
 Regardless of the source, a command is published.
 
-<p>
-  <img class="article-image" src="/public/articles/events-are-domain-atoms/capability.webp" alt="" loading="eager" fetchpriority="high" />
-  <em class="image-description">Image 3. First, discover business capabilities and later map their properties to business processes.</em>
-</p>
-
+<article-image src="/public/articles/events-are-domain-atoms/capability.webp" label="Image 3. First, discover business capabilities and later map their properties to business processes."></article-image>
 But... the command is not all. Besides the command, we must know the current state to make our decision.
 
 This is like a machine state but with events as the output:

@@ -49,11 +49,7 @@ _**We all came together to question how slow the other two solutions are compare
 
 _An Archetype_ is a defined **solution to a business problem**._The Time Availability_ answers the question: “_Can I schedule resource X between D1 and D2?_”.
 
-<p>
-  <img class="article-image" src="/public/articles/availability/1.webp" alt="" loading="eager" fetchpriority="high" />
-  <em class="image-description">Image 1. Oops! Can't be in two places at the same time!</em>
-</p>
-
+<article-image src="/public/articles/availability/1.webp" label="Image 1. Oops! Can't be in two places at the same time!"></article-image>
 
 Certainly, you bumped into this problem class. *Can I book that cottage house for the upcoming weekend? Can I "book" the babysitter, Alice, for this evening? Can I schedule a Bali massage with Nu Luh next Wednesday at 16:00? Can I have this doctor's call at 14:15-14:30?*
 
@@ -66,8 +62,7 @@ For instance, if we are interested in reservations of doctors' visits, which dep
 
 Here, I will focus on the latter case. Our primary technical challenge is *multiple simultaneous attempts to lock or unlock* the same resource.
 
-<img class="article-image" src="/public/articles/availability/2.webp" alt="" loading="eager" fetchpriority="high" />
-
+<article-image src="/public/articles/availability/2.webp" label=""></article-image>
 Image 2. Object-oriented representation of the TimeAvailability archetype.
 
 Let's dive into three technical solutions for the *Root Aggregate* implementation of the *Time Availability* archetype.
@@ -222,8 +217,7 @@ describe(`time slots`, () => {
 
 **This solution is well-suited for reading and writing because it's backed by a simple index**, as seen in *Image 3*. Locks are split into 15-minute (the size is just an example) time slots, allowing us to build a unique *B-tree* (*non-clustered*) index on the `resourceId` and the `startTime`. This enables us to catch collisions since only 15-minute time slots can be saved.
 
-<img class="article-image" src="/public/articles/availability/3.webp" alt="" loading="eager" fetchpriority="high" />
-
+<article-image src="/public/articles/availability/3.webp" label=""></article-image>
 Image 3. Unique index handles "conflicts".
 
 **As you can surely notice, that handy solution comes at a price.** What if we switch business-wise to one-minute or 20-minute time slots? What if things change, and at some point, we'd like to have one-hour or one-day time slots to cut down on data amount? Then, it turns out, the solution is not very flexible, and to fulfil domain challenges over time, we will be forced to bend our architecture to its extent. Presumably, with this specific approach, we won't be able to be as flexible as with the other two ways.
@@ -415,8 +409,7 @@ The query analysis shows that the database engine utilized the *B-tree index* pl
 
 > The bitmap index scan actually operates in tandem with a Bitmap Heap Scan: it does not fetch the data itself. Instead of producing the rows directly, the bitmap index scan constructs a bitmap of potential row locations. It feeds this data to a parent Bitmap Heap Scan, which can decode the bitmap to fetch the underlying data, grabbing data page by page.
 
-<img class="article-image" src="/public/articles/availability/4.webp" alt="" loading="eager" fetchpriority="high" />
-
+<article-image src="/public/articles/availability/4.webp" label=""></article-image>
 Image 4. Bitmap Index Scan for the *SELECT FOR UPDATE* query.
 
 *Unlocking* looks this way:
@@ -521,8 +514,7 @@ Initially, I generated 10,000 locks and obtained comparable results for all thre
 
 That gives 120 million rows for the first solution and a million for the other two.
 
-<img class="article-image" src="/public/articles/availability/5.webp" alt="" loading="eager" fetchpriority="high" />
-
+<article-image src="/public/articles/availability/5.webp" label=""></article-image>
 Image 5. Comparison of the average time of operations of all three solutions for a million reservations.
 
 **Basically, we can confidently say that all three solutions are equally efficient.** A million rows is not a small amount, so it should have shown significant differences in performance. But it didn't. What's more perplexing is that, with my current knowledge, I can't explain why the second solution (the "*SELECT*" one) appeared so effective.
@@ -535,8 +527,7 @@ Unfortunately, this means I have to do more tests. Nothing proves more about the
 
 Let's test how our solutions will cope under medium load. Imagine that 10-thousand simultaneous requests to lock a resource happen.
 
-<img class="article-image" src="/public/articles/availability/6.webp" alt="" loading="eager" fetchpriority="high" />
-
+<article-image src="/public/articles/availability/6.webp" label=""></article-image>
 Image 6. 10000 new reservations done concurrently.
 
 **Without a shred of doubt, all three functions do well and are comparable** (if your client is OK with a request taking a second and a half).
@@ -547,8 +538,7 @@ In that situation, you can test your implementation on *a* *vertically scaled Po
 
 Additionally, consider tailoring your solution to your specific business case, which may have particular requirements to help narrow down some scenarios, such as predefined appointments. Lastly, you can explore a solution based on specialized tooling (see the next chapter).
 
-<img class="article-image" src="/public/articles/availability/7.webp" alt="" loading="eager" fetchpriority="high" />
-
+<article-image src="/public/articles/availability/7.webp" label=""></article-image>
 *Image 7. A million new reservations done concurrently.*
 
 **I also performed tests for concurrent access for unlocking --- the results are good and acceptable even for a million simultaneous requests.** But I knew the results upfront. I'm not a Nostradamus --- all of the implementations are straightforward and rely on indexes, and they come down to a single `UPDATE` statement. The performance of *the time slot solution* depends on how many slots are updated at once.

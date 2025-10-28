@@ -60,12 +60,7 @@ All of that contributes to the potential project’s success.
 
 Below, you can see today’s fruit of my collaboration with [Natalia Milerska](https://www.linkedin.com/in/natalia-milerska). _We squeezed the maximum knowledge into 3 hours of workshops_😃
 
+<article-image src="/public/articles/ux-and-architect/image1.webp" label="A simple workshop board with a timeline and categorized sets of questions"></article-image>
 <p>
-  <img class="article-image" src="/public/articles/ux-and-architect/image1.webp" alt="" loading="eager" fetchpriority="high" />
-  <em class="image-description">A simple workshop board with a timeline and categorized sets of questions</em>
-</p>
-
-<p>
-  <img class="article-image" src="/public/articles/ux-and-architect/image2.webp" alt="" loading="eager" fetchpriority="high" />
-  <em class="image-description">I tried for the first time the <b>Domain Storytelling</b> (Stefan Höfer, Henning Schwentner). I liked it!</em>
+  <article-image src="/public/articles/ux-and-architect/image2.webp" label=""></article-image>  <em class="image-description">I tried for the first time the <b>Domain Storytelling</b> (Stefan Höfer, Henning Schwentner). I liked it!</em>
 </p>
