@@ -505,6 +505,10 @@ article-image.thumbnail-article-image .article-thumbnail-container {
   user-select: none;
 }
 
+.decorated-section.no-shadow {
+  box-shadow: none;
+}
+
 .decorated-section a {
   display: inline-block;
   margin-left: 1em;
