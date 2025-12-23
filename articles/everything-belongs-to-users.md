@@ -22,17 +22,17 @@ published: true
 > Homo Sovieticus's mantra was "**Everything belongs to the kolkhoz, everything belongs to me**". In the context of this text I want to rephrase it to: **Everything belongs to the app, everything belongs to users**.
 
 <img class="cover-image article-image" src="/public/articles/kolkhoz.webp" alt="" loading="eager" fetchpriority="high" />
-  
-I often hear we _can't_ modularise the app when everything depends on _users_. I hear it's a mirage, overcomplication in the name of self-indulgence.  
-  
-I remember that once, back in the old sunny days, trying to visualise the team's problems, I took a piece of paper, drew big dots, labelled them with class names, and drew directional arrows between any two modules referencing each other. **That was a spider's web!** 
-  
-Then, I realised **life is about striving for a straightforward graph that doesn't look like that web**.  
+
+I often hear we _can't_ modularise the app when everything depends on _users_. I hear it's a mirage, overcomplication in the name of self-indulgence.
+
+I remember that once, back in the old sunny days, trying to visualise the team's problems, I took a piece of paper, drew big dots, labelled them with class names, and drew directional arrows between any two modules referencing each other. **That was a spider's web!**
+
+Then, I realised **life is about striving for a straightforward graph that doesn't look like that web**.
 
 #### Users glue all the pieces together, right?
-  
-But what to do with those _users_?  
-  
+
+But what to do with those _users_?
+
 The problem is we can call whatever user-related a user.
 
 ➡️ User _belongs_ to the complaints.
@@ -55,9 +55,9 @@ It's a classical _ubiquitous language_ [problem](https://martinfowler.com/bliki/
 Without a proper design phase we can't discover subtle differences between actual entities.
 
 #### Business capabilities
-  
+
 Imagine we have _patients_ registered in our app. Patients can be evaluated according to different test results.  
-  
+
 <article-image src="/public/articles/kolhkoz/tests.webp" label="Image 2. Two modules referencing a patient."></article-image>  
 We defined two [_business capabilities_](https://www.leanix.net/en/wiki/ea/business-capability) - evaluation of test A or B results.
 
@@ -94,15 +94,15 @@ Also, the other modules don't need to know e.g. emails except the _PII_ (Persona
 With simple context separation, we increase the overall reliability of the system because we untangled different system capabilities:
 
 ➡️ Getting profile details / Logging-in patients  
-➡️ Evaluating A test results  
-➡️ Evaluating B test results  
+➡️ Evaluating A test results
+➡️ Evaluating B test results
 
 Look at the _Image 4_ that shows the correct design.
 
-<article-image src="/public/articles/kolhkoz/separation.webp" label="Image 4. Each "module"/"slice"/"feature" knows a different patient entity."></article-image>
+<article-image src="/public/articles/kolhkoz/separation.webp" label='Image 4. Each "module"/"slice"/"feature" knows a different patient entity.'></article-image>
 Also, look at the _Image 5_ below how the bad design is.
 
-<article-image src="/public/articles/kolhkoz/no-separation.webp" label="Image 5. Each "module"/"slice"/"feature" knows a different patient entity."></article-image>  
+<article-image src="/public/articles/kolhkoz/no-separation.webp" label='Image 5. Each "module"/"slice"/"feature" knows a different patient entity.'></article-image>
 **Each capability understands the patient differently, using the same identifiers to uniquely identify and link patients if needed.**
 
 #### Database also does matter
