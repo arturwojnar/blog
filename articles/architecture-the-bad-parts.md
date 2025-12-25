@@ -76,7 +76,7 @@ Here's the text format of the image content, in case you like it more.
 -   **AC1.** My system receives the patient’s test results: alanine aminotransferase (ALT – U/L) and liver fibrosis level on the METAVIR scale F0–F4 from elastography.
 -   **AC2.** ALT above 35 U/L for women / 45 U/L for men generates a small alert.
 -   **AC3.** Fibrosis levels F1, F2, F3, and F4 generate a small alert.
--   **AC4.** After three consecutive alarming ALT–fibrosis result pairs, taken at intervals of at least one month, we calculate the liver cancer risk level using the formula:**(patient age / 70) * (median fibrosis / 4) * (mean ALT / [last ALT result + first ALT result])**
+-   **AC4.** After three consecutive alarming ALT–fibrosis result pairs, taken at intervals of at least one month, we calculate the liver cancer risk level using the formula: <img src="/public/articles/architecture-the-bad-parts/formula.webp" style="max-width: 400px">
 -   **AC5.** If the calculated liver cancer risk level is greater than 0.3, we generate a large alert.
 -   **AC6.** A doctor may resolve a large alert → this resolves all small alerts.
 -   **AC7.** A doctor may resolve small alerts, but when a large alert appears, small alerts cannot be resolved.
@@ -183,9 +183,511 @@ I will present you some more interesting parts of the implementation. 🔍
 
 The whole thing is implemented in _NodeJS_/_TypeScript_. If you're not into this tech stack, then I'm pretty sure the codebase will be still readable to you. 📖
 
-Remember, that the full implementation you can check in [this repo and this branch](https://github.com/arturwojnar/alerting-app-example/blob/no-design). You can check also the commit history. 🔗
+Remember, that the full implementation you can check in [this repo and on this branch](https://github.com/arturwojnar/alerting-app-example/blob/no-design). You can check also the commit history. 🔗
+
+First, let's list the `domain/Alert.ts`:
+
+```ts
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm'
+import { User, Sex } from './User.js'
+import { Measurement, MeasurementType } from './Measurement.js'
+
+export enum AlertType {
+  SMALL = 'small',
+  BIG = 'big',
+}
+
+export interface AlarmingPair {
+  alt: Measurement
+  fibrosis: Measurement
+  date: Date
+}
+
+@Entity('alerts')
+export class Alert {
+  @PrimaryGeneratedColumn('uuid')
+  id!: string
+
+  @Column({
+    type: 'enum',
+    enum: AlertType,
+  })
+  type!: AlertType
+
+  @Column({ default: false })
+  resolved!: boolean
+
+  @ManyToOne(() => User, (user) => user.alerts)
+  user!: User
+
+  @Column()
+  userId!: string
+
+  @CreateDateColumn()
+  createdAt!: Date
+
+  @UpdateDateColumn()
+  updatedAt!: Date
+
+  // AC2: Check if ALT value triggers alert
+  static shouldTriggerAltAlert(value: number, sex: Sex): boolean {
+    const threshold = sex === Sex.MALE ? 45 : 35
+    return value > threshold
+  }
+
+  // AC3: Check if fibrosis value triggers alert
+  static shouldTriggerFibrosisAlert(value: number): boolean {
+    return value >= 1 && value <= 4
+  }
+
+  // AC4: Find alarming pairs from measurements
+  static findAlarmingPairs(
+    measurements: Measurement[],
+    user: User,
+  ): AlarmingPair[] {
+    const alarmingPairs: AlarmingPair[] = []
+
+    // Group measurements by date (same day)
+    const measurementsByDate = new Map<string, Measurement[]>()
+    for (const m of measurements) {
+      const dateKey = m.measuredAt.toISOString().split('T')[0]
+      if (!measurementsByDate.has(dateKey)) {
+        measurementsByDate.set(dateKey, [])
+      }
+      measurementsByDate.get(dateKey)!.push(m)
+    }
+
+    // Find alarming pairs
+    for (const dateMeasurements of measurementsByDate.values()) {
+      const altMeasurement = dateMeasurements.find(
+        (m) => m.measurementType === MeasurementType.ALT,
+      )
+      const fibrosisMeasurement = dateMeasurements.find(
+        (m) => m.measurementType === MeasurementType.FIBROSIS,
+      )
+
+      if (altMeasurement && fibrosisMeasurement) {
+        const isAltAlarming = Alert.shouldTriggerAltAlert(
+          altMeasurement.value,
+          user.sex,
+        )
+        const isFibrosisAlarming = Alert.shouldTriggerFibrosisAlert(
+          fibrosisMeasurement.value,
+        )
+
+        if (isAltAlarming && isFibrosisAlarming) {
+          alarmingPairs.push({
+            alt: altMeasurement,
+            fibrosis: fibrosisMeasurement,
+            date: altMeasurement.measuredAt,
+          })
+        }
+      }
+    }
+
+    return alarmingPairs
+  }
+
+  // AC4: Find valid consecutive pairs (at least one month apart)
+  static findValidConsecutivePairs(
+    alarmingPairs: AlarmingPair[],
+    requiredCount: number = 3,
+  ): AlarmingPair[] {
+    if (alarmingPairs.length < requiredCount) {
+      return []
+    }
+
+    // Sort by date descending
+    const sorted = [...alarmingPairs].sort(
+      (a, b) => b.date.getTime() - a.date.getTime(),
+    )
+
+    const validPairs: AlarmingPair[] = []
+    for (const pair of sorted) {
+      if (validPairs.length === 0) {
+        validPairs.push(pair)
+      } else {
+        const lastPair = validPairs[validPairs.length - 1]
+        const daysDiff = Math.abs(
+          (pair.date.getTime() - lastPair.date.getTime()) /
+            (1000 * 60 * 60 * 24),
+        )
+        if (daysDiff >= 30) {
+          validPairs.push(pair)
+          if (validPairs.length === requiredCount) {
+            break
+          }
+        }
+      }
+    }
+
+    return validPairs.length === requiredCount ? validPairs : []
+  }
+
+  // AC4: Calculate liver cancer risk
+  static calculateLiverCancerRisk(
+    validPairs: AlarmingPair[],
+    user: User,
+  ): number {
+    const age =
+      (new Date().getTime() - user.dateOfBirth.getTime()) /
+      (1000 * 60 * 60 * 24 * 365.25)
+
+    const fibrosisValues = validPairs.map((p) => p.fibrosis.value)
+    const medianFibrosis = fibrosisValues.sort((a, b) => a - b)[
+      Math.floor(fibrosisValues.length / 2)
+    ]
+
+    const altValues = validPairs.map((p) => p.alt.value)
+    const meanALT = altValues.reduce((sum, v) => sum + v, 0) / altValues.length
+    const lastALT = validPairs[0].alt.value
+    const firstALT = validPairs[validPairs.length - 1].alt.value
+
+    return (age / 70) * (medianFibrosis / 4) * (meanALT / (lastALT + firstALT))
+  }
+
+  // AC5: Check if risk level requires big alert
+  static shouldRaiseBigAlert(riskLevel: number): boolean {
+    return riskLevel > 0.3
+  }
+}
+```
+
+The `Alert` class is a `TypeORM` entity. It contains a few _static_ methods that encapsulate the business logic to be used in a related service.
+**Basically, the goal is to find the three most recent measurement pairs that triggered small alerts.** If those exist, then a big alert should be raised. 🎯
+
+Now, see how the `services/AlertService` has been implemented: 👇
+
+```ts
+import { AlertRepository } from '../repositories/AlertRepository.js'
+import { MeasurementRepository } from '../repositories/MeasurementRepository.js'
+import { Alert, AlertType } from '../domain/Alert.js'
+import { User } from '../domain/User.js'
+import { MeasurementType } from '../domain/Measurement.js'
+import { AppDataSource } from '../core/infrastructure/database.js'
+
+export class AlertService {
+  private alertRepository: AlertRepository
+  private measurementRepository: MeasurementRepository
+
+  constructor() {
+    this.alertRepository = new AlertRepository()
+    this.measurementRepository = new MeasurementRepository()
+  }
+
+  async getAlertById(id: string): Promise<Alert | null> {
+    return await this.alertRepository.findById(id)
+  }
+
+  async getAlertsByUserId(userId: string): Promise<Alert[]> {
+    return await this.alertRepository.findByUserId(userId)
+  }
+
+  async getUnresolvedAlertsByUserId(userId: string): Promise<Alert[]> {
+    return await this.alertRepository.findUnresolvedByUserId(userId)
+  }
+
+  async getAllAlerts(): Promise<Alert[]> {
+    return await this.alertRepository.findAll()
+  }
+
+  // AC2-AC8: Check measurement and trigger alerts
+  async checkMeasurement(
+    user: User,
+    type: MeasurementType,
+    value: number,
+  ): Promise<void> {
+    // AC8: No new alerts if unresolved big alert exists
+    const unresolvedBigAlert =
+      await this.alertRepository.findUnresolvedBigAlertByUserId(user.id)
+
+    if (unresolvedBigAlert) {
+      console.log('Cannot generate new alerts - unresolved big alert exists')
+      return
+    }
+
+    // AC2: Check ALT thresholds
+    if (type === MeasurementType.ALT) {
+      if (Alert.shouldTriggerAltAlert(value, user.sex)) {
+        await this.raiseSmallAlert(user)
+      }
+    }
+
+    // AC3: Check fibrosis levels F1-F4
+    if (type === MeasurementType.FIBROSIS) {
+      if (Alert.shouldTriggerFibrosisAlert(value)) {
+        await this.raiseSmallAlert(user)
+      }
+    }
+
+    // AC4: Check if big alert should be raised
+    await this.checkIfBigAlertShouldBeRaised(user)
+  }
+
+  // Create a small alert
+  private async raiseSmallAlert(user: User): Promise<Alert> {
+    const repository = AppDataSource.getRepository(Alert)
+    const alert = repository.create({
+      type: AlertType.SMALL,
+      user,
+      userId: user.id,
+    })
+    return await repository.save(alert)
+  }
+
+  // AC4-AC5: Check if big alert should be raised based on measurements
+  private async checkIfBigAlertShouldBeRaised(user: User): Promise<void> {
+    // Get all measurements for the user
+    const measurements = await this.measurementRepository.findByUserId(user.id)
+
+    // Find alarming pairs
+    const alarmingPairs = Alert.findAlarmingPairs(measurements, user)
+
+    // Find valid consecutive pairs (at least 3, one month apart)
+    const validPairs = Alert.findValidConsecutivePairs(alarmingPairs, 3)
+
+    if (validPairs.length === 0) {
+      return
+    }
+
+    // Calculate liver cancer risk
+    const riskLevel = Alert.calculateLiverCancerRisk(validPairs, user)
+
+    // AC5: Raise big alert if risk > 0.3
+    if (Alert.shouldRaiseBigAlert(riskLevel)) {
+      await this.raiseBigAlert(user)
+    }
+  }
+
+  // Create a big alert
+  private async raiseBigAlert(user: User): Promise<Alert> {
+    const repository = AppDataSource.getRepository(Alert)
+
+    // Check if big alert already exists
+    const existingBigAlert =
+      await this.alertRepository.findUnresolvedBigAlertByUserId(user.id)
+
+    if (existingBigAlert) {
+      return existingBigAlert
+    }
+
+    const alert = repository.create({
+      type: AlertType.BIG,
+      user,
+      userId: user.id,
+    })
+    return await repository.save(alert)
+  }
+
+  // AC6-AC7: Resolve alert
+  async resolveAlert(id: string): Promise<boolean> {
+    const alert = await this.alertRepository.findById(id)
+    if (!alert) {
+      throw new Error(`Alert with id ${id} not found`)
+    }
+
+    const repository = AppDataSource.getRepository(Alert)
+
+    // AC6: When resolving a big alert, resolve all small alerts
+    if (alert.type === AlertType.BIG) {
+      await repository.update(
+        {
+          userId: alert.userId,
+          type: AlertType.SMALL,
+          resolved: false,
+        },
+        { resolved: true },
+      )
+
+      alert.resolved = true
+      await repository.save(alert)
+      return true
+    }
+
+    // AC7: Small alerts cannot be resolved if a big alert exists
+    if (alert.type === AlertType.SMALL) {
+      const unresolvedBigAlert =
+        await this.alertRepository.findUnresolvedBigAlertByUserId(alert.userId)
+
+      if (unresolvedBigAlert) {
+        console.log('Cannot resolve small alert - unresolved big alert exists')
+        return false
+      }
+
+      alert.resolved = true
+      await repository.save(alert)
+      return true
+    }
+
+    return false
+  }
+
+  async deleteAlert(id: string): Promise<void> {
+    await this.alertRepository.delete(id)
+  }
+}
+```
+
+The service orchestrates the `Alert` entity and the `AlertRepository`. **The most important method is `checkMeasurement`, which determines whether any alert should be raised.** ⚡
+
+At the end, let's take a quick look at the `MeasurementService`. It handles the side effect of checking and potentially raising alerts: 🔍
+
+```ts
+import { MeasurementRepository } from '../repositories/MeasurementRepository.js'
+import { UserRepository } from '../repositories/UserRepository.js'
+import { Measurement, MeasurementType } from '../domain/Measurement.js'
+import { AppDataSource } from '../core/infrastructure/database.js'
+import { AlertService } from './AlertService.js'
+
+export class MeasurementService {
+  private measurementRepository: MeasurementRepository
+  private userRepository: UserRepository
+  private alertService: AlertService
+
+  constructor() {
+    this.measurementRepository = new MeasurementRepository()
+    this.userRepository = new UserRepository()
+    this.alertService = new AlertService()
+  }
+
+  async addMeasurement(
+    userId: string,
+    type: MeasurementType,
+    value: number,
+    measuredAt: Date = new Date(),
+  ): Promise<Measurement> {
+    const user = await this.userRepository.findById(userId)
+    if (!user) {
+      throw new Error(`User with id ${userId} not found`)
+    }
+
+    // Create and save measurement
+    const repository = AppDataSource.getRepository(Measurement)
+    const measurement = repository.create({
+      measurementType: type,
+      value,
+      measuredAt,
+      user,
+      userId: user.id,
+    })
+    const savedMeasurement = await repository.save(measurement)
+
+    // Trigger alert checking
+    await this.alertService.checkMeasurement(user, type, value)
+
+    return savedMeasurement
+  }
+
+  async getMeasurementById(id: string): Promise<Measurement | null> {
+    return await this.measurementRepository.findById(id)
+  }
+
+  async getMeasurementsByUserId(userId: string): Promise<Measurement[]> {
+    return await this.measurementRepository.findByUserId(userId)
+  }
+
+  async getAllMeasurements(): Promise<Measurement[]> {
+    return await this.measurementRepository.findAll()
+  }
+
+  async deleteMeasurement(id: string): Promise<void> {
+    await this.measurementRepository.delete(id)
+  }
+}
+```
+
+Yeah! That was a ride! We're done! Go home, Dear Developers. See you in the next sprint! 👋
+
+## Changes! 🔄
+
+Nothing is certain except for death and taxes... and CHANGES! 💀💰
+
+In this chapter, I'd like to show you, Dear Reader, how new features can put the codebase to the test and demonstrate how your components will evolve.
+
+**You need only one change to turn your assumptions upside down.** 🙃
+
+## Change One 🔄
+
+> The doctor wants to view priority patients, i.e., those for whom a big alert has been raised.
+
+I asked `Claude Code` (`Sonnet 4.5`) to implement the change. 🤖
+
+Look at Image 6, where the changes are highlighted. **The most obvious place for the new piece of code is the `User` entity.** Image 6 shows the modifications applied to `UserRepository`. The change is effortless, right? We have joined the `Users` and `Alerts` tables by the foreign key (`userId`) and filtered the patients who have a raised significant alert (and the alert is still active). ✅
+
+<article-image src="/public/articles/architecture-the-bad-parts/change1.webp" label="Image 6. Getting Priority Patients to the User."></article-image>
+
+What do you think about this? 🤔
+
+### Risks ⚠️
+
+Let's critically analyze the recent changes:
+
+<big-number value="1"></big-number> _The Priority Patient_ feature has been mixed into the `User`/`PII` (eng. [Personally Identifiable Information](https://www.ibm.com/think/topics/pii)). 🔀
+
+**It means that if the team gets two tasks** — one is to add an _ID number_ and the other is to extend the definition of the _Priority Patient_ — then the changes will be applied to the same file, to the same entity. If the team works with a relational database and relies on migrations, then the conflict will spread to the migrations as well. Additionally, **working on the same components forces more inter-human communication, which is costly.** 💸
+This is the **coupling** created between two features: _PII_ and _Priority Patients_.
+
+<big-number value="2"></big-number> Next, similar changes will also be applied to the `User` entity. 📝
+
+<big-number value="3"></big-number> The implementation joins the `Users` with the `Alerts` table. The `Alert` entity is used to make business decisions (whether alerts should be raised). **This is dangerous, as by implementing a new feature that has nothing to do with alerting, we may impact the alerting logic.** 💥
+
+<big-number value="4"></big-number> Imagine that this feature could've been implemented a bit differently. That could've been done with an `isPriorityPatient` flag, so there's no need to perform the join every time.
+The coupling problem remains the same, but **this solution is even worse because it extends the `User` entity with a new property.** 😱
+The team I currently work with inherited a codebase where the `Patients` table has been weighted down with so many flags and properties that [DynamoDB](https://aws.amazon.com/dynamodb/?trk=f9e0f4c5-ccbb-4db9-a569-bd8403262058&sc_channel=ps&trk=f9e0f4c5-ccbb-4db9-a569-bd8403262058&sc_channel=ps&ef_id=CjwKCAiA3rPKBhBZEiwAhPNFQHSkCSleIQ8aS8VAJxbUepAp5VkXbV46g-3uD2Agg4KiD06A91O5RRoCxlAQAvD_BwE:G:s&s_kwcid=AL!4422!3!645186177970!e!!g!!dynamodb&gad_campaignid=19571721573&gbraid=0AAAAADjHtp_VWKDGgKmWomdVBmq7IztLk&gclid=CjwKCAiA3rPKBhBZEiwAhPNFQHSkCSleIQ8aS8VAJxbUepAp5VkXbV46g-3uD2Agg4KiD06A91O5RRoCxlAQAvD_BwE) reported that a single row/document is too big and cannot be loaded at once from the drive! 💾
+**This is the most outstanding and largest example of coupling I have seen in my life.** 🏆
+
+## Change Two 🔄
+
+> Doctors need to determine the severity of a given alert on a scale of "low", "medium", "high", "critical". 📊
+
+I asked `Claude Code` (`Sonnet 4.5`) to implement the change. 🤖
+
+<article-image src="/public/articles/architecture-the-bad-parts/change2.webp" label="Image 8. Alert severity."></article-image>
+
+What do you think about this? 🤔
+
+### Risks ⚠️
+
+<big-number value="1"></big-number> The change adds the `importance` property to the `Alert` entity. **The problem is that the new property is needed for the view, not for deciding about raising or resolving alerts.** Thus, we've just mixed up a _write model_ with a _read model_. As with Change One, **this means that when changing things for a view, it may cause a _regression_ in the alerting logic.** 💥
+
+<big-number value="2"></big-number> Again, **by changing a view, we can impact business logic (sic!)** 🤮
+
+## Change Three 🔄
+
+> Doctors want to calculate a new risk level: the risk of fatty liver disease. This generates small alerts without affecting big ones. 🏥
+
+The business and its capabilities evolve and change; the business adapts to the market and the competitors. That's why the company's owner, after consultation with stakeholders (medical doctors), decided that the system should be able to determine the risk of a fatty liver. That should eventually bring in more new customers. 💼
+
+I asked `Claude Code` (`Sonnet 4.5`) to implement the change. 🤖
+
+The test for whether a new alert should be raised when it turns out there is a significant risk of fatty liver was added (according to the architecture and its logic) to the `Alert` entity. 🎯
+
+<article-image src="/public/articles/architecture-the-bad-parts/change3-1.webp" label="Image 9. Fatty liver check applied to the Alert class."></article-image>
+
+It's worth noticing how this new method, `checkFattyLiverRisk`, is being called in the related service. You can see it in Image 10. 👀
+
+<article-image src="/public/articles/architecture-the-bad-parts/change3-2.webp" label="Image 10. New method is called before calling the risk cancer check."></article-image>
+
+### Risks ⚠️
+
+<big-number value="1"></big-number> Checking the cancer risk and checking the fatty liver risk both happen in the `Alert` entity (within the same context). 🔀
+**This is coupling, but now between two _write models_.** The newly added check requires the patient's sex, ALT, and fibrosis levels to be calculated.
+
+<big-number value="2">The service calls so-called _side effects_ synchronously, one after another.</big-number> ⏱️
+**What if one of the checks fails? Or what would happen if the running container gets abruptly closed between the checks?** Will we end up in an _inconsistent_ state? This is a matter of _reliability_. 🛡️
+
+<big-number value="3"></big-number> When you look closely at the `Alert` service, we see a pretty lengthy dictionary containing `Alert`, `Measurement`, and `User`. 📚
+Think also that the `checkMeasurement` method is called in the `Measurement` service. **It's all tangled together and connected to each other. We can start thinking of the tangled objects as a big ball of mud.** 🧶
 
 
+<big-number value="4"></big-number> The `Alert` entity got pretty big. Imagine that further changes will add more tastes and smells to this class, which has started becoming spaghetti code and a God Class. 🍝👹
 
 <!-- ## The Bad Part: Noun-ing
 
