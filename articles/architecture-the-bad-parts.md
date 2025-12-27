@@ -27,7 +27,7 @@ Do you want to go through a detailed example and see how poor or naive approach 
 
 Yeah. I know you want to. 😏
 
-Do you want to read about **domain leaks**? About how **starting from nouns is bad**? About **mixing read and write models**? 🤔
+Do you want to read about **context coupling**? About how **starting from nouns is bad**? About **mixing read and write models**? 🤔
 
 Tighten your seat belt and let's hit the road! 🚀
 
@@ -621,7 +621,7 @@ I asked `Claude Code` (`Sonnet 4.5`) to implement the change. 🤖
 
 Look at Image 6, where the changes are highlighted. **The most obvious place for the new piece of code is the `User` entity.** Image 6 shows the modifications applied to `UserRepository`. The change is effortless, right? We have joined the `Users` and `Alerts` tables by the foreign key (`userId`) and filtered the patients who have a raised significant alert (and the alert is still active). ✅
 
-<article-image src="/public/articles/architecture-the-bad-parts/change1.webp" label="Image 6. Getting Priority Patients to the User."></article-image>
+<article-image maxwidth="600px" src="/public/articles/architecture-the-bad-parts/change1.webp" label="Image 6. Getting Priority Patients to the User."></article-image>
 
 What do you think about this? 🤔
 
@@ -649,7 +649,7 @@ The team I currently work with inherited a codebase where the `Patients` table h
 
 I asked `Claude Code` (`Sonnet 4.5`) to implement the change. 🤖
 
-<article-image src="/public/articles/architecture-the-bad-parts/change2.webp" label="Image 8. Alert severity."></article-image>
+<article-image maxwidth="600px" src="/public/articles/architecture-the-bad-parts/change2.webp" label="Image 8. Alert severity."></article-image>
 
 What do you think about this? 🤔
 
@@ -669,18 +669,18 @@ I asked `Claude Code` (`Sonnet 4.5`) to implement the change. 🤖
 
 The test for whether a new alert should be raised when it turns out there is a significant risk of fatty liver was added (according to the architecture and its logic) to the `Alert` entity. 🎯
 
-<article-image src="/public/articles/architecture-the-bad-parts/change3-1.webp" label="Image 9. Fatty liver check applied to the Alert class."></article-image>
+<article-image maxwidth="900px" src="/public/articles/architecture-the-bad-parts/change3-1.webp" label="Image 9. Fatty liver check applied to the Alert class."></article-image>
 
 It's worth noticing how this new method, `checkFattyLiverRisk`, is being called in the related service. You can see it in Image 10. 👀
 
-<article-image src="/public/articles/architecture-the-bad-parts/change3-2.webp" label="Image 10. New method is called before calling the risk cancer check."></article-image>
+<article-image maxwidth="900px" src="/public/articles/architecture-the-bad-parts/change3-2.webp" label="Image 10. New method is called before calling the risk cancer check."></article-image>
 
 ### Risks ⚠️
 
 <big-number value="1"></big-number> Checking the cancer risk and checking the fatty liver risk both happen in the `Alert` entity (within the same context). 🔀
 **This is coupling, but now between two _write models_.** The newly added check requires the patient's sex, ALT, and fibrosis levels to be calculated.
 
-<big-number value="2">The service calls so-called _side effects_ synchronously, one after another.</big-number> ⏱️
+<big-number value="2"></big-number> The service calls so-called _side effects_ synchronously, one after another. ⏱️
 **What if one of the checks fails? Or what would happen if the running container gets abruptly closed between the checks?** Will we end up in an _inconsistent_ state? This is a matter of _reliability_. 🛡️
 
 <big-number value="3"></big-number> When you look closely at the `Alert` service, we see a pretty lengthy dictionary containing `Alert`, `Measurement`, and `User`. 📚
@@ -689,19 +689,176 @@ Think also that the `checkMeasurement` method is called in the `Measurement` ser
 
 <big-number value="4"></big-number> The `Alert` entity got pretty big. Imagine that further changes will add more tastes and smells to this class, which has started becoming spaghetti code and a God Class. 🍝👹
 
-<!-- ## The Bad Part: Noun-ing
+## Other changes 🔄
 
-Once the development team wrote down the REST API endpoints, the team discovered the main resources. These are:
-- Measurement
-- Alert
-- User
+_Let's consider the following requirement:_
 
-These domain language, these words, these nouns describe everyhting that happens in the system and they map perfectly to the API endpoints.
-Someone created an [Architecture Decision Record](https://adr.github.io/) describing a motivation behind the decision to split the API this way, not another, and as the final documentation monument, the developer attached an UML class diagram. See the Image 3.
+> The integrating clinic wants to introduce its own risk calculation formula
 
-<article-image src="/public/articles/architecture-the-bad-parts/classes.webp" label="Image 3. UML Class Diagram describing the system entities."></article-image>
+Nothing simpler, right? Following the current architecture and the way of work, the team decides, yet another time, to extend the `Alert` entity and implement the new logic, a new decision model, along side the previous ones.
 
-_User_ has _Measurement_ and _Alert_
-### The pain
+**Thus, we keep increasing the features coupling within the alerting part.**
 
-Onion/ports/clean -->
+This process will go deeper, because such integrations are popular. A new signed contract is potential new integration with another clinic or hospital.
+
+_Let's take another requirement:_
+
+> Doctor wants to display liver cancer risk levels
+
+While the team thinks about this feature during another planning session, it concludes that the change needed to be applied is not trivial.
+Turns out that currently the system does not persist calculated risk levels, instead it analyzes the input data each time. However, the team believes they can just store the risk level in alerts.
+But someone else from the team, someone more analytical, says that alerts contains only risks which exceeded the treshold. Thus, to implement the feature the team would have to store those values separately.
+
+**But here comes the question. Maybe the team hasn't discovered some entities in the first place?**
+
+## Prediction of Alert evolution
+
+We know enough to predict how the `Alert` entity (by that, I understand the domain part, but also the repository, service and controller - in general a place containing features grouped under one context) will evolve. And the future is not bright for it.
+
+We've already learned that the `Alert` includes various features grouped under the Alert flag.
+
+See a line chart in Image 11 demonstrating how the coupling of the contained features in Alert increases over time, when next features are implemented.
+
+When coupling raises, cohesion decreases.
+
+<article-image maxwidth="600px" src="/public/articles/architecture-the-bad-parts/alert-coupling-chart.webp" label="Image 11. Alert, as an object, contains many slightly dependent functionalities."></article-image>
+
+## When we know more, let's check the diagram again
+
+After seeing how the codebase evolves and knowing the weak spots, we can critically examine the classes diagram again.
+
+Image 12 hightlight the doubts which araised.
+
+<big-number value="1"></big-number> Users, that is, who exactly?
+Priority patients have been implemented in Users, thus Users suffer the same way as Alerts when it comes to increasing the coupling. Even more, because _"User"_ is very broad in its meanings.
+Does the _user_ mean the same for measurements? Does the _user_ mean the same for alerting? Does the _user_ mean the same for the function that calculates the fatty liver risk?
+
+<big-number value="2"></big-number> Now, look again at the `Alert` entity: `user`, `ALT`, `fibrosis`, `measurement`. Next, we added also dependency to `fatty liver`. `Alert` encapsulates the whole domain. **The different part of the domain leaks into `Alert` from all holes**.
+
+<big-number value="3"></big-number> Heuristic which sorts contexts based on discovered domain **nouns**, like _measurement_, _alert_ is good one to start with the modelling process.
+Looking at the `Alert` class we see many different **nouns** which suggests that it's likely they should belong to separate entities.
+
+<big-number value="4"></big-number> Let's think about the presence of the `user` object in `Alert`.
+We needed also the birth date (later this was also the sex), but we provided the whole `user` object. The same which contains sensitive data and lots of different unnecessary things.
+It's technically possible and tempting to access other properties then the birth date and the sex. The contract between `Alert` and `User` entities is not defined, so `Alert` can reach any property of `User`.
+Keeping this thinking - should we also know anything about internal logic of liver risk or fatty liver calculation?
+
+<article-image src="/public/articles/architecture-the-bad-parts/classes-issues.webp" label="Image 12. Critical analysis of the Class Diagram after we learned more about the growth direction."></article-image>
+
+## The Bad Parts
+
+I pointed out a lot of issues in the current implementation and this is the time to group all of them into Bad Part Practices.
+
+We already discussed one Bad Part, _Wireframe Driven Development_. See other bad practices.
+
+## The Bad Part: Noun(ing)
+
+Nouning is a way of work when development teams build domain models around nouns rather than behaviours. Undesirable effect of it is that models grow too much, having loosely related behaviours. Such models are characterized by low cohesion and high coupling of contained behaviours.
+Often, such noun-based models are just read models.
+
+In `User` we mixed up personnal data together with information whether a patient is a priority.
+
+In `Alert` we tight together a few different behaviours:
+- read model (type, timestamps, status, important flag)
+- write model - calculating risk of liver cancer
+- write model - calculating risk of fatty liver
+- write model - should a small alert be raised
+- write model - should a big alert be raised
+
+We created a highly coupled models and their maintanance will become a bottelneck over time.
+
+Eventually the models will become:
+- God objects
+- Spaghetti code
+
+Splitting the models into smaller files referenced in the main file won't change the situation a bit.
+
+## The Bad Part: No separation of read and write models
+
+No separation of read and write models means that there is one model which contains both a read and a write model. This is bad because changes in views will impact the write models which represent business logic. Moreover, the write models will have access to data they don't require. This is contractual issue, because it's not explicit what data actually needed in the write model, so when a property gets renamed or deleted, then we can introduce a bug in the wirte model. This might be also a security vulnerability. Think of it like about violation of [Liskov substitution princile](https://en.wikipedia.org/wiki/Liskov_substitution_principle) on architecture level.
+
+The perfect example of combination write and read models is `Alert`.
+
+## The Bad Part: Features coupling
+
+Features coupling is when we tightly couple domain processes/behaviours, so they impact each other.
+
+Think of calculating liver cancer risk, calculating another risk after integration with a new clinic and calculating fatty liver risk. They are separate processes but tighted with each other in `Alert`.
+
+## The Bad Part: No clear contexts
+
+No clear context means different parts of domain leaks between domain entities, so in the end everything depends on each other and no business process is protected from a change in other parts of the system. Even a change of a read-only property may cause a damage. This is what true [big ball of mud](https://dev.to/m_midas/big-ball-of-mud-understanding-the-antipattern-and-how-to-avoid-it-2i) means.
+
+With better modelling hygiene, we should've created a strong separation between domain entities and contexts that includes them. For instance, create a `Patient` read model for `Alert`, which would store only the necessary data, such as birth date and sex. Thanks to that, a change in `User`, source of PII, wouldn't impact `Alert`.
+
+## The Bad Part: Context violation / Cross-Context Coupling
+
+A context violation happens when logic that belongs to one business domain is executed inside another domain, causing their models and responsibilities to be mixed. On the other hand, cross-context coupling means two domains are tied together so tightly that one cannot change without breaking the other.
+
+This is what happens in `MeasurementService`:
+
+```ts
+// Trigger alert checking
+await this.alertService.checkMeasurement(user, type, value)
+```
+
+This is also broken for alerts:
+- No separation of users
+- Implementng different business processes which depend on the same entity and the same data
+
+## The Bad Part: Dependency injection over events
+
+[Dependency inversion principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle) of [SOLID](https://en.wikipedia.org/wiki/SOLID) defines how to create loosely coupled objects. The most popular method of implementation of this pronciple is dependency injection, but it creates still high coupling. In contrast to another method of the implementation - events. Events, in fact, create loosely coupled contexts (not entirely - context violation is still possible).
+
+
+This is not a bad part, but it can be, like in our case. Imagine how the implementation would look like with events and how side effects would be handled when a new measurement gets registered.
+
+## The Bad Part: Leaking the domain
+
+TBA
+
+
+## The Bad Part: No ubiquitous language
+
+No [ubiquitous language](https://martinfowler.com/bliki/UbiquitousLanguage.html) means the code and business diverge. Developers, domain experts, and stakeholders use different terms, leading to miscommunication, inconsistent implementation of business rules, and fragile or ambiguous systems. The domain model becomes harder to understand, maintain, and evolve, and integration between bounded contexts is error-prone. A shared language is essential to ensure clarity, correctness, and alignment between the software and the business.
+
+In the example we defined a user. But who is that, in fact? Is the user responsible for what exactly? What a user means for measurements? What a user means for alerts?
+
+## The Bad Part: No actual design phase
+
+Skipping or minimizing the design phase often feels productive in the short term. After all, writing code gives immediate results, while design discussions can feel abstract or slow.
+
+However, the absence of a real design phase usually means that:
+- Requirements are translated directly into code
+- Wireframes become architectural drivers
+- Domain concepts are discovered *after* implementation
+- Refactoring becomes the primary design tool
+
+In this article’s example, the system was designed implicitly through REST endpoints, entities, and database tables. Architecture emerged accidentally rather than intentionally.
+
+The Agile methodology is not the answer, because if you split initial design/architecture work into a few sprints, then it'll cause that your architecture will become uncontrolled and undirected.
+
+## The Bad Part: Data coupling
+
+Data coupling is when contexts cannot be separated because they used shared data (tables, documents, etc.)
+
+Imagine, we want to physically separate two business capabilities: registering measurements and alerting. Alerting is critical and we decided to put it nto a separate infrastructure and that means a separate service.
+
+But here comes the real and big issue. What to do with the data?
+
+When deciding whether an alert should be raised, `Alert` reads `Users` table. What to do with `Users`, then? Should `Alert` requests users or store its own read model?
+
+## Wrap-up
+
+This article intentionally showcased a system that *works* but evolves poorly.
+
+None of the problems described appear catastrophic at first. In fact, many of them look reasonable, familiar, and even “best-practice compliant” when viewed in isolation. The real danger lies in how these decisions compound over time.
+
+What we observed was:
+- Growing coupling between unrelated features
+- Blurred domain boundaries
+- Entities overloaded with responsibilities
+- Read and write concerns mixed together
+- Architecture driven by UI and persistence rather than behavior
+
+**Bad architecture is rarely the result of incompetence — it is usually the result of good intentions applied without sufficient domain insight.**

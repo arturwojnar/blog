@@ -7,13 +7,22 @@ import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
  * @param {import("@11ty/eleventy/UserConfig").default} eleventyConfig
  */
 export default function (eleventyConfig) {
+  // Exclude AGENTS.md from build
+  eleventyConfig.ignores.add("AGENTS.md");
+  
   eleventyConfig.addPlugin(syntaxHighlight);
   eleventyConfig.addPassthroughCopy({ public: "./public" });
+
+  // Exclude AGENTS.md from build
+  eleventyConfig.ignores.add("AGENTS.md");
 
   // Copy robots.txt and manifest.xml to root
   eleventyConfig.addPassthroughCopy({ "public/robots.txt": "robots.txt" });
   eleventyConfig.addPassthroughCopy({ "public/manifest.xml": "manifest.xml" });
   eleventyConfig.addPassthroughCopy({ "public/manifest.json": "manifest.json" });
+
+  // Exclude AGENTS.md from build
+  eleventyConfig.ignores.add("AGENTS.md");
 
   // Default layout for Markdown files if not defined
   eleventyConfig.addGlobalData("layout", "layouts/layout.njk");

@@ -5,17 +5,18 @@ class ArticleImage extends HTMLElement {
     const loading = this.getAttribute("loading") || "lazy";
     const isThumbnail = this.getAttribute("thumbnail") === 'true';
     const label = this.getAttribute("label") || '';
+    const maxWidth = this.getAttribute("maxwidth") || '100%';
 
     // Create container with spinner
     this.innerHTML = isThumbnail ? `
       <div class="article-thumbnail-container">
         <sl-spinner class="article-image-spinner"></sl-spinner>
-        <img class="article-image-img" alt="${alt}" loading="${loading}" />
+        <img class="article-image-img" alt="${alt}" loading="${loading}" style="max-width: ${maxWidth};" />
       </div>
     ` : `
       <p class="article-image-container">
         <sl-spinner class="article-image-spinner"></sl-spinner>
-        <a href="" target="_blank"><img class="article-image" alt="${alt}" loading="${loading}" /></a>
+        <a href="" target="_blank"><img class="article-image" alt="${alt}" loading="${loading}" style="max-width: ${maxWidth};" /></a>
         <em class="image-description">${label}</em>
       </p>
     `;
@@ -32,7 +33,9 @@ class ArticleImage extends HTMLElement {
       loaded = true;
       spinner.style.display = "none";
       img.classList.add("loaded");
-      container.classList.add("loaded");
+      if (container) {
+        container.classList.add("loaded");
+      }
     };
 
     const showError = () => {
