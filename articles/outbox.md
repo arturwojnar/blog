@@ -16,7 +16,7 @@ tags:
   - hermesjs
 canonical: https://www.knowhowcode.dev/articles/outbox
 excerpt: "A comprehensive introduction to distributed systems and how Hermes PostgreSQL implements the Outbox pattern for reliable message publishing"
-readingTime: 15
+readingTime: 39
 published: true
 ---
 

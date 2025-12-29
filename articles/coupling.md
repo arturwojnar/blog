@@ -15,7 +15,7 @@ tags:
   - domain-driven-design
 canonical: https://www.knowhowcode.dev/articles/coupling
 excerpt: "Discover how coupling management and communication are the fundamental building blocks of all software development methodologies and patterns"
-readingTime: 6
+readingTime: 3
 published: true
 ---
 

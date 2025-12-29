@@ -16,7 +16,7 @@ tags:
   - domain-driven-design
 canonical: https://www.knowhowcode.dev/articles/fhir
 excerpt: "The Fast Healthcare Interoperability Resources (HL7 FHIR) standard describes how computer systems can exchange healthcare information. Learn why it's important from a software developer's perspective."
-readingTime: 5
+readingTime: 8
 published: true
 ---
 

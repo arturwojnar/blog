@@ -15,7 +15,7 @@ tags:
   - type-safety
 canonical: https://www.knowhowcode.dev/articles/typescript-dto
 excerpt: "A practical guide to creating Data Transfer Objects (DTOs) in TypeScript with simple, effective patterns"
-readingTime: 5
+readingTime: 2
 published: true
 ---
 

@@ -15,7 +15,7 @@ tags:
   - dependency-management
 canonical: https://www.knowhowcode.dev/articles/everything-belongs-to-users
 excerpt: "Exploring how user-centric design principles can help simplify complex software architectures and reduce coupling between modules"
-readingTime: 6
+readingTime: 5
 published: true
 ---
 

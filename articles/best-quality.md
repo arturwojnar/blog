@@ -15,7 +15,7 @@ tags:
   - software-development
 canonical: https://www.knowhowcode.dev/articles/best-quality
 excerpt: "Understanding how teams often over-engineer quality attributes and how to find the right balance for your specific requirements"
-readingTime: 5
+readingTime: 2
 published: true
 ---
 

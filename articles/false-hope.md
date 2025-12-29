@@ -14,7 +14,7 @@ tags:
   - design-thinking
 canonical: https://www.knowhowcode.dev/articles/false-hope
 excerpt: "Exploring why calling implementation patterns 'architectures' misleads developers and how to approach true architectural design"
-readingTime: 4
+readingTime: 1
 published: true
 ---
 

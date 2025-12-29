@@ -14,7 +14,7 @@ tags:
   - domain-driven-design
 canonical: https://www.knowhowcode.dev/articles/decomposition
 excerpt: "Have you ever gotten stuck with your task because of a change introduced by another developer in a completely separate service? Learn about monolith database decomposition."
-readingTime: 12
+readingTime: 16
 published: true
 ---
 

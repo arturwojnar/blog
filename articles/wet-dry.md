@@ -13,7 +13,7 @@ tags:
   - design-principles
 canonical: https://www.knowhowcode.dev/articles/wet-dry
 excerpt: "Understanding when to apply DRY (Don't Repeat Yourself) vs WET (Write Everything Twice) principles in software development"
-readingTime: 3
+readingTime: 1
 published: true
 ---
 

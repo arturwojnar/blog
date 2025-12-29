@@ -15,7 +15,7 @@ tags:
   - team-communication
 canonical: https://www.knowhowcode.dev/articles/ux-and-architect
 excerpt: "Exploring how UX designers and software architects collaborate in the design process and why programming is just a side effect"
-readingTime: 7
+readingTime: 3
 published: true
 ---
 

@@ -13,7 +13,7 @@ tags:
   - domain-driven-design
 canonical: https://www.knowhowcode.dev/articles/solution
 excerpt: "If you do THAT, THEN YOU DO IT WRONG! Explore how we approach problem-solving in software development and avoid falling for ultimate solutions and silver bullets."
-readingTime: 8
+readingTime: 11
 published: true
 ---
 

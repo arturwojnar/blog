@@ -15,7 +15,7 @@ tags:
   - best-practices
 canonical: https://www.knowhowcode.dev/articles/do-not-trust-orms
 excerpt: "This text is a summary of my troubles and lessons learned, presented as points on how to handle interviews."
-readingTime: 8
+readingTime: 4
 published: true
 ---
 

@@ -15,7 +15,7 @@ tags:
   - communication
 canonical: https://www.knowhowcode.dev/articles/overengineering
 excerpt: "Understanding how rigid adherence to patterns can trap developers and lead to unnecessarily complex solutions"
-readingTime: 4
+readingTime: 2
 published: true
 ---
 

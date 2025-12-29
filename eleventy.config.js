@@ -1,5 +1,6 @@
 // @ts-check
 import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
+import markdownItAnchor from "markdown-it-anchor";
 
 // Type definitions for better autocompletion in VS Code
 // See: https://www.11ty.dev/docs/config/#configuration-api-methods
@@ -11,6 +12,17 @@ export default function (eleventyConfig) {
   eleventyConfig.ignores.add("AGENTS.md");
   
   eleventyConfig.addPlugin(syntaxHighlight);
+
+  // Configure markdown-it to add IDs to headings for TOC links
+  eleventyConfig.amendLibrary("md", (mdLib) => {
+    mdLib.use(markdownItAnchor, {
+      permalink: markdownItAnchor.permalink.headerLink({
+        safariReaderFix: true,
+      }),
+      level: [2, 3, 4, 5, 6],
+      slugify: eleventyConfig.getFilter("slugify")
+    });
+  });
   eleventyConfig.addPassthroughCopy({ public: "./public" });
 
   // Exclude AGENTS.md from build

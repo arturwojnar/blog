@@ -15,7 +15,7 @@ tags:
   - best-practices
 canonical: https://www.knowhowcode.dev/articles/do-not-trust-orms
 excerpt: "Why you should be skeptical of framework documentation and ORMs, and how to make better architectural decisions"
-readingTime: 8
+readingTime: 3
 published: true
 ---
 

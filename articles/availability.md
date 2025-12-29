@@ -16,7 +16,7 @@ tags:
   - availability-archetype
 canonical: https://www.knowhowcode.dev/articles/availability
 excerpt: "An Archetype is a defined solution to a business problem. The Time Availability answers the question: Can I schedule resource X between D1 and D2?."
-readingTime: 20
+readingTime: 23
 slug: availability
 ---
 

@@ -15,7 +15,7 @@ tags:
   - code-quality
 canonical: https://www.knowhowcode.dev/articles/is-solid-dead
 excerpt: "Revisiting SOLID principles in the context of modern software development and high-level component design"
-readingTime: 6
+readingTime: 3
 published: true
 ---
 

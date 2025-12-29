@@ -13,7 +13,7 @@ tags:
   - domain-driven-design
 canonical: https://www.knowhowcode.dev/articles/events-are-domain-atoms
 excerpt: "If you wonder how to take another step towards business language and its technical representation, then you should definitely read this article. You will learn how discovering of business capabilities combined with the vent sourcing and the decider pattern helps you in this challange."
-readingTime: 12
+readingTime: 10
 published: true
 ---
 

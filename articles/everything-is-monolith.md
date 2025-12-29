@@ -14,7 +14,7 @@ tags:
   - distributed-systems
 canonical: https://www.knowhowcode.dev/articles/everything-is-monolith
 excerpt: "Understanding why even distributed systems are fundamentally monolithic and how coupling management is the key to software development"
-readingTime: 4
+readingTime: 2
 published: true
 ---
 

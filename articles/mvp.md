@@ -6,6 +6,7 @@ date: 2023-09-09T00:00:00.000Z
 title: "How to successfully deliver an MVP to the market"
 description: "My thoughts on how we can help ourselves to successfully deliver the MVP on the market."
 layout: ../layouts/article.njk
+readingTime: 18
 ---
 
 <img class="cover-image article-image" src="/public/articles/mvp/cover.webp" alt="" loading="eager" fetchpriority="high" />
