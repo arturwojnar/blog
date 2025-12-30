@@ -22,94 +22,91 @@ slug: architecture-the-bad-parts
 
 ## Table of Contents
 
-0. [Hello, world!](#hello-world)
-1. [The project](#the-project)
-2. [The Bad Part: Wireframe Driven Development](#the-bad-part-wireframe-driven-development)
-3. [The implementation](#the-implementation)
-   - [Class Diagram](#class-diagram)
-   - [Database diagram](#database-diagram)
-   - [The architecture](#the-architecture)
-   - [The code](#the-code)
-4. [Changes!](#changes)
-5. [Change One](#change-one)
-6. [Change Two](#change-two)
-7. [Change Three](#change-three)
-8. [Other changes](#other-changes)
-9. [Prediction of Alert evolution](#prediction-of-alert-evolution)
-10. [When we know more, let's check the diagram again](#when-we-know-more-lets-check-the-diagram-again)
-11. [The Bad Parts](#the-bad-parts)
-12. [The Bad Part: Noun(ing)](#the-bad-part-noun-ing)
-13. [The Bad Part: No separation of read and write models](#the-bad-part-no-separation-of-read-and-write-models)
-14. [The Bad Part: Features Coupling](#the-bad-part-features-coupling)
+0. [Table of Contents](#table-of-contents)
+1. [Hello, world!](#hello-world)
+2. [The project](#the-project)
+3. [The Bad Part: Wireframe Driven Development ️](#the-bad-part-wireframe-driven-development-)
+4. [The implementation](#the-implementation)
+5. [Changes!](#changes)
+6. [Change One](#change-one)
+7. [Change Two](#change-two)
+8. [Change Three](#change-three)
+9. [Other changes](#other-changes)
+10. [Prediction of Alert evolution](#prediction-of-alert-evolution)
+11. [When we know more, let's check the diagram again](#when-we-know-more-lets-check-the-diagram-again)
+12. [The Bad Parts](#the-bad-parts)
+13. [The Bad Part: Noun(ing)](#the-bad-part-nouning)
+14. [The Bad Part: No separation of read and write models](#the-bad-part-no-separation-of-read-and-write-models)
 15. [The Bad Part: No Clear Contexts](#the-bad-part-no-clear-contexts)
-16. [The Bad Part: Context violation / Cross-Context Coupling](#the-bad-part-context-violation-cross-context-coupling)
+16. [The Bad Part: Context violation / Cross-Context Coupling](#the-bad-part-context-violation--cross-context-coupling)
 17. [The Bad Part: Dependency Injection over Events](#the-bad-part-dependency-injection-over-events)
 18. [The Bad Part: Leaking the Domain](#the-bad-part-leaking-the-domain)
 19. [The Bad Part: No Ubiquitous Language](#the-bad-part-no-ubiquitous-language)
 20. [The Bad Part: No Actual Design Phase](#the-bad-part-no-actual-design-phase)
-21. [The Bad Part: Data Coupling](#the-bad-part-data-coupling)
-22. [Wrap-up](#wrap-up)
-
+21. [The Bad Part: Instrastructure over domain](#the-bad-part-instrastructure-over-domain)
+22. [The Bad Part: Data Coupling](#the-bad-part-data-coupling)
+23. [Wrap-up](#wrap-up)
 
 ## Hello, world!
 
-🎃🎃🎃
+
+
 
 Hello, Internet citizens! 👋
 
 Do you want to learn about **BAD ARCHITECTURE PRACTICES**? Do you think you are free of them? Because I made all possible mistakes on my way! 😅
 
-Do you want to go through a detailed example and see how poor or naive approach to architecture can turn your components into **God Objects**? 👹
+Do you want to go through a detailed example and see how poor or naive approach to architecture can turn your components into **God Objects**? 
 
-Yeah. I know you want to. 😏
+Yeah. I know you want to. 
 
-Do you want to read about **context coupling**? About how **starting from nouns is bad**? About **mixing read and write models**? 🤔
+Do you want to read about **context coupling**? About how **starting from nouns is bad**? About **mixing read and write models**? 
 
-Tighten your seat belt and let's hit the road! 🚀
-
-🎃🎃🎃
-
-I've been asked a question recently after one of my presentations that sounded, more or less, like this: "_But what for? Why should I change the way I work right now and introduce a more complex solution instead_"? That was a talk I called "_Baby steps in Event Sourcing_". I replied then that **I don't think this is necessarily a more complicated approach; rather, it's a matter of our customs and experience**. I also responded with a question about whether you (the participant) find your current and past projects straightforward. Were those projects weighed down by bugs popping out of nowhere? 🐛
-
-But, the question was good, though. Really good. 💯
-
-It's not easy to answer that one. **How to bridge the gap between knowledge and experience?** 🌉
-
-And it came to me. How was that in my case, I asked myself. **I simply spotted how bad and messy the codebase can become.** 💩
-
-The only way for me, as the presenter, is to demonstrate how bad software-engineering practices devolve the project into a [big ball of mud](https://dev.to/m_midas/big-ball-of-mud-understanding-the-antipattern-and-how-to-avoid-it-2i), convert classes into [God Classes](https://dev.to/wallacefreitas/understanding-god-objects-in-object-oriented-programming-5636), and make you a big fan of Italian cuisine as **your code becomes spaghetti**. 🍝
+Tighten your seat belt and let's hit the road! 
 
 
-🎃🎃🎃
 
-The title of this article was inspired by *Douglas Crockford's* "[JavaScript: The Good Parts](https://www.oreilly.com/library/view/javascript-the-good/9780596517748/)", as well as *Neal Ford's* "[Software Architecture: The Hard Parts](https://www.oreilly.com/library/view/software-architecture-the/9781492086888/)". 📚
+I've been asked a question recently after one of my presentations that sounded, more or less, like this: "_But what for? Why should I change the way I work right now and introduce a more complex solution instead_"? That was a talk I called "_Baby steps in Event Sourcing_". I replied then that **I don't think this is necessarily a more complicated approach; rather, it's a matter of our customs and experience**. I also responded with a question about whether you (the participant) find your current and past projects straightforward. Were those projects weighed down by bugs popping out of nowhere? 
 
-🎃🎃🎃
+But, the question was good, though. Really good. 
 
-You'll find the full implementation of this article's example in [this repo and branch](https://github.com/arturwojnar/alerting-app-example/blob/no-design). 🔗
+It's not easy to answer that one. **How to bridge the gap between knowledge and experience?** 
 
-🎃🎃🎃
+And it came to me. How was that in my case, I asked myself. **I simply spotted how bad and messy the codebase can become.** 
 
-Let's treat this article as the explanation why people should think about the architecture. Back in the days that was for me a revelation and the beginning of the road towards events. **Moving from CRUD to events is less about technology and more about changing how we think.** 🧠 Events aren’t more complex or time-consuming — clinging to bad practices is. So... let's dive into the bad practices. And make the code scary! 👻
+The only way for me, as the presenter, is to demonstrate how bad software-engineering practices devolve the project into a [big ball of mud](https://dev.to/m_midas/big-ball-of-mud-understanding-the-antipattern-and-how-to-avoid-it-2i), convert classes into [God Classes](https://dev.to/wallacefreitas/understanding-god-objects-in-object-oriented-programming-5636), and make you a big fan of Italian cuisine as **your code becomes spaghetti**. 
 
-🎃🎃🎃
+
+
+
+The title of this article was inspired by *Douglas Crockford's* "[JavaScript: The Good Parts](https://www.oreilly.com/library/view/javascript-the-good/9780596517748/)", as well as *Neal Ford's* "[Software Architecture: The Hard Parts](https://www.oreilly.com/library/view/software-architecture-the/9781492086888/)". 
+
+
+
+You'll find the full implementation of this article's example in [this repo and branch](https://github.com/arturwojnar/alerting-app-example/blob/no-design). 
+
+
+
+Let's treat this article as the explanation why people should think about the architecture. Back in the days that was for me a revelation and the beginning of the road towards events. **Moving from CRUD to events is less about technology and more about changing how we think.**  Events aren’t more complex or time-consuming — clinging to bad practices is. So... let's dive into the bad practices. And make the code scary! 
+
+
 
 I focused on a few fundamental *Bad Parts*; topics related to Event-Driven Architecture are intentionally out of scope.
 
-## The project 📋
+## The project 
 
-First, let's talk about the requirements we'll be working on. Meet the client, *Janek*. 👨‍⚕️
+First, let's talk about the requirements we'll be working on. Meet the client, *Janek*. ‍⚕️
 
 <article-image src="/public/articles/architecture-the-bad-parts/requirements.webp" label="Image 1. Business context and acceptance criterias."></article-image>
 
 Here's the text format of the image content, in case you like it more.
 
-### **Context** 🏥
+### **Context** 
 
 -   _Janek_ owns a company called “JanMed” (previously “JanWątroba”)
 -   _Janek_ has a network of ten laboratories in Poland 🇵🇱
 -   The laboratories have technicians and equipment necessary for liver examinations
--   _Janek_ wants to digitize the process of monitoring patients’ health and lay off part of the staff 💻
+-   _Janek_ wants to digitize the process of monitoring patients’ health and lay off part of the staff 
 
 ### **Acceptance criterias** ✅
 
@@ -122,50 +119,50 @@ Here's the text format of the image content, in case you like it more.
 -   **AC7.** A doctor may resolve small alerts, but when a large alert appears, small alerts cannot be resolved.
 -   **AC8.** No new alerts can be generated if a large alert has not been resolved.
 
-## The Bad Part: Wireframe Driven Development 🖼️
+## The Bad Part: Wireframe Driven Development ️
 
-The team meets for a planning session. The epics have already been prepared by (and here comes one of the possible roles) *Project Leader*/*Team Leader*/*(Proxy) Product Owner*. The epics have been prepared based on detailed work by a *UX designer* who examined the users' journey. All personas have been discovered — a patient, a medical doctor, and a laboratory technician. 👥
+The team meets for a planning session. The epics have already been prepared by (and here comes one of the possible roles) *Project Leader*/*Team Leader*/*(Proxy) Product Owner*. The epics have been prepared based on detailed work by a *UX designer* who examined the users' journey. All personas have been discovered — a patient, a medical doctor, and a laboratory technician. 
 
-The epics, along with linked designs, are: 📱
-- Authentication (registration, logging in) 🔐
-- Laboratory app (measurements registration) 🧪
-- Patient app (viewing measurements, alerting) 🏥
-- Medical doctor app (viewing patients, alerting, resolving alerts) 👨‍⚕️
+The epics, along with linked designs, are: 
+- Authentication (registration, logging in) 
+- Laboratory app (measurements registration) 
+- Patient app (viewing measurements, alerting) 
+- Medical doctor app (viewing patients, alerting, resolving alerts) ‍⚕️
 - Admin Panel ⚙️
 
-During the long planning session, the backend developers concluded, based on the wireframes, that a few *REST API* endpoints are needed: 🔗
+During the long planning session, the backend developers concluded, based on the wireframes, that a few *REST API* endpoints are needed: 
 - Adding measurements, that is *ALT* blood results and liver fibrosis levels. On measurement registration, there will be a check for whether an alert should be raised. ⚠️
 - Resolving and getting alerts
 - *CRUD* for patients
 - Endpoints for the integration with an [*OIDC* provider](https://openid.net/developers/how-connect-works/), like [*Keycloak*](https://www.keycloak.org/) or [*AWS Cognito*](https://aws.amazon.com/pm/cognito/?trk=1cd4d802-f0cd-40ed-9f74-5a472b02fba5&sc_channel=ps&ef_id=CjwKCAiAmKnKBhBrEiwAaqAnZ07MTAgtad56hYS0uIX1Xu4ywEni4Rfr-iqrvZZNoLkbKw9N_FfQCxoCsSgQAvD_BwE:G:s&s_kwcid=AL!4422!3!651541907485!e!!g!!cognito!19835790380!146491699385&gad_campaignid=19835790380&gbraid=0AAAAADjHtp_2LM_Gmh7NuOvZ_iyujxCcs&gclid=CjwKCAiAmKnKBhBrEiwAaqAnZ07MTAgtad56hYS0uIX1Xu4ywEni4Rfr-iqrvZZNoLkbKw9N_FfQCxoCsSgQAvD_BwE)
 
-### The pain: Wireframe driven-development 😱
+### The pain: Wireframe driven-development 
 
-Does this process sound familiar? If so, that might be you, who will finally break the bad cycle. 🔄
+Does this process sound familiar? If so, that might be you, who will finally break the bad cycle. 
 
 **Relying fully on UX wireframes and designs and treating them as the architecture is a real pain**, because views often aggregate a lot of information where logically we expect clear separation.
 
-Look at Image 2, where you can see a results search page on [*Amazon*](https://www.amazon.com/s?k=laptop&crid=27XWE7JK2L7BY&sprefix=lapto%2Caps%2C262&ref=nb_sb_noss_2). 🛒
+Look at Image 2, where you can see a results search page on [*Amazon*](https://www.amazon.com/s?k=laptop&crid=27XWE7JK2L7BY&sprefix=lapto%2Caps%2C262&ref=nb_sb_noss_2). 
 
 <article-image src="/public/articles/architecture-the-bad-parts/amazon.webp" label="Image 2. Every red rectangle comes from a separate system area. The view aggregates many separate contexts."></article-image>
 
-Do you think the implementation was so naive that *Amazon* stores product instances along with data regarding special offers, ad origin, rating, number of comments, prices, and delivery estimation? 🤔
+Do you think the implementation was so naive that *Amazon* stores product instances along with data regarding special offers, ad origin, rating, number of comments, prices, and delivery estimation? 
 
-## The implementation 💻
+## The implementation 
 
-### Class Diagram 📊
+### Class Diagram 
 
-Once the development team wrote down the *REST API* endpoints, the team discovered the main resources. These are: 📝
+Once the development team wrote down the *REST API* endpoints, the team discovered the main resources. These are: 
 - `Measurement`
 - `Alert`
 - `User`
 
-**This domain language, these words, these nouns describe everything that happens in the system and they map perfectly to the API endpoints.** 📍
+**This domain language, these words, these nouns describe everything that happens in the system and they map perfectly to the API endpoints.** 
 Someone created an [Architecture Decision Record](https://adr.github.io/) describing the motivation behind the decision to split the API this way and not another, and as the final documentation monument, the developer attached a *UML* class diagram. See Image 3.
 
 <article-image src="/public/articles/architecture-the-bad-parts/classes.webp" label="Image 3. UML Class Diagram describing the system entities."></article-image>
 
-`User` has `Measurement` and `Alert`, which makes sense because `User` has these relations, right? 🤷
+`User` has `Measurement` and `Alert`, which makes sense because `User` has these relations, right? 
 
 The most interesting is the `Alert` class, which has the following behaviors: ⚡
 
@@ -191,7 +188,7 @@ static shouldRaiseBigAlert(riskLevel: number): boolean
 ```
 
 
-### Database diagram 🗄️
+### Database diagram ️
 
 Once we designed the classes, we can decide what tables we need. **The matter is simple. Three tables are all we need.** Check out Image 4. ✨
 
@@ -199,32 +196,32 @@ Once we designed the classes, we can decide what tables we need. **The matter is
 
 `Alerts` and `Measurements` refer to `Users`. Logical, right? ✅
 
-There's a chance you learned about [database normalization and the normal forms](https://en.wikipedia.org/wiki/Database_normalization). If you did, you lucky bastard! 🍀 You'll be able to tell your kids about that in one sentence along with CDs, tapes, walkmans, etc. 📼
+There's a chance you learned about [database normalization and the normal forms](https://en.wikipedia.org/wiki/Database_normalization). If you did, you lucky bastard!  You'll be able to tell your kids about that in one sentence along with CDs, tapes, walkmans, etc. 
 
 Probably the schema is at least in *2NF*, as none of the _non-prime attributes (that is, one not part of any candidate key) is functionally dependent on only a proper subset of the attributes making up a candidate key_. Hehe 😀😀😀
 
-### The architecture 🏗️
+### The architecture ️
 
-Right. The architecture. Architecture is a word. 📐
+Right. The architecture. Architecture is a word. 
 
-We all know the [*Layered Architecture*](https://dev.to/yasmine_ddec94f4d4/understanding-the-layered-architecture-pattern-a-comprehensive-guide-1e2j). **We've been taught it. It's everywhere.** Similarly to other "Architectures." But this one also seems easy. 😌
+We all know the [*Layered Architecture*](https://dev.to/yasmine_ddec94f4d4/understanding-the-layered-architecture-pattern-a-comprehensive-guide-1e2j). **We've been taught it. It's everywhere.** Similarly to other "Architectures." But this one also seems easy. 
 
-So, please look at the Image 5. 👀
+So, please look at the Image 5. 
 
-The *controllers* (*REST API*) refer to the *Application layer* (services), which refers to the *Domain layer* and the *Persistence layer* (repositories). OK, maybe it's a slightly twisted version of the pattern, because the Domain itself does not refer to the repositories directly but rather operates on "clean" data. Normally, the Domain layer refers to the Persistence layer. But hey, who told you that I want to implement the worst version of all possible implementations? 😈
+The *controllers* (*REST API*) refer to the *Application layer* (services), which refers to the *Domain layer* and the *Persistence layer* (repositories). OK, maybe it's a slightly twisted version of the pattern, because the Domain itself does not refer to the repositories directly but rather operates on "clean" data. Normally, the Domain layer refers to the Persistence layer. But hey, who told you that I want to implement the worst version of all possible implementations? 
 
 <article-image src="/public/articles/architecture-the-bad-parts/layers.webp" label="Image 5. Layered Architecture. A bit improved, but still..."></article-image>
 
 
-### The code 💻
+### The code 
 
 Software engineers are not the ones to write some docs, so let's go to some hard coding, shall we? ⌨️
 
-I will present you some more interesting parts of the implementation. 🔍
+I will present you some more interesting parts of the implementation. 
 
-The whole thing is implemented in *Node.js*/*TypeScript*. If you're not into this tech stack, I'm pretty sure the codebase will still be readable to you. 📖
+The whole thing is implemented in *Node.js*/*TypeScript*. If you're not into this tech stack, I'm pretty sure the codebase will still be readable to you. 
 
-Remember, you can check the full implementation in [this repo and on this branch](https://github.com/arturwojnar/alerting-app-example/blob/no-design). You can also check the commit history. 🔗
+Remember, you can check the full implementation in [this repo and on this branch](https://github.com/arturwojnar/alerting-app-example/blob/no-design). You can also check the commit history. 
 
 First, let's look at the `domain/Alert.ts`:
 
@@ -402,9 +399,9 @@ export class Alert {
 ```
 
 The `Alert` class is a *TypeORM* entity. It contains a few `static` methods that encapsulate the business logic to be used in a related service.
-**Basically, the goal is to find the three most recent measurement pairs that triggered small alerts.** If those exist, then a big alert should be raised. 🎯
+**Basically, the goal is to find the three most recent measurement pairs that triggered small alerts.** If those exist, then a big alert should be raised. 
 
-Now, see how `services/AlertService` has been implemented: 👇
+Now, see how `services/AlertService` has been implemented: 
 
 ```ts
 import { AlertRepository } from '../repositories/AlertRepository.js'
@@ -578,7 +575,7 @@ export class AlertService {
 
 The service orchestrates the `Alert` entity and the `AlertRepository`. **The most important method is `checkMeasurement`, which determines whether any alert should be raised.** ⚡
 
-At the end, let's take a quick look at the `MeasurementService`. It handles the side effect of checking and potentially raising alerts: 🔍
+At the end, let's take a quick look at the `MeasurementService`. It handles the side effect of checking and potentially raising alerts: 
 
 ```ts
 import { MeasurementRepository } from '../repositories/MeasurementRepository.js'
@@ -646,91 +643,91 @@ export class MeasurementService {
 
 Yeah! That was a ride! We're done! Go home, Dear Developers. See you in the next sprint! 👋
 
-## Changes! 🔄
+## Changes! 
 
-Nothing is certain except for death and taxes... and CHANGES! 💀💰
+Nothing is certain except for death and taxes... and CHANGES! 
 
 In this chapter, I'd like to show you, Dear Reader, how new features can put the codebase to the test and demonstrate how your components will evolve.
 
-**You need only one change to turn your assumptions upside down.** 🙃
+**You need only one change to turn your assumptions upside down.** 
 
-## Change One 🔄
+## Change One 
 
 > The doctor wants to view priority patients, i.e., those for whom a big alert has been raised.
 
-I asked `Claude Code` (`Sonnet 4.5`) to implement the change. 🤖
+I asked `Claude Code` (`Sonnet 4.5`) to implement the change. 
 
 Look at Image 6, where the changes are highlighted. **The most obvious place for the new piece of code is the `User` entity.** Image 6 shows the modifications applied to `UserRepository`. The change is effortless, right? We have joined the `Users` and `Alerts` tables by the foreign key (`userId`) and filtered the patients who have a raised significant alert (and the alert is still active). ✅
 
 <article-image maxwidth="600px" src="/public/articles/architecture-the-bad-parts/change1.webp" label="Image 6. Getting Priority Patients to the User."></article-image>
 
-What do you think about this? 🤔
+What do you think about this? 
 
 ### Risks ⚠️
 
 Let's critically analyze the recent changes:
 
-<big-number value="1"></big-number> *The Priority Patient* feature has been mixed into the `User`/*PII* (eng. [Personally Identifiable Information](https://www.ibm.com/think/topics/pii)). 🔀
+<big-number value="1"></big-number> *The Priority Patient* feature has been mixed into the `User`/*PII* (eng. [Personally Identifiable Information](https://www.ibm.com/think/topics/pii)). 
 
-**It means that if the team gets two tasks** — one is to add an *ID number* and the other is to extend the definition of the *Priority Patient* — then the changes will be applied to the same file, to the same entity. If the team works with a relational database and relies on migrations, then the conflict will spread to the migrations as well. Additionally, **working on the same components forces more inter-human communication, which is costly.** 💸
+**It means that if the team gets two tasks** — one is to add an *ID number* and the other is to extend the definition of the *Priority Patient* — then the changes will be applied to the same file, to the same entity. If the team works with a relational database and relies on migrations, then the conflict will spread to the migrations as well. Additionally, **working on the same components forces more inter-human communication, which is costly.** 
 This is the **coupling** created between two features: *PII* and *Priority Patients*.
 
-<big-number value="2"></big-number> Next, similar changes will also be applied to the `User` entity. 📝
+<big-number value="2"></big-number> Next, similar changes will also be applied to the `User` entity. 
 
-<big-number value="3"></big-number> The implementation joins the `Users` with the `Alerts` table. The `Alert` entity is used to make business decisions (whether alerts should be raised). **This is dangerous, as by implementing a new feature that has nothing to do with alerting, we may impact the alerting logic.** 💥
+<big-number value="3"></big-number> The implementation joins the `Users` with the `Alerts` table. The `Alert` entity is used to make business decisions (whether alerts should be raised). **This is dangerous, as by implementing a new feature that has nothing to do with alerting, we may impact the alerting logic.** 
 
 <big-number value="4"></big-number> Imagine that this feature could've been implemented a bit differently. That could've been done with an `isPriorityPatient` flag, so there's no need to perform the join every time.
-The coupling problem remains the same, but **this solution is even worse because it extends the `User` entity with a new property.** 😱
-The team I currently work with inherited a codebase where the `Patients` table has been weighted down with so many flags and properties that [DynamoDB](https://aws.amazon.com/dynamodb/?trk=f9e0f4c5-ccbb-4db9-a569-bd8403262058&sc_channel=ps&trk=f9e0f4c5-ccbb-4db9-a569-bd8403262058&sc_channel=ps&ef_id=CjwKCAiA3rPKBhBZEiwAhPNFQHSkCSleIQ8aS8VAJxbUepAp5VkXbV46g-3uD2Agg4KiD06A91O5RRoCxlAQAvD_BwE:G:s&s_kwcid=AL!4422!3!645186177970!e!!g!!dynamodb&gad_campaignid=19571721573&gbraid=0AAAAADjHtp_VWKDGgKmWomdVBmq7IztLk&gclid=CjwKCAiA3rPKBhBZEiwAhPNFQHSkCSleIQ8aS8VAJxbUepAp5VkXbV46g-3uD2Agg4KiD06A91O5RRoCxlAQAvD_BwE) reported that a single row/document is too big and cannot be loaded at once from the drive! 💾
-**This is the most outstanding and largest example of coupling I have seen in my life.** 🏆
+The coupling problem remains the same, but **this solution is even worse because it extends the `User` entity with a new property.** 
+The team I currently work with inherited a codebase where the `Patients` table has been weighted down with so many flags and properties that [DynamoDB](https://aws.amazon.com/dynamodb/?trk=f9e0f4c5-ccbb-4db9-a569-bd8403262058&sc_channel=ps&trk=f9e0f4c5-ccbb-4db9-a569-bd8403262058&sc_channel=ps&ef_id=CjwKCAiA3rPKBhBZEiwAhPNFQHSkCSleIQ8aS8VAJxbUepAp5VkXbV46g-3uD2Agg4KiD06A91O5RRoCxlAQAvD_BwE:G:s&s_kwcid=AL!4422!3!645186177970!e!!g!!dynamodb&gad_campaignid=19571721573&gbraid=0AAAAADjHtp_VWKDGgKmWomdVBmq7IztLk&gclid=CjwKCAiA3rPKBhBZEiwAhPNFQHSkCSleIQ8aS8VAJxbUepAp5VkXbV46g-3uD2Agg4KiD06A91O5RRoCxlAQAvD_BwE) reported that a single row/document is too big and cannot be loaded at once from the drive! 
+**This is the most outstanding and largest example of coupling I have seen in my life.** 
 
-## Change Two 🔄
+## Change Two 
 
-> Doctors need to determine the severity of a given alert on a scale of "low", "medium", "high", "critical". 📊
+> Doctors need to determine the severity of a given alert on a scale of "low", "medium", "high", "critical". 
 
-I asked `Claude Code` (`Sonnet 4.5`) to implement the change. 🤖
+I asked `Claude Code` (`Sonnet 4.5`) to implement the change. 
 
 <article-image maxwidth="600px" src="/public/articles/architecture-the-bad-parts/change2.webp" label="Image 8. Alert severity."></article-image>
 
-What do you think about this? 🤔
+What do you think about this? 
 
 ### Risks ⚠️
 
-<big-number value="1"></big-number> The change adds the `importance` property to the `Alert` entity. **The problem is that the new property is needed for the view, not for deciding about raising or resolving alerts.** Thus, we've just mixed up a *write model* with a *read model*. As with Change One, **this means that when changing things for a view, it may cause a regression in the alerting logic.** 💥
+<big-number value="1"></big-number> The change adds the `importance` property to the `Alert` entity. **The problem is that the new property is needed for the view, not for deciding about raising or resolving alerts.** Thus, we've just mixed up a *write model* with a *read model*. As with Change One, **this means that when changing things for a view, it may cause a regression in the alerting logic.** 
 
-<big-number value="2"></big-number> Again, **by changing a view, we can impact business logic (sic!)** 🤮
+<big-number value="2"></big-number> Again, **by changing a view, we can impact business logic (sic!)** 
 
-## Change Three 🔄
+## Change Three 
 
-> Doctors want to calculate a new risk level: the risk of fatty liver disease. This generates small alerts without affecting big ones. 🏥
+> Doctors want to calculate a new risk level: the risk of fatty liver disease. This generates small alerts without affecting big ones. 
 
-The business and its capabilities evolve and change; the business adapts to the market and the competitors. That's why the company's owner, after consultation with stakeholders (medical doctors), decided that the system should be able to determine the risk of a fatty liver. That should eventually bring in more new customers. 💼
+The business and its capabilities evolve and change; the business adapts to the market and the competitors. That's why the company's owner, after consultation with stakeholders (medical doctors), decided that the system should be able to determine the risk of a fatty liver. That should eventually bring in more new customers. 
 
-I asked `Claude Code` (`Sonnet 4.5`) to implement the change. 🤖
+I asked `Claude Code` (`Sonnet 4.5`) to implement the change. 
 
-The test for whether a new alert should be raised when it turns out there is a significant risk of fatty liver was added (according to the architecture and its logic) to the `Alert` entity. 🎯
+The test for whether a new alert should be raised when it turns out there is a significant risk of fatty liver was added (according to the architecture and its logic) to the `Alert` entity. 
 
 <article-image maxwidth="900px" src="/public/articles/architecture-the-bad-parts/change3-1.webp" label="Image 9. Fatty liver check applied to the Alert class."></article-image>
 
-It's worth noticing how this new method, `checkFattyLiverRisk`, is being called in the related service. You can see it in Image 10. 👀
+It's worth noticing how this new method, `checkFattyLiverRisk`, is being called in the related service. You can see it in Image 10. 
 
 <article-image maxwidth="900px" src="/public/articles/architecture-the-bad-parts/change3-2.webp" label="Image 10. New method is called before calling the risk cancer check."></article-image>
 
 ### Risks ⚠️
 
-<big-number value="1"></big-number> Checking the cancer risk and checking the fatty liver risk both happen in the `Alert` entity (within the same context). 🔀
+<big-number value="1"></big-number> Checking the cancer risk and checking the fatty liver risk both happen in the `Alert` entity (within the same context). 
 **This is coupling, but now between two *write models*.** The newly added check requires the patient's sex, *ALT*, and fibrosis levels to be calculated.
 
 <big-number value="2"></big-number> The service calls so-called *side effects* synchronously, one after another. ⏱️
-**What if one of the checks fails? Or what would happen if the running container gets abruptly closed between the checks?** Will we end up in an *inconsistent* state? This is a matter of *reliability*. 🛡️
+**What if one of the checks fails? Or what would happen if the running container gets abruptly closed between the checks?** Will we end up in an *inconsistent* state? This is a matter of *reliability*. ️
 
-<big-number value="3"></big-number> When you look closely at the `Alert` service, we see a pretty lengthy dictionary containing `Alert`, `Measurement`, and `User`. 📚
-Think also that the `checkMeasurement` method is called in the `Measurement` service. **It's all tangled together and connected to each other. We can start thinking of the tangled objects as a big ball of mud.** 🧶
+<big-number value="3"></big-number> When you look closely at the `Alert` service, we see a pretty lengthy dictionary containing `Alert`, `Measurement`, and `User`. 
+Think also that the `checkMeasurement` method is called in the `Measurement` service. **It's all tangled together and connected to each other. We can start thinking of the tangled objects as a big ball of mud.** 
 
 
-<big-number value="4"></big-number> The `Alert` entity got pretty big. Imagine that further changes will add more tastes and smells to this class, which has started becoming spaghetti code and a God Class. 🍝👹
+<big-number value="4"></big-number> The `Alert` entity got pretty big. Imagine that further changes will add more tastes and smells to this class, which has started becoming spaghetti code and a God Class. 
 
-## Other changes 🔄
+## Other changes 
 
 _Let's consider the following requirement:_
 
@@ -949,9 +946,6 @@ Separation techniques applied to discovered contexts, such as data redundancy, h
 
 Everything is a tool. If you don’t know how to build event-driven architectures, haven’t applied CQRS, or aren’t familiar with event sourcing or DDD, these are simply skills to learn and adopt—just like any other tool in your current toolset.
 
-
-
-
-See you, later!
+See you later.
 
 Artur.
