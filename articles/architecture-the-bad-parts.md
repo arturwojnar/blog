@@ -91,7 +91,7 @@ I focused on a few fundamental *Bad Parts*; topics related to Event-Driven Archi
 
 ## The project
 
-First, let's talk about the requirements we'll be working on. Meet the client, *Janek*. ‍⚕️
+First, let's talk about the requirements we'll be working on. Meet the client, *Janek*.
 
 <article-image src="/public/articles/architecture-the-bad-parts/requirements.webp" label="Image 1. Business context and acceptance criterias."></article-image>
 
@@ -123,11 +123,11 @@ The epics, along with linked designs, are:
 - Authentication (registration, logging in)
 - Laboratory app (measurements registration)
 - Patient app (viewing measurements, alerting)
-- Medical doctor app (viewing patients, alerting, resolving alerts) ‍⚕️
-- Admin Panel ⚙️
+- Medical doctor app (viewing patients, alerting, resolving alerts)
+- Admin Panel
 
 During the long planning session, the backend developers concluded, based on the wireframes, that a few *REST API* endpoints are needed:
-- Adding measurements, that is *ALT* blood results and liver fibrosis levels. On measurement registration, there will be a check for whether an alert should be raised. ⚠️
+- Adding measurements, that is *ALT* blood results and liver fibrosis levels. On measurement registration, there will be a check for whether an alert should be raised.
 - Resolving and getting alerts
 - *CRUD* for patients
 - Endpoints for the integration with an [*OIDC* provider](https://openid.net/developers/how-connect-works/), like [*Keycloak*](https://www.keycloak.org/) or [*AWS Cognito*](https://aws.amazon.com/pm/cognito/?trk=1cd4d802-f0cd-40ed-9f74-5a472b02fba5&sc_channel=ps&ef_id=CjwKCAiAmKnKBhBrEiwAaqAnZ07MTAgtad56hYS0uIX1Xu4ywEni4Rfr-iqrvZZNoLkbKw9N_FfQCxoCsSgQAvD_BwE:G:s&s_kwcid=AL!4422!3!651541907485!e!!g!!cognito!19835790380!146491699385&gad_campaignid=19835790380&gbraid=0AAAAADjHtp_2LM_Gmh7NuOvZ_iyujxCcs&gclid=CjwKCAiAmKnKBhBrEiwAaqAnZ07MTAgtad56hYS0uIX1Xu4ywEni4Rfr-iqrvZZNoLkbKw9N_FfQCxoCsSgQAvD_BwE)
@@ -571,7 +571,7 @@ export class AlertService {
 
 The service orchestrates the `Alert` entity and the `AlertRepository`. **The most important method is `checkMeasurement`, which determines whether any alert should be raised.** ⚡
 
-At the end, let's take a quick look at the `MeasurementService`. It handles the side effect of checking and potentially raising alerts: 
+At the end, let's take a quick look at the `MeasurementService`. It handles the side effect of checking and potentially raising alerts:
 
 ```ts
 import { MeasurementRepository } from '../repositories/MeasurementRepository.js'
@@ -653,7 +653,7 @@ In this chapter, I'd like to show you, Dear Reader, how new features can put the
 
 I asked `Claude Code` (`Sonnet 4.5`) to implement the change.
 
-Look at Image 6, where the changes are highlighted. **The most obvious place for the new piece of code is the `User` entity.** Image 6 shows the modifications applied to `UserRepository`. The change is effortless, right? We have joined the `Users` and `Alerts` tables by the foreign key (`userId`) and filtered the patients who have a raised significant alert (and the alert is still active). ✅
+Look at Image 6, where the changes are highlighted. **The most obvious place for the new piece of code is the `User` entity.** Image 6 shows the modifications applied to `UserRepository`. The change is effortless, right? We have joined the `Users` and `Alerts` tables by the foreign key (`userId`) and filtered the patients who have a raised significant alert (and the alert is still active).
 
 <article-image maxwidth="600px" src="/public/articles/architecture-the-bad-parts/change1.webp" label="Image 6. Getting Priority Patients to the User."></article-image>
 
