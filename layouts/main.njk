@@ -30,7 +30,7 @@
     href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css"
     rel="stylesheet"
   />
-  
+
 </head>
 <body>
   <header class="main-header">
@@ -41,6 +41,24 @@
         <a class="nav-link {% if page.url.startsWith('/trainings') %}active{% endif %}" href="/trainings">🤝 <span class="main-link-text">Trainings</span></a>
         <a class="nav-link {% if page.url.startsWith('/talks') %}active{% endif %}" href="/talks">🎤 <span class="main-link-text">Talks</span></a>
       </div>
+      
+      <div class="nav-newsletter-container">
+        <form id="nav-newsletter-form" class="newsletter-form nav-newsletter-form">
+          <sl-tooltip id="nav-newsletter-tooltip" placement="bottom" trigger="manual">
+            <div slot="content" id="nav-newsletter-tooltip-content"></div>
+            <input 
+              type="email" 
+              id="nav-newsletter-email" 
+              name="email" 
+              placeholder="Subscribe to newsletter" 
+              required 
+              aria-label="Email address for newsletter subscription"
+            />
+          </sl-tooltip>
+          <button type="submit" aria-label="Subscribe">✓</button>
+        </form>
+      </div>
+      
       <a href="/" class="logo-link">
         <img src="/public/logo.svg" alt="KnowHowCode" class="logo" />
       </a>
@@ -66,6 +84,24 @@
         </a>
       </div>
     </div>
+
+    <div class="newsletter-container">
+      <form id="newsletter-form" class="newsletter-form">
+        <sl-tooltip id="newsletter-tooltip" placement="top" trigger="manual">
+          <div slot="content" id="newsletter-tooltip-content"></div>
+          <input 
+            type="email" 
+            id="newsletter-email" 
+            name="email" 
+            placeholder="Subscribe to newsletter" 
+            required 
+            aria-label="Email address for newsletter subscription"
+          />
+        </sl-tooltip>
+        <button type="submit" aria-label="Subscribe">✓</button>
+      </form>
+    </div>
+
     &copy; {{ "now" | year() }} KnowHowCode
   </footer>
 </body>
