@@ -15,11 +15,11 @@ ogUrl: "https://www.knowhowcode.dev/articles/"
         {% else %}
           <div class="article-image"></div>
         {% endif %}
-        
+
         <div class="article-content">
           <h2 class="article-title">{{ a.data.title }}</h2>
           <p class="article-description">{{ a.data.description }}</p>
-          
+
           <div class="article-meta">
             {% if a.data.date %}
               <div class="article-date">
@@ -33,6 +33,12 @@ ogUrl: "https://www.knowhowcode.dev/articles/"
               <div class="article-author">
                 <sl-icon name="person" style="font-size: 14px;"></sl-icon>
                 {{ a.data.author.name }}
+              </div>
+            {% endif %}
+            {% if a.data.readingTime %}
+              <div class="article-reading-time">
+                <sl-icon name="clock" style="font-size: 14px; position: relative;"></sl-icon>
+                {{ a.data.readingTime }} min
               </div>
             {% endif %}
           </div>

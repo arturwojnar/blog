@@ -359,7 +359,9 @@ footer {
   bottom: 1em;
 }
 
-.article-date {
+.article-date,
+.article-author,
+.article-reading-time {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
