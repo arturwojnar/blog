@@ -7,7 +7,7 @@ title: "The ultimate solution to everything"
 description: "If you do THAT, THEN YOU DO IT WRONG!"
 layout: ../layouts/article.njk
 tags:
-  - software-architecture
+  - architecture
   - risk-management
   - legacy-code
   - domain-driven-design
@@ -75,7 +75,7 @@ A few examples:
     
 5.  Suppose a project is still in the phase of a modular monolith with well-defined data ownership. In that case, I agree with simplifying and embracing database operations from different modules in one database transaction to avoid eventual consistency problems. At some point, when the project evolves to the point where it has to split into separate processes, this implementation will be something to refactor, but up to this point, we save time and money.
     
-6.  [Slicing](https://www.jimmybogard.com/vertical-slice-architecture/) the codebase. It’s something other than modules — the slices are more granular, referencing one feature. With that approach, I avoid expanding relationships and unnecessary dependencies between features (the opposite of the [Layered Architecture](https://www.oreilly.com/library/view/software-architecture-patterns/9781491971437/ch01.html)).
+6.  [Slicing](https://www.jimmybogard.com/vertical-slice-architecture/) the codebase. It’s something other than modules — the slices are more granular, referencing one feature. With that approach, I avoid expanding relationships and unnecessary dependencies between features (the opposite of the [Layered Architecture](https://www.oreilly.com/library/view/architecture-patterns/9781491971437/ch01.html)).
     
 
 It is a fair summary of my thoughts to say that I strive to keep legacy code manageable because I know that it’s inevitable. _Legacy code is yet another tool to fit a project implementation into a multidimensional shape created by the intersection of different non-functional constraints_ _like time, budget and team capabilities_. It’s like packing numerous pieces of luggage into the car trunk; some of them will get squeezed, and some of the boxes may get deformed a bit, but after all, it’s about protecting what is inside and not forgetting to pack an undeniably needed thing.

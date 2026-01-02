@@ -10,7 +10,7 @@ layout: ../layouts/article.njk
 tags:
   - overengineering
   - design-patterns
-  - software-architecture
+  - architecture
   - coupling
   - communication
 canonical: https://www.knowhowcode.dev/articles/overengineering

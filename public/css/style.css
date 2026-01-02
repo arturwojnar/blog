@@ -250,9 +250,14 @@ footer {
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   height: 100%;
+  min-height: 480px;
   display: flex;
   flex-direction: column;
   position: relative;
+}
+
+.article-featured {
+  min-height: 300px;
 }
 
 
@@ -322,6 +327,7 @@ footer {
   display: flex;
   flex-direction: column;
   margin-bottom: 1em;
+  min-height: 200px;
 }
 
 .article-title {
@@ -337,11 +343,12 @@ footer {
 }
 
 .article-description {
-  margin: 0 0 var(--spacing-md) 0;
+  margin: 0 0 var(--spacing-2xl) 0;
   color: var(--color-text-secondary);
   font-size: var(--font-size-base);
   line-height: 1.6;
   flex: 1;
+  min-height: 3em;
 }
 
 .article-featured .article-description {
@@ -356,7 +363,29 @@ footer {
   color: var(--color-text-muted);
   margin-top: auto;
   position: absolute;
+  bottom: 4em;
+}
+
+.article-tags {
+  display: flex;
+  gap: var(--spacing-xs);
+  flex-wrap: wrap;
+  position: absolute;
   bottom: 1em;
+}
+
+.article-page-tags {
+  display: flex;
+  gap: var(--spacing-xs);
+  flex-wrap: wrap;
+  margin-bottom: var(--spacing-xl);
+}
+
+.article-tags sl-badge::part(base),
+.article-page-tags sl-badge::part(base) {
+  background-color: var(--color-primary-500);
+  color: var(--color-neutral-900);
+  border-color: var(--color-primary-500);
 }
 
 .article-date,

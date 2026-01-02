@@ -42,6 +42,18 @@ ogUrl: "https://www.knowhowcode.dev/articles/"
               </div>
             {% endif %}
           </div>
+
+          <div class="article-tags">
+            {% if a.data.tags %}
+              {% set tagCount = 0 %}
+              {% for tag in a.data.tags %}
+                {% if tag != "articles" and tagCount < 2 %}
+                  <sl-badge variant="neutral" pill>{{ tag }}</sl-badge>
+                  {% set tagCount = tagCount + 1 %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          </div>
         </div>
       </a>
     </article>

@@ -8,7 +8,7 @@ title: "Everything belongs to users"
 description: "Homo Sovieticus's mantra was: Everything belongs to the kolkhoz, everything belongs to me. In the context of this text, I want to rephrase it to: Everything belongs to the app, everything belongs to users."
 layout: ../layouts/article.njk
 tags:
-  - software-architecture
+  - architecture
   - modular-design
   - user-centric-design
   - system-design

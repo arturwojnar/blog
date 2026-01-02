@@ -8,7 +8,7 @@ title: "Be WET between modules, DRY within modules"
 description: "Learn when to apply DRY vs WET principles in software architecture. DRY within modules for maintainability, WET between modules for decoupling."
 layout: ../layouts/article.njk
 tags:
-  - software-architecture
+  - architecture
   - best-practices
   - design-principles
 canonical: https://www.knowhowcode.dev/articles/wet-dry

@@ -10,7 +10,7 @@ description: "Do not harm yourself by thinking that you create a system with ind
 tags:
   - monolith-systems
   - microservices
-  - software-architecture
+  - architecture
   - distributed-systems
 canonical: https://www.knowhowcode.dev/articles/everything-is-monolith
 excerpt: "Understanding why even distributed systems are fundamentally monolithic and how coupling management is the key to software development"

@@ -8,7 +8,7 @@ title: "Coupling management + Communication = Our job"
 description: "Most of the known patterns can be reduced to the coupling control. Get to know how this reasoning can help you simplify your solutions."
 layout: ../layouts/article.njk
 tags:
-  - software-architecture
+  - architecture
   - coupling
   - communication
   - design-patterns

@@ -9,7 +9,7 @@ description: "I'll do a small revision of the SOLID principles, shifting it more
 layout: ../layouts/article.njk
 tags:
   - solid-principles
-  - software-architecture
+  - architecture
   - design-principles
   - best-practices
   - code-quality

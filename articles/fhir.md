@@ -10,7 +10,7 @@ tags:
   - fhir
   - smile
   - hl7
-  - software-architecture
+  - architecture
   - design-principles
   - availability-archetype
   - domain-driven-design

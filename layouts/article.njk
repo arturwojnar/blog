@@ -7,6 +7,17 @@ eleventyComputed:
 <sl-card>
   <like-container slug="{{ slug or page.fileSlug }}"></like-container>
   <h1>{{ title }}</h1>
+  
+  {% if tags %}
+    <div class="article-page-tags">
+      {% for tag in tags %}
+        {% if tag != "articles" %}
+          <sl-badge variant="neutral" pill>{{ tag }}</sl-badge>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+  
   {{ content | safe }}
 </sl-card>
 

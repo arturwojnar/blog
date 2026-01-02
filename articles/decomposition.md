@@ -7,11 +7,9 @@ title: "Why make a decomposition of the monolith database?"
 description: "Have you ever gotten stuck with your task because of a change introduced by another developer in a completely separate service?"
 layout: ../layouts/article.njk
 tags:
-  - archetypes
-  - software-architecture
-  - design-principles
-  - availability-archetype
-  - domain-driven-design
+  - architecture
+  - database
+  - patterns
 canonical: https://www.knowhowcode.dev/articles/decomposition
 excerpt: "Have you ever gotten stuck with your task because of a change introduced by another developer in a completely separate service? Learn about monolith database decomposition."
 readingTime: 16

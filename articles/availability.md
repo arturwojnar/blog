@@ -7,7 +7,7 @@ title: "Comparing Time Availability archetype implementations"
 description: "How to implement a time-based resource reservation system, assuming high traffic?"
 layout: ../layouts/article.njk
 tags:
-  - software-architecture
+  - architecture
   - archetypes
   - postgresql
   - software-development

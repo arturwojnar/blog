@@ -8,7 +8,7 @@ title: "False hope of various architectures from books"
 description: "Why naming patterns as 'architectures' creates false hope. Learn the difference between implementation patterns and true software architecture."
 layout: ../layouts/article.njk
 tags:
-  - software-architecture
+  - architecture
   - hexagonal-architecture
   - clean-architecture
   - design-thinking

@@ -9,7 +9,7 @@ description: "Programming is not the most essential part of the development proc
 layout: ../layouts/article.njk
 tags:
   - ux-design
-  - software-architecture
+  - architecture
   - collaboration
   - design-process
   - team-communication

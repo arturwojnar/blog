@@ -7,7 +7,7 @@ title: "Software Architecture: The Bad Parts"
 description: "A practical walkthrough showing how seemingly reasonable architectural decisions can gradually turn a system into a big ball of mud. Learn about the Bad Parts of architectures."
 layout: ../layouts/article.njk
 tags:
-  - software-architecture
+  - architecture
   - antipatterns
   - cqrs
   - domain-driven-design
@@ -75,7 +75,7 @@ The only way for me, as the presenter, is to demonstrate how bad software-engine
 
 •••
 
-The title of this article was inspired by *Douglas Crockford's* "[JavaScript: The Good Parts](https://www.oreilly.com/library/view/javascript-the-good/9780596517748/)", as well as *Neal Ford's* "[Software Architecture: The Hard Parts](https://www.oreilly.com/library/view/software-architecture-the/9781492086888/)".
+The title of this article was inspired by *Douglas Crockford's* "[JavaScript: The Good Parts](https://www.oreilly.com/library/view/javascript-the-good/9780596517748/)", as well as *Neal Ford's* "[Software Architecture: The Hard Parts](https://www.oreilly.com/library/view/architecture-the/9781492086888/)".
 
 •••
 
