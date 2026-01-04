@@ -381,13 +381,6 @@ footer {
   margin-bottom: var(--spacing-xl);
 }
 
-.article-tags sl-badge::part(base),
-.article-page-tags sl-badge::part(base) {
-  background-color: var(--color-primary-500);
-  color: var(--color-neutral-900);
-  border-color: var(--color-primary-500);
-}
-
 .article-date,
 .article-author,
 .article-reading-time {
