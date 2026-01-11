@@ -278,7 +278,7 @@ customElements.define("like-container", LikeContainer);
 class BigNumber extends HTMLElement {
   connectedCallback() {
     const value = this.getAttribute("value") || "0";
-    
+
     // Map of digit to emoji
     const digitEmoji = {
       '0': '0️⃣',
@@ -292,10 +292,10 @@ class BigNumber extends HTMLElement {
       '8': '8️⃣',
       '9': '9️⃣'
     };
-    
+
     // Convert each digit to emoji
     const emojiNumber = value.split('').map(digit => digitEmoji[digit] || digit).join('');
-    
+
     this.innerHTML = `<span style="font-size: 1.5em">${emojiNumber}</span>`;
   }
 }
