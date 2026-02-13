@@ -266,7 +266,7 @@ Even if LLMs remain accessible to many, your technical skills remain important. 
 
 ---
 
-## ⭐ Daniel Orzadowski. Salesman of IT Solutions.
+## ⭐ Daniel Orzadowski. Consultative Sales Specialist | GTM Strategy | AI-Driven Sales Intelligence.
 
 **Every Software Architect is also a salesperson.**
 
