@@ -4,50 +4,114 @@ layout: "../layouts/main.njk"
 permalink: "/talks.html"
 ogUrl: "https://www.knowhowcode.dev/talks/"
 talks:
+  - date: "2026-03-12"
+    time: "18:15 - 19:00"
+    conference: "Fluttered Meetup Wrocław #12 (GDG)"
+    title: "Software Architecture: The Bad Parts"
+    link: https://www.youtube.com/watch?v=FKdy6mmMfio&t=716s
+    emoji: "🤝"
+    description: |
+      In this talk, I will demonstrate how so-called good practices combined with a shallow understanding of the domain can create a dangerous illusion of control.
+      Using a real-world example from the Connected Health domain—specifically, liver cancer risk alerting—I will show how a noun-driven design approach leads to excessive coupling and brittle systems.
+      The talk will explore common architectural pitfalls such as context violations, database coupling, domain leakage, and mixing read and write models. I will also challenge a popular industry belief by explaining why Clean/Hexagonal Architecture is not an architecture.
+      Attendees will leave with a clearer understanding of how design decisions shape system behavior—and how easily “best practices” can fail when the domain is misunderstood.
   - date: "2025-06-05"
     time: "14:00 - 14:45"
     conference: "4Dev Warszawa 2025"
     title: "Każdy* system jest rozproszony"
+    link: https://www.youtube.com/watch?v=kzpS5OmLFL0&t=1159s&pp=ygUYYXJ0dXIgd29qbmFyIDRkZXZlbG9wZXJz
     emoji: "🤝"
     description: |
       Każdy* system oprogramowania jest rozproszony. Udawanie, że tak nie jest, naraża system Twojego klienta na nieprzewidywalność rzeczywistości. Współczesny rozwój oprogramowania opiera się w dużej mierze na podmiotach trzecich — generycznych subdomenach pakowanych jako usługi SaaS: delegowane uwierzytelnianie, zarządzanie RBAC, powiadomienia itp. Połączenie tych komponentów z przewagą rynkową Twojego klienta tworzy produkt.
 
       W mojej prezentacji przedstawię dlaczego praktycznie zawsze powinniśmy się przejmować problemami architektur rozproszonych. Omówię to na teoretycznie prostym przypadku - rejestracji użytkowników.
-  - date: "2024-11-18"
-    conference: "DevFest Poznań 2024"
-    title: "Porównanie implementacji Archetypu Dostępności Czasowej"
+  - title: "Porównanie implementacji Archetypu Dostępności Czasowej"
     emoji: "🤝"
     description: |
       Archetypy architektoniczne to rozwiązania problemów biznesowych. Dzięki ich znajomości łatwiej rozpoznamy elementy składowe naszego projektu - klocki, z których budujemy architekturę. Jednym z najbardziej popularnych archetypów jest archetyp Dostępności. Podczas mojej prelekcji opowiem o wariacji tego problemu - Dostępności Czasowej (ang. Time Availability). Omówię definicję obiektową archetypu i szczegółowo opiszę trzy różne implementacje pod kątem ich wydajności w systemach gdzie spodziewamy się dużego ruchu.
-  - date: "2024-10-08"
-    conference: "4Developers Katowice"
-    title: "Porównanie implementacji Archetypu Dostępności Czasowej"
-    emoji: "🤝"
-    description: |
-      Archetypy architektoniczne to rozwiązania problemów biznesowych. Dzięki ich znajomości łatwiej rozpoznamy elementy składowe naszego projektu - klocki, z których budujemy architekturę. Jednym z najbardziej popularnych archetypów jest archetyp Dostępności. Podczas mojej prelekcji opowiem o wariacji tego problemu - Dostępności Czasowej (ang. Time Availability). Omówię definicję obiektową archetypu i szczegółowo opiszę trzy różne implementacje pod kątem ich wydajności w systemach gdzie spodziewamy się dużego ruchu.
+    events:
+      - date: "2024-11-18"
+        conference: "DevFest Poznań 2024"
+      - date: "2024-10-08"
+        conference: "4Developers Katowice"
+        link: https://www.youtube.com/watch?v=qd-qIgd7JNs&t=10s&pp=ygUYYXJ0dXIgd29qbmFyIDRkZXZlbG9wZXJz
 ---
-<img class="talks-cover" src="/public/talks-cover.jpg" alt="">
+<div class="talks-cover-container">
+  <img class="talks-cover" src="/public/conference1.webp"  alt="" />
+  <img class="talks-main-image" src="/public/conference1.webp" alt="" />
+</div>
+
 <div class="talks-list">
   {% for talk in talks %}
     <article class="talk-item">
-      <div class="talk-header">
-        <sl-icon name="calendar3" class="talk-date-icon"></sl-icon>
-        <div class="talk-date-info">
-          <time datetime="{{ talk.date }}">{{ talk.date | date('DD.MM.YYYY') }}</time>
-          <span class="talk-separator">-</span>
-          <span class="talk-conference">{{ talk.conference }}</span>
-          {% if talk.time %}<span class="talk-time">({{ talk.time }})</span>{% endif %}
-        </div>
-      </div>
-
       <h2 class="talk-title">
         <span class="talk-emoji">{{ talk.emoji }}</span>
         "{{ talk.title }}"
       </h2>
 
-      <div class="talk-description">
-        {{ talk.description | safe }}
-      </div>
+      {% if talk.events %}
+        {# Multi-event talk #}
+        {% for event in talk.events %}
+        <div class="talk-event">
+          <div class="talk-header">
+            <sl-icon name="calendar3" class="talk-date-icon"></sl-icon>
+            <div class="talk-date-info">
+              <time datetime="{{ event.date }}">{{ event.date | date('DD.MM.YYYY') }}</time>
+              <span class="talk-separator">-</span>
+              <span class="talk-conference">{{ event.conference }}</span>
+              {% if event.time %}<span class="talk-time">({{ event.time }})</span>{% endif %}
+            </div>
+          </div>
+
+          {% if event.link %}
+          <div class="talk-video">
+            <iframe
+              width="560"
+              height="315"
+              src="{{ event.link | replace('watch?v=', 'embed/') | replace('&t=', '?start=') | replace('s&', '&') | replace('0s', '0') | replace('1s', '1') | replace('2s', '2') | replace('3s', '3') | replace('4s', '4') | replace('5s', '5') | replace('6s', '6') | replace('7s', '7') | replace('8s', '8') | replace('9s', '9') }}"
+              title="{{ talk.title }}"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen>
+            </iframe>
+          </div>
+          {% endif %}
+        </div>
+        {% endfor %}
+
+        <div class="talk-description">
+          {{ talk.description | safe }}
+        </div>
+      {% else %}
+        {# Single-event talk #}
+        <div class="talk-header">
+          <sl-icon name="calendar3" class="talk-date-icon"></sl-icon>
+          <div class="talk-date-info">
+            <time datetime="{{ talk.date }}">{{ talk.date | date('DD.MM.YYYY') }}</time>
+            <span class="talk-separator">-</span>
+            <span class="talk-conference">{{ talk.conference }}</span>
+            {% if talk.time %}<span class="talk-time">({{ talk.time }})</span>{% endif %}
+          </div>
+        </div>
+
+        <div class="talk-description">
+          {{ talk.description | safe }}
+        </div>
+
+        {% if talk.link %}
+        <div class="talk-video">
+          <iframe
+            width="560"
+            height="315"
+            src="{{ talk.link | replace('watch?v=', 'embed/') | replace('&t=', '?start=') | replace('s&', '&') | replace('0s', '0') | replace('1s', '1') | replace('2s', '2') | replace('3s', '3') | replace('4s', '4') | replace('5s', '5') | replace('6s', '6') | replace('7s', '7') | replace('8s', '8') | replace('9s', '9') }}"
+            title="{{ talk.title }}"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+        {% endif %}
+      {% endif %}
     </article>
   {% endfor %}
 </div>
