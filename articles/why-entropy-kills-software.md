@@ -22,7 +22,7 @@ slug: why-entropy-kills-software
 The default state of matter is chaos. The movement of matter is always toward chaos. Disorganization.
 
 Life is unique — incredibly organized into billions of structures working together. Seemingly fragile, it is an exception to the ever-expanding empty dark space.
-And life exists only, because eventually it degrades, vanishes, and blends back with the rest of the free atoms, chaotically colliding in constant motion.
+And life exists onlys because eventually it degrades, vanishes, and blends back with the rest of the free atoms, chaotically colliding in constant motion.
 
 *This is statistics.*
 
