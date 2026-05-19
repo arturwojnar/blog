@@ -58,6 +58,10 @@ export default function (eleventyConfig) {
     return date.toLocaleDateString("en-US");
   });
 
+  eleventyConfig.addFilter("isPast", (dateStr) => {
+    return new Date(dateStr) < new Date();
+  });
+
   eleventyConfig.addFilter("year", () => {
     return new Date().getFullYear().toString();
   });

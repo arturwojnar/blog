@@ -4,10 +4,10 @@ layout: "../layouts/main.njk"
 permalink: "/talks.html"
 ogUrl: "https://www.knowhowcode.dev/talks/"
 talks:
-  - date: "2026-03-12"
+  - title: "Software Architecture: The Bad Parts"
+    date: "2026-03-12"
     time: "18:15 - 19:00"
     conference: "Fluttered Meetup Wrocław #12 (GDG)"
-    title: "Software Architecture: The Bad Parts"
     link: https://www.youtube.com/watch?v=FKdy6mmMfio&t=716s
     emoji: "🤝"
     description: |
@@ -15,6 +15,20 @@ talks:
       Using a real-world example from the Connected Health domain—specifically, liver cancer risk alerting—I will show how a noun-driven design approach leads to excessive coupling and brittle systems.
       The talk will explore common architectural pitfalls such as context violations, database coupling, domain leakage, and mixing read and write models. I will also challenge a popular industry belief by explaining why Clean/Hexagonal Architecture is not an architecture.
       Attendees will leave with a clearer understanding of how design decisions shape system behavior—and how easily “best practices” can fail when the domain is misunderstood.
+    events:
+      - date: "2026-06-17"
+        conference: "meet.js Wrocław"
+        link: https://devoxx.pl/?srsltid=AfmBOooYGgSWt4zYslivZ-_a7ol91JqUXXzBcfjKPpwJ4eBHa5DZBq25
+      - date: "2026-05-12"
+        conference: "meet.js Wrocław"
+        link: https://www.meetup.com/pl-pl/meet-js-wroclaw/events/314453670/?eventOrigin=group_past_events
+      - date: "2026-04-21"
+        conference: "Warsaw Software Architecture Group #4"
+        link: https://wsag.org.pl/events/2026-04-21/meetup-4/
+      - date: "2026-03-12"
+        time: "18:15 - 19:00"
+        conference: "Fluttered Meetup Wrocław #12 (GDG)"
+        link: https://www.youtube.com/watch?v=FKdy6mmMfio&t=716s
   - date: "2025-06-05"
     time: "14:00 - 14:45"
     conference: "4Dev Warszawa 2025"
@@ -32,6 +46,7 @@ talks:
     events:
       - date: "2024-11-18"
         conference: "DevFest Poznań 2024"
+        link: https://gdg.community.dev/events/details/google-gdg-poznan-presents-devfest-poznan-2024/
       - date: "2024-10-08"
         conference: "4Developers Katowice"
         link: https://www.youtube.com/watch?v=qd-qIgd7JNs&t=10s&pp=ygUYYXJ0dXIgd29qbmFyIDRkZXZlbG9wZXJz
@@ -55,6 +70,7 @@ talks:
         <div class="talk-event">
           <div class="talk-header">
             <sl-icon name="calendar3" class="talk-date-icon"></sl-icon>
+            <span>{% if event.date | isPast %}✅{% else %}🤞{% endif %}</span>
             <div class="talk-date-info">
               <time datetime="{{ event.date }}">{{ event.date | date('DD.MM.YYYY') }}</time>
               <span class="talk-separator">-</span>
@@ -64,17 +80,21 @@ talks:
           </div>
 
           {% if event.link %}
-          <div class="talk-video">
-            <iframe
-              width="560"
-              height="315"
-              src="{{ event.link | replace('watch?v=', 'embed/') | replace('&t=', '?start=') | replace('s&', '&') | replace('0s', '0') | replace('1s', '1') | replace('2s', '2') | replace('3s', '3') | replace('4s', '4') | replace('5s', '5') | replace('6s', '6') | replace('7s', '7') | replace('8s', '8') | replace('9s', '9') }}"
-              title="{{ talk.title }}"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen>
-            </iframe>
-          </div>
+            {% if "youtube.com" in event.link %}
+            <div class="talk-video">
+              <iframe
+                width="560"
+                height="315"
+                src="{{ event.link | replace('watch?v=', 'embed/') | replace('&t=', '?start=') | replace('s&', '&') | replace('0s', '0') | replace('1s', '1') | replace('2s', '2') | replace('3s', '3') | replace('4s', '4') | replace('5s', '5') | replace('6s', '6') | replace('7s', '7') | replace('8s', '8') | replace('9s', '9') }}"
+                title="{{ talk.title }}"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+              </iframe>
+            </div>
+            {% else %}
+            <a class="talk-event-link" href="{{ event.link }}" target="_blank" rel="noopener noreferrer">👉 See the event</a>
+            {% endif %}
           {% endif %}
         </div>
         {% endfor %}
@@ -86,6 +106,7 @@ talks:
         {# Single-event talk #}
         <div class="talk-header">
           <sl-icon name="calendar3" class="talk-date-icon"></sl-icon>
+          <span>{% if talk.date | isPast %}✅{% else %}🤞{% endif %}</span>
           <div class="talk-date-info">
             <time datetime="{{ talk.date }}">{{ talk.date | date('DD.MM.YYYY') }}</time>
             <span class="talk-separator">-</span>
@@ -99,17 +120,21 @@ talks:
         </div>
 
         {% if talk.link %}
-        <div class="talk-video">
-          <iframe
-            width="560"
-            height="315"
-            src="{{ talk.link | replace('watch?v=', 'embed/') | replace('&t=', '?start=') | replace('s&', '&') | replace('0s', '0') | replace('1s', '1') | replace('2s', '2') | replace('3s', '3') | replace('4s', '4') | replace('5s', '5') | replace('6s', '6') | replace('7s', '7') | replace('8s', '8') | replace('9s', '9') }}"
-            title="{{ talk.title }}"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen>
-          </iframe>
-        </div>
+          {% if "youtube.com" in talk.link %}
+          <div class="talk-video">
+            <iframe
+              width="560"
+              height="315"
+              src="{{ talk.link | replace('watch?v=', 'embed/') | replace('&t=', '?start=') | replace('s&', '&') | replace('0s', '0') | replace('1s', '1') | replace('2s', '2') | replace('3s', '3') | replace('4s', '4') | replace('5s', '5') | replace('6s', '6') | replace('7s', '7') | replace('8s', '8') | replace('9s', '9') }}"
+              title="{{ talk.title }}"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen>
+            </iframe>
+          </div>
+          {% else %}
+          <a class="talk-event-link" href="{{ talk.link }}" target="_blank" rel="noopener noreferrer">See the event</a>
+          {% endif %}
         {% endif %}
       {% endif %}
     </article>
