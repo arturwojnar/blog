@@ -1,0 +1,7 @@
+dist
+node_modules
+.vercel
+_site
+public/css/*.min.css
+*.svg
+package-lock.json

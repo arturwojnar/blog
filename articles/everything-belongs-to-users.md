@@ -8,12 +8,11 @@ title: "Everything belongs to users"
 description: "Homo Sovieticus's mantra was: Everything belongs to the kolkhoz, everything belongs to me. In the context of this text, I want to rephrase it to: Everything belongs to the app, everything belongs to users."
 layout: ../layouts/article.njk
 tags:
-  - architecture
-  - modular-design
+  - product-delivery
   - user-centric-design
+  - modularity
   - system-design
-  - dependency-management
-canonical: https://www.knowhowcode.dev/articles/everything-belongs-to-users
+canonical: https://www.planthencode.com/articles/everything-belongs-to-users
 excerpt: "Exploring how user-centric design principles can help simplify complex software architectures and reduce coupling between modules"
 readingTime: 5
 published: true
@@ -76,7 +75,7 @@ Let's picture creating explicit coupling between patients and the two evaluation
 It's presented in the _Image 3_.
 
 <article-image src="/public/articles/kolhkoz/folders2.webp" width="350px" label="Image 3. Coupling by generalisation."></article-image>
-> 💡 By the way - `patient.entity` is hanging, it doesn't belong to any specific module. This situation is called _orphan classes_, initially described by Neal Ford. I wrote more about that [here](https://www.knowhowcode.dev/articles/solution).
+> 💡 By the way - `patient.entity` is hanging, it doesn't belong to any specific module. This situation is called _orphan classes_, initially described by Neal Ford. I wrote more about that [here](https://www.planthencode.com/articles/solution).
 
 In fact, the two features are fueled by two _projections_ of who the patient is and by what behaviours and properties are represented.
 
@@ -113,7 +112,7 @@ It's tempting to create some relations. Especially if we work with a single data
 
 That'd make a physical relation between capabilities that can potentially force changes in module A/B because the "base" patient model changed.
 
-You can read more about the database coupling [here](https://www.knowhowcode.dev/articles/decomposition). 
+You can read more about the database coupling [here](https://www.planthencode.com/articles/decomposition). 
 
 #### Outro
 
@@ -125,6 +124,6 @@ In properly **designed** systems, there are **narrowed** "sectors" of the overal
 
 Sure, those "sectors" are not entirely separated. It is not possible, and this is not the goal.
 
-The aim is to build an [effective development environment](https://www.knowhowcode.dev/articles/coupling) in which features can be successfully implemented in a reasonable time - in contrast to the (Distributed) [Big Ball of Mud](https://thedomaindrivendesign.io/big-ball-of-mud/).
+The aim is to build an [effective development environment](https://www.planthencode.com/articles/coupling) in which features can be successfully implemented in a reasonable time - in contrast to the (Distributed) [Big Ball of Mud](https://thedomaindrivendesign.io/big-ball-of-mud/).
 
 

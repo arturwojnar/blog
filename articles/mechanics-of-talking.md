@@ -7,9 +7,11 @@ title: "Mechanics of talking. Must-have soft skills of Solutions Architect."
 description: "This article will set you on the path to mastering effective client communication."
 layout: ../layouts/article.njk
 tags:
-  - softskills
-  - architecture
-canonical: https://www.knowhowcode.dev/articles/mechanics-of-talking
+  - people-communication
+  - soft-skills
+  - communication
+  - solutions-architect
+canonical: https://www.planthencode.com/articles/mechanics-of-talking
 excerpt: "This article will set you on the path to mastering effective client communication."
 readingTime: 14
 slug: mechanics-of-talking

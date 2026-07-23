@@ -8,12 +8,11 @@ title: "Is SOLID dead?"
 description: "I'll do a small revision of the SOLID principles, shifting it more towards high-level components and modern software development practices."
 layout: ../layouts/article.njk
 tags:
-  - solid-principles
   - architecture
+  - solid-principles
   - design-principles
-  - best-practices
   - code-quality
-canonical: https://www.knowhowcode.dev/articles/is-solid-dead
+canonical: https://www.planthencode.com/articles/is-solid-dead
 excerpt: "Revisiting SOLID principles in the context of modern software development and high-level component design"
 readingTime: 3
 published: true

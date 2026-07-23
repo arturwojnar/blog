@@ -1,45 +1,52 @@
 ---
 layout: "./main.njk"
 eleventyComputed:
-  ogUrl: "https://www.knowhowcode.dev/articles/{{ page.fileSlug }}/"
+  ogUrl: "https://www.planthencode.com/articles/{{ page.fileSlug }}/"
 ---
+{% from "collab-cta.njk" import collabCta %}
 
-<sl-card>
-  <like-container slug="{{ slug or page.fileSlug }}"></like-container>
-  <h1>{{ title }}</h1>
-  {% if tags %}
-    <div class="article-page-tags">
-      {% for tag in tags %}
-        {% if tag != "articles" %}
-          <sl-badge variant="primary" pill>{{ tag }}</sl-badge>
-        {% endif %}
-      {% endfor %}
+<div class="wrap article">
+  <article>
+    <like-container slug="{{ slug or page.fileSlug }}"></like-container>
+
+    {% set category = tags | categoryOf %}
+    {% if category %}
+      <a class="article-category" href="/articles#{{ category }}">{{ category | categoryLabel }}</a>
+    {% endif %}
+
+    <h1 class="article-title">{{ title }}</h1>
+
+    {% set topics = tags | topicTags %}
+    {% if topics.length %}
+      <div class="article-tags">
+        {% for tag in topics %}
+          <span class="tag">{{ tag }}</span>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <div class="article-body">
+      {{ content | safe }}
     </div>
-  {% endif %}
-  {{ content | safe }}
-</sl-card>
-<section class="decorated-section no-shadow product">
-  <img src="/public/hermes-postgresql.webp" width="150px" alt/>
-  <div class="product-content">
-    <h2 class="product-title">HermesJS 🫒🌿</h2>
-    <div class="product-description">
-      You like
-      <em>Node.js</em>. You like
-      <em>TypeScript</em>.<br/> But you
-      <em>miss a lot</em>
-      of things in this ecosystem. You miss a
-      <em>chassis</em>.<br/>
-      <em>Hermes PostgreSQL</em>
-      and
-      <em>Hermes MongoDB</em>
-      are part of the initiative that delivers to you a foundation of a
-      <em>reliable system</em>.<br/> It is a library,
-      <u>not a framework</u>, which relies on PostgreSQL's Logical Replication / MongoDB Change Stream.<br/>
-      <i>It implements the
-        <b>Outbox pattern</b>. You can span a database transaction over persisting an entity and publishing a message.</i>
-      <br/><br/>
-      <a href="https://docs.hermesjs.tech/" target="_black">Go to the docs!</a><br/> Give a start on the
-      <a href="https://github.com/chassisjs/hermes" target="_black">GitHub</a>!
+  </article>
+</div>
+
+<div class="wrap">
+  {{ collabCta("en") }}
+
+  <section class="section">
+    <div class="prod">
+      <div class="ico">🫒</div>
+      <div style="flex:1">
+        <h3>HermesJS 🫒🌿</h3>
+        <p>
+          Reliable messaging for Node.js / TypeScript. <em>Hermes PostgreSQL</em> (logical
+          replication) &amp; <em>Hermes MongoDB</em> (change streams) implement the
+          <strong>Outbox pattern</strong> — span a DB transaction over persisting an entity and
+          publishing a message. A library, not a framework.
+        </p>
+      </div>
+      <a href="https://docs.hermesjs.tech/" target="_blank" rel="noopener">Docs &gt;&gt;</a>
     </div>
-  </div>
-</section>
+  </section>
+</div>

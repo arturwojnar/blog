@@ -7,11 +7,12 @@ title: "Events are domain atoms"
 description: "If you wonder how to take another step towards business language and its technical representation, then you should definitely read this article. You will learn how discovering of business capabilities combined with the vent sourcing and the decider pattern helps you in this challange."
 layout: ../layouts/article.njk
 tags:
-  - architecture
+  - domain-design
   - event-sourcing
   - event-driven-architecture
   - domain-driven-design
-canonical: https://www.knowhowcode.dev/articles/events-are-domain-atoms
+  - decider-pattern
+canonical: https://www.planthencode.com/articles/events-are-domain-atoms
 excerpt: "If you wonder how to take another step towards business language and its technical representation, then you should definitely read this article. You will learn how discovering of business capabilities combined with the vent sourcing and the decider pattern helps you in this challange."
 readingTime: 10
 published: true

@@ -8,11 +8,12 @@ title: "Everything is a monolith"
 layout: ../layouts/article.njk
 description: "Do not harm yourself by thinking that you create a system with independent components"
 tags:
-  - monolith-systems
-  - microservices
   - architecture
+  - monolith
+  - microservices
   - distributed-systems
-canonical: https://www.knowhowcode.dev/articles/everything-is-monolith
+  - coupling
+canonical: https://www.planthencode.com/articles/everything-is-monolith
 excerpt: "Understanding why even distributed systems are fundamentally monolithic and how coupling management is the key to software development"
 readingTime: 2
 published: true

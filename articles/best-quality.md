@@ -8,12 +8,11 @@ title: "How teams fail to provide adequate quality"
 description: "Learn why teams waste time applying unnecessary quality attributes and how to determine the right level of quality for your system's actual needs."
 layout: ../layouts/article.njk
 tags:
+  - product-delivery
   - software-quality
-  - system-design
   - quality-attributes
-  - team-management
-  - software-development
-canonical: https://www.knowhowcode.dev/articles/best-quality
+  - system-design
+canonical: https://www.planthencode.com/articles/best-quality
 excerpt: "Understanding how teams often over-engineer quality attributes and how to find the right balance for your specific requirements"
 readingTime: 2
 published: true

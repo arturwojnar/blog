@@ -8,12 +8,11 @@ title: "UX and Architect are two sides of the design"
 description: "Programming is not the most essential part of the development process, but the collaboration is."
 layout: ../layouts/article.njk
 tags:
+  - people-communication
   - ux-design
-  - architecture
   - collaboration
   - design-process
-  - team-communication
-canonical: https://www.knowhowcode.dev/articles/ux-and-architect
+canonical: https://www.planthencode.com/articles/ux-and-architect
 excerpt: "Exploring how UX designers and software architects collaborate in the design process and why programming is just a side effect"
 readingTime: 3
 published: true

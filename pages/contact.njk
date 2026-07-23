@@ -1,0 +1,82 @@
+---
+title: "Contact — book a call"
+description: "Book a short 1:1 call with Artur Wojnar, or reach out by email. Mentoring, code & architecture audits, workshops and Event Storming sessions."
+layout: "../layouts/main.njk"
+permalink: "/contact.html"
+ogUrl: "https://www.planthencode.com/contact/"
+---
+
+<div class="wrap">
+  <div class="hero" style="padding-bottom:24px">
+    <div class="eyebrow">plan <span class="c1">&gt;&gt;</span> then <span class="c1">&gt;&gt;</span> code</div>
+    <h1>Let's talk</h1>
+    <p class="lede">
+      Stuck on a hard technical decision? Book a short call below, or reach out by email — always
+      concrete, with take-away materials.
+    </p>
+    <div class="contact-links">
+      <a class="btn btn-ghost" href="mailto:contact@arturwojnar.com">contact@arturwojnar.com</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/artur-wojnar-a19349a6/" target="_blank" rel="noopener">LinkedIn &gt;&gt;</a>
+      <a class="btn btn-ghost" href="https://github.com/arturwojnar" target="_blank" rel="noopener">GitHub &gt;&gt;</a>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="kicker">Book a slot</div>
+    <!-- Cal.com inline embed → https://cal.eu/arturwojnar -->
+    <div id="cal-inline" class="cal-embed"></div>
+    <noscript>
+      <p>
+        Enable JavaScript to book inline, or go straight to
+        <a href="https://cal.eu/arturwojnar" target="_blank" rel="noopener">cal.eu/arturwojnar</a>.
+      </p>
+    </noscript>
+  </section>
+</div>
+
+<script>
+  (function (C, A, L) {
+    let p = function (a, ar) {
+      a.q.push(ar);
+    };
+    let d = C.document;
+    C.Cal =
+      C.Cal ||
+      function () {
+        let cal = C.Cal;
+        let ar = arguments;
+        if (!cal.loaded) {
+          cal.ns = {};
+          cal.q = cal.q || [];
+          d.head.appendChild(d.createElement("script")).src = A;
+          cal.loaded = true;
+        }
+        if (ar[0] === L) {
+          const api = function () {
+            p(api, arguments);
+          };
+          const namespace = ar[1];
+          api.q = api.q || [];
+          if (typeof namespace === "string") {
+            cal.ns[namespace] = cal.ns[namespace] || api;
+            p(cal.ns[namespace], ar);
+            p(cal, ["initNamespace", namespace]);
+          } else p(cal, ar);
+          return;
+        }
+        p(cal, ar);
+      };
+  })(window, "https://app.cal.com/embed/embed.js", "init");
+
+  Cal("init", { origin: "https://cal.eu" });
+  Cal("inline", {
+    elementOrSelector: "#cal-inline",
+    calLink: "arturwojnar",
+    layout: "month_view",
+  });
+  // Match the site theme.
+  Cal("ui", {
+    theme: document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light",
+    hideEventTypeDetails: false,
+  });
+</script>

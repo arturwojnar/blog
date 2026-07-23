@@ -7,9 +7,12 @@ title: "Why does entropy kill my software?"
 description: "Software architecture decays toward chaos the same way matter does. Two practical tools for keeping entropy low: small functional modules and archetype-based generalization."
 layout: ../layouts/article.njk
 tags:
-  - softskills
   - architecture
-canonical: https://www.knowhowcode.dev/articles/why-entropy-kills-software
+  - entropy
+  - modularity
+  - archetypes
+  - system-design
+canonical: https://www.planthencode.com/articles/why-entropy-kills-software
 excerpt: "The default state of matter is chaos, and software is no different. After enough time, what started organized and 'clean' fills with disorder. Here is how I fight entropy in system design."
 readingTime: 5
 slug: why-entropy-kills-software

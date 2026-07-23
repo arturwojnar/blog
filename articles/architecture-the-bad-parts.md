@@ -11,8 +11,7 @@ tags:
   - antipatterns
   - cqrs
   - domain-driven-design
-  - ddd
-canonical: https://www.knowhowcode.dev/articles/architecture-the-bad-parts
+canonical: https://www.planthencode.com/articles/architecture-the-bad-parts
 excerpt: "A real-world walkthrough of architectural antipatterns and how good intentions lead to bad software."
 readingTime: 33
 slug: architecture-the-bad-parts
@@ -898,7 +897,7 @@ When deciding whether an alert should be raised, `Alert` reads the `Users` table
 
 Database relationships can become heavy chains — the relationships should not cross contexts; If they do, then one context is able to read data of another context, which leads to having a contract by database (shared database) - a well-known anti-pattern descibed in [Enterprise Integration Patterns: Designing, Building, and Deploying Messaging Solutions](https://www.amazon.com/Enterprise-Integration-Patterns-Designing-Deploying/dp/0321200683).
 
-Read about how to proceed with [database decomposition](https://www.knowhowcode.dev/articles/decomposition/).
+Read about how to proceed with [database decomposition](https://www.planthencode.com/articles/decomposition/).
 
 **Shared persistence is the strongest form of coupling.**
 
@@ -925,7 +924,7 @@ Through shallow modelling, we probably haven't discovered all the entities we ne
 - **Or even better write models**: `calculateLiverFattyRisk`, `calculateLiverCancerRisk`
 - **And read models**: `Alert`, `Evaluation`, `PriorityPatient`, etc.
 
-One of solutions you can find in my previous article: [Events are Domain Atoms](https://www.knowhowcode.dev/articles/events-are-domain-atoms/).
+One of solutions you can find in my previous article: [Events are Domain Atoms](https://www.planthencode.com/articles/events-are-domain-atoms/).
 
 **The write model ≠ the read model.** When a single table like `Alert` serves both views and business decisions, adding view-only information (like alert importance) pollutes the write model.
 

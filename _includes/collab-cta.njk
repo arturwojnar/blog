@@ -1,0 +1,30 @@
+{#
+  collab-cta — reusable "Stuck on a hard technical decision?" band.
+  Tiered funnel teaser → Contact (book a call) + Offer. Bilingual.
+  Usage: {% from "collab-cta.njk" import collabCta %}{{ collabCta("en") }}
+#}
+{% macro collabCta(lang="en") %}
+<section class="section">
+  <div class="band">
+    {% if lang == "pl" %}
+      <h2>Utknąłeś na trudnej decyzji technicznej?</h2>
+      <p>
+        Pomagam zespołom i osobom w architekturze, DDD, Node.js, chmurze i DevOps — mentoring,
+        audyty kodu i architektury, warsztaty oraz sesje Event Storming. Zawsze konkretnie i z
+        materiałami na wynos.
+      </p>
+      <a class="btn btn-primary" href="/contact">Umów rozmowę <span class="a">&gt;&gt;</span></a>
+      <div class="lang">PL · <a href="/offer">english version »</a></div>
+    {% else %}
+      <h2>Stuck on a hard technical decision?</h2>
+      <p>
+        I help teams and individuals with architecture, DDD, Node.js, cloud and DevOps — mentoring,
+        code &amp; architecture audits, workshops and Event Storming sessions. Always concrete, with
+        take-away materials.
+      </p>
+      <a class="btn btn-primary" href="/contact">Book a call <span class="a">&gt;&gt;</span></a>
+      <div class="lang">EN · <a href="/oferta">wersja PL »</a></div>
+    {% endif %}
+  </div>
+</section>
+{% endmacro %}

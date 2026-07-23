@@ -9,9 +9,10 @@ description: "Learn when to apply DRY vs WET principles in software architecture
 layout: ../layouts/article.njk
 tags:
   - architecture
-  - best-practices
   - design-principles
-canonical: https://www.knowhowcode.dev/articles/wet-dry
+  - modularity
+  - best-practices
+canonical: https://www.planthencode.com/articles/wet-dry
 excerpt: "Understanding when to apply DRY (Don't Repeat Yourself) vs WET (Write Everything Twice) principles in software development"
 readingTime: 1
 published: true

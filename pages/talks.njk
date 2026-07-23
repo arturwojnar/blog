@@ -1,8 +1,9 @@
 ---
-title: "Talks"
+title: "Speaker — talks & webinars"
+description: "Conference talks, meetups and webinars by Artur Wojnar on software architecture, DDD, distributed systems and product-from-tech."
 layout: "../layouts/main.njk"
 permalink: "/talks.html"
-ogUrl: "https://www.knowhowcode.dev/talks/"
+ogUrl: "https://www.planthencode.com/talks/"
 talks:
   - title: "Software Architecture: The Bad Parts"
     date: "2026-03-12"
@@ -51,18 +52,20 @@ talks:
         conference: "4Developers Katowice"
         link: https://www.youtube.com/watch?v=qd-qIgd7JNs&t=10s&pp=ygUYYXJ0dXIgd29qbmFyIDRkZXZlbG9wZXJz
 ---
-<div class="talks-cover-container">
-  <img class="talks-cover" src="/public/conference1.webp"  alt="" />
-  <img class="talks-main-image" src="/public/conference1.webp" alt="" />
-</div>
+<div class="wrap">
+  <div class="hero" style="padding-bottom:24px">
+    <div class="eyebrow">plan <span class="c1">&gt;&gt;</span> then <span class="c1">&gt;&gt;</span> code</div>
+    <h1>Speaker</h1>
+    <p class="lede">Conference talks, meetups and webinars — architecture, DDD, distributed systems, and the product-from-tech perspective.</p>
+  </div>
 
-<div class="talks-list">
-  {% for talk in talks %}
-    <article class="talk-item">
-      <h2 class="talk-title">
-        <span class="talk-emoji">{{ talk.emoji }}</span>
-        "{{ talk.title }}"
-      </h2>
+  <div class="talks-list">
+    {% for talk in talks %}
+      <article class="talk-item">
+        <h2 class="talk-title">
+          <span class="talk-emoji">{{ talk.emoji }}</span>
+          {{ talk.title }}
+        </h2>
 
       {% if talk.events %}
         {# Multi-event talk #}
@@ -139,4 +142,5 @@ talks:
       {% endif %}
     </article>
   {% endfor %}
+  </div>
 </div>

@@ -1,17 +1,43 @@
-:root {
-  /* Primary Brand Colors */
-  --color-primary-50: #d9f8ff;
-  --color-primary-100: #b3f1ff;
-  --color-primary-200: #8deaff;
-  --color-primary-300: #66e4ff;
-  --color-primary-400: #40ddff;
-  --color-primary-500: #1ad6ff;
-  --color-primary-600: #00b9e1;
-  --color-primary-700: #008aa9;
-  --color-primary-800: #005c70;
-  --color-primary-900: #002e38;
+/*
+ * Design tokens — Plan Then Code
+ * ------------------------------------------------------------------
+ * Primary = indigo, Secondary = cyan. Light + dark via [data-theme].
+ * Existing token NAMES are preserved so style.css keeps working; only
+ * VALUES are remapped. New brand/semantic tokens added per plan.md §7.
+ *
+ * Accessibility rules baked in:
+ *  - --accent-fg / --secondary-fg flip per theme (white in light,
+ *    dark-navy in dark) so buttons always pass WCAG AA.
+ *  - Cyan (secondary) is for large text / icons / borders / bg — NOT
+ *    small body links (use --color-text-* or --accent for those).
+ */
 
-  /* Neutral Colors */
+:root {
+  /* ---- Primary brand: INDIGO (scale) ---- */
+  --color-primary-50: #eef2ff;
+  --color-primary-100: #e0e7ff;
+  --color-primary-200: #c7d2fe;
+  --color-primary-300: #a5b4fc;
+  --color-primary-400: #818cf8;
+  --color-primary-500: #4f46e5; /* accent */
+  --color-primary-600: #4338ca; /* accent-hover */
+  --color-primary-700: #3730a3;
+  --color-primary-800: #312e81;
+  --color-primary-900: #1e1b4b;
+
+  /* ---- Secondary brand: CYAN / SKY (scale) ---- */
+  --color-secondary-50: #ecfeff;
+  --color-secondary-100: #cffafe;
+  --color-secondary-200: #a5f3fc;
+  --color-secondary-300: #67e8f9;
+  --color-secondary-400: #22d3ee;
+  --color-secondary-500: #0891b2; /* secondary */
+  --color-secondary-600: #0e7490; /* secondary-hover */
+  --color-secondary-700: #155e75;
+  --color-secondary-800: #164e63;
+  --color-secondary-900: #083344;
+
+  /* ---- Neutral scale ---- */
   --color-neutral-50: #f8fafc;
   --color-neutral-100: #f1f5f9;
   --color-neutral-200: #e2e8f0;
@@ -23,51 +49,141 @@
   --color-neutral-800: #1e293b;
   --color-neutral-900: #0f172a;
 
-  /* Accent Colors */
+  /* ---- Brand semantic aliases (the token API components should use) ---- */
+  --accent: var(--color-primary-500);
+  --accent-hover: var(--color-primary-600);
+  --accent-subtle: var(--color-primary-50);
+  --accent-fg: #ffffff; /* text ON a primary button */
+
+  --secondary: var(--color-secondary-500);
+  --secondary-hover: var(--color-secondary-600);
+  --secondary-subtle: var(--color-secondary-50);
+  --secondary-fg: #ffffff; /* text ON a secondary button */
+
+  /* ---- Functional state colors ---- */
   --color-accent-orange: #f97316;
   --color-accent-yellow: #eab308;
   --color-accent-green: #22c55e;
   --color-accent-red: #ef4444;
+  --success: #16a34a;
+  --success-subtle: #f0fdf4;
+  --warning: #d97706;
+  --warning-subtle: #fffbeb;
+  --danger: #dc2626;
+  --danger-subtle: #fef2f2;
 
-  /* Semantic Colors */
+  /* ---- Semantic UI tokens (light theme values) ---- */
   --color-background: var(--color-neutral-50);
   --color-surface: #ffffff;
   --color-surface-variant: var(--color-neutral-100);
   --color-text-primary: var(--color-neutral-900);
   --color-text-secondary: var(--color-neutral-600);
-  --color-text-muted: var(--color-neutral-400);
+  --color-text-muted: var(--color-neutral-500);
   --color-border: var(--color-neutral-200);
   --color-border-hover: var(--color-neutral-300);
+  --color-code-bg: var(--color-neutral-100);
 
-  /* Layout & Spacing */
-  --spacing-xs: 0.25rem;   /* 4px */
-  --spacing-sm: 0.5rem;    /* 8px */
-  --spacing-md: 1rem;      /* 16px */
-  --spacing-lg: 1.5rem;    /* 24px */
-  --spacing-xl: 2rem;      /* 32px */
-  --spacing-2xl: 3rem;     /* 48px */
-  --spacing-3xl: 4rem;     /* 64px */
+  /* ---- Layout & Spacing ---- */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
 
-  /* Border Radius */
-  --radius-sm: 0.25rem;    /* 4px */
-  --radius-md: 0.5rem;     /* 8px */
-  --radius-lg: 0.75rem;    /* 12px */
-  --radius-xl: 1rem;       /* 16px */
+  /* ---- Border Radius ---- */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
 
-  /* Typography */
-  --font-size-xs: 0.75rem;    /* 12px */
-  --font-size-sm: 0.875rem;   /* 14px */
-  --font-size-base: 1rem;     /* 16px */
-  --font-size-lg: 1.125rem;   /* 18px */
-  --font-size-xl: 1.25rem;    /* 20px */
-  --font-size-2xl: 1.5rem;    /* 24px */
-  --font-size-3xl: 1.875rem;  /* 30px */
-  --font-size-4xl: 2.25rem;   /* 36px */
+  /* ---- Content widths ---- */
+  --width-reading: 720px; /* prose / article body */
+  --width-wide: 840px; /* service tiles */
+  --width-full: 1040px; /* full sections */
+  --width-prose: 720px; /* comfortable text measure for article paragraphs */
 
-  /* Shadows */
+  /* ---- Typography ---- */
+  --font-serif: "Iowan Old Style", "Palatino", Georgia, serif;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+
+  /* ---- Shadows ---- */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  color-scheme: light;
 }
 
+/* ---- DARK THEME ---- */
+[data-theme="dark"] {
+  /* brand shifts lighter for contrast on dark bg */
+  --accent: var(--color-primary-400); /* #818cf8 */
+  --accent-hover: var(--color-primary-300); /* #a5b4fc */
+  --accent-subtle: var(--color-primary-900); /* #1e1b4b */
+  --accent-fg: #0b1120; /* DARK text on light-ish accent = AA/AAA */
+
+  --secondary: var(--color-secondary-400); /* #22d3ee */
+  --secondary-hover: var(--color-secondary-300); /* #67e8f9 */
+  --secondary-subtle: #0c2e37;
+  --secondary-fg: #0b1120;
+
+  --color-background: #0b1120;
+  --color-surface: #111a2e;
+  --color-surface-variant: #16223c;
+  --color-text-primary: #e2e8f0;
+  --color-text-secondary: #cbd5e1;
+  --color-text-muted: #94a3b8;
+  --color-border: #1e293b;
+  --color-border-hover: #334155;
+  --color-code-bg: #0f1729;
+
+  /* primary-500/600 are used directly by legacy style.css — keep them
+     usable on dark by pointing to the lighter indigo. */
+  --color-primary-500: #818cf8;
+  --color-primary-600: #a5b4fc;
+
+  --success-subtle: #0d2b22;
+  --warning-subtle: #2e2410;
+  --danger-subtle: #3a1420;
+
+  color-scheme: dark;
+}
+
+/* Respect OS preference on first paint when no explicit theme is set.
+   The theme-toggle writes data-theme to override. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --accent: var(--color-primary-400);
+    --accent-hover: var(--color-primary-300);
+    --accent-subtle: var(--color-primary-900);
+    --accent-fg: #0b1120;
+    --secondary: var(--color-secondary-400);
+    --secondary-hover: var(--color-secondary-300);
+    --secondary-subtle: #0c2e37;
+    --secondary-fg: #0b1120;
+    --color-background: #0b1120;
+    --color-surface: #111a2e;
+    --color-surface-variant: #16223c;
+    --color-text-primary: #e2e8f0;
+    --color-text-secondary: #cbd5e1;
+    --color-text-muted: #94a3b8;
+    --color-border: #1e293b;
+    --color-border-hover: #334155;
+    --color-code-bg: #0f1729;
+    --color-primary-500: #818cf8;
+    --color-primary-600: #a5b4fc;
+    color-scheme: dark;
+  }
+}

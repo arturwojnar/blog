@@ -12,7 +12,7 @@ tags:
   - hexagonal-architecture
   - clean-architecture
   - design-thinking
-canonical: https://www.knowhowcode.dev/articles/false-hope
+canonical: https://www.planthencode.com/articles/false-hope
 excerpt: "Exploring why calling implementation patterns 'architectures' misleads developers and how to approach true architectural design"
 readingTime: 1
 published: true
