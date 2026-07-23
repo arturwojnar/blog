@@ -1,0 +1,41 @@
+// ---- Token bridges: short aliases over colors.css tokens ----
+:root {
+  --bg: var(--color-background);
+  --bg-elev: var(--color-surface);
+  --fg: var(--color-text-primary);
+  --fg-muted: var(--color-text-muted);
+  --border: var(--color-border);
+  --code-bg: var(--color-code-bg);
+}
+
+// ---- Base reset + global styles ----
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--accent);
+}
+
+// Utility color accents
+.c1 {
+  color: var(--accent);
+  font-weight: 700;
+}
+.c2 {
+  color: var(--secondary);
+  font-weight: 700;
+}

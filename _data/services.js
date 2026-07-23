@@ -128,34 +128,57 @@ export const services = [
       ],
     },
   },
+  {
+    num: "06",
+    en: {
+      title: "Custom",
+      meta: "your problem · your terms",
+      points: [
+        "Have a specific problem that doesn't fit a standard format?",
+        "Bring it — we'll figure out the shape together",
+        "Could be a deep-dive session, async review, or a short engagement",
+        "No fixed scope, no upsell — just what you actually need",
+      ],
+    },
+    pl: {
+      title: "Na miarę",
+      meta: "twój problem · twoje warunki",
+      points: [
+        "Masz konkretny problem, który nie pasuje do standardowego formatu?",
+        "Przynieś go — wspólnie ustalimy, jak to ugryźć",
+        "Może to być głęboka sesja, recenzja async lub krótkie zaangażowanie",
+        "Bez sztywnego zakresu, bez upsellingu — tylko to, czego naprawdę potrzebujesz",
+      ],
+    },
+  },
 ];
 
 export const copy = {
   en: {
     eyebrow: "collaboration",
     title: "Offer",
-    lede: "I help teams and individuals through hard technical decisions — from strategy and architecture, through code, to cloud. Five ways we can work together:",
+    lede: "I help teams and individuals through hard technical decisions — from strategy and architecture, through code, to cloud. Six ways we can work together:",
     guaranteeTitle: "Satisfaction guarantee",
     guarantee:
       "If you're not happy with the results — a workshop, an audit, a session — you don't pay. Simple as that.",
     ctaTitle: "Stuck on a hard technical decision?",
     ctaText: "Book a short call and let's talk about where you're stuck.",
     ctaButton: "Book a call",
-    langSwitch: "wersja PL »",
+    langSwitch: "🇵🇱 PL »",
     langSwitchUrl: "/oferta",
     recoMore: "All recommendations on LinkedIn",
   },
   pl: {
     eyebrow: "współpraca",
     title: "Oferta",
-    lede: "Pomagam zespołom i osobom przejść przez trudne decyzje techniczne — od strategii i architektury, przez kod, po chmurę. Pięć sposobów, w jakie możemy razem pracować:",
+    lede: "Pomagam zespołom i osobom przejść przez trudne decyzje techniczne — od strategii i architektury, przez kod, po chmurę. Sześć sposobów, w jakie możemy razem pracować:",
     guaranteeTitle: "Gwarancja satysfakcji",
     guarantee:
       "Jeśli nie jesteś zadowolony z rezultatów — warsztatu, audytu, sesji — nie płacisz. Tak po prostu.",
     ctaTitle: "Utknąłeś na trudnej decyzji technicznej?",
     ctaText: "Umów krótką rozmowę i pogadajmy o tym, gdzie utknąłeś.",
     ctaButton: "Umów rozmowę",
-    langSwitch: "english version »",
+    langSwitch: "🇬🇧 EN »",
     langSwitchUrl: "/offer",
     recoMore: "Wszystkie rekomendacje na LinkedIn",
   },

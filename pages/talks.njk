@@ -18,7 +18,7 @@ talks:
       Attendees will leave with a clearer understanding of how design decisions shape system behavior—and how easily “best practices” can fail when the domain is misunderstood.
     events:
       - date: "2026-06-17"
-        conference: "meet.js Wrocław"
+        conference: "Devoxx Poland 2026"
         link: https://devoxx.pl/?srsltid=AfmBOooYGgSWt4zYslivZ-_a7ol91JqUXXzBcfjKPpwJ4eBHa5DZBq25
       - date: "2026-05-12"
         conference: "meet.js Wrocław"
@@ -63,7 +63,7 @@ talks:
     {% for talk in talks %}
       <article class="talk-item">
         <h2 class="talk-title">
-          <span class="talk-emoji">{{ talk.emoji }}</span>
+          <span class="c1">&gt;&gt;</span>
           {{ talk.title }}
         </h2>
 
@@ -73,17 +73,19 @@ talks:
         <div class="talk-event">
           <div class="talk-header">
             <sl-icon name="calendar3" class="talk-date-icon"></sl-icon>
-            <span>{% if event.date | isPast %}✅{% else %}🤞{% endif %}</span>
             <div class="talk-date-info">
               <time datetime="{{ event.date }}">{{ event.date | date('DD.MM.YYYY') }}</time>
-              <span class="talk-separator">-</span>
-              <span class="talk-conference">{{ event.conference }}</span>
+              <span class="talk-separator">>></span>
+              {% if event.link and "youtube.com" not in event.link %}
+                <a class="talk-conference" href="{{ event.link }}" target="_blank" rel="noopener noreferrer">{{ event.conference }}</a>
+              {% else %}
+                <span class="talk-conference">{{ event.conference }}</span>
+              {% endif %}
               {% if event.time %}<span class="talk-time">({{ event.time }})</span>{% endif %}
             </div>
           </div>
 
-          {% if event.link %}
-            {% if "youtube.com" in event.link %}
+          {% if event.link and "youtube.com" in event.link %}
             <div class="talk-video">
               <iframe
                 width="560"
@@ -95,9 +97,6 @@ talks:
                 allowfullscreen>
               </iframe>
             </div>
-            {% else %}
-            <a class="talk-event-link" href="{{ event.link }}" target="_blank" rel="noopener noreferrer">👉 See the event</a>
-            {% endif %}
           {% endif %}
         </div>
         {% endfor %}
@@ -109,11 +108,14 @@ talks:
         {# Single-event talk #}
         <div class="talk-header">
           <sl-icon name="calendar3" class="talk-date-icon"></sl-icon>
-          <span>{% if talk.date | isPast %}✅{% else %}🤞{% endif %}</span>
           <div class="talk-date-info">
             <time datetime="{{ talk.date }}">{{ talk.date | date('DD.MM.YYYY') }}</time>
-            <span class="talk-separator">-</span>
-            <span class="talk-conference">{{ talk.conference }}</span>
+            <span class="talk-separator">>></span>
+            {% if talk.link and "youtube.com" not in talk.link %}
+              <a class="talk-conference" href="{{ talk.link }}" target="_blank" rel="noopener noreferrer">{{ talk.conference }}</a>
+            {% else %}
+              <span class="talk-conference">{{ talk.conference }}</span>
+            {% endif %}
             {% if talk.time %}<span class="talk-time">({{ talk.time }})</span>{% endif %}
           </div>
         </div>
@@ -122,8 +124,7 @@ talks:
           {{ talk.description | safe }}
         </div>
 
-        {% if talk.link %}
-          {% if "youtube.com" in talk.link %}
+        {% if talk.link and "youtube.com" in talk.link %}
           <div class="talk-video">
             <iframe
               width="560"
@@ -135,9 +136,6 @@ talks:
               allowfullscreen>
             </iframe>
           </div>
-          {% else %}
-          <a class="talk-event-link" href="{{ talk.link }}" target="_blank" rel="noopener noreferrer">See the event</a>
-          {% endif %}
         {% endif %}
       {% endif %}
     </article>

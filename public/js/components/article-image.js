@@ -7,7 +7,9 @@ export class ArticleImage extends HTMLElement {
     const loading = this.getAttribute("loading") || "lazy";
     const isThumbnail = this.getAttribute("thumbnail") === "true";
     const label = this.getAttribute("label") || "";
-    const maxWidth = this.getAttribute("maxwidth") || "100%";
+    const maxWidthAttr = this.getAttribute("maxwidth");
+    // Clamp to the container: never exceed 100% even if maxwidth is larger.
+    const maxWidth = maxWidthAttr ? `min(${maxWidthAttr}, 100%)` : "100%";
 
     // Create container with spinner
     this.innerHTML = isThumbnail

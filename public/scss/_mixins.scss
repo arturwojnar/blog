@@ -1,0 +1,53 @@
+// ---- Shared mixins ----
+
+// Elevated card (bg-elev + border + radius)
+@mixin card-base($radius: 14px, $pad: 22px) {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: $radius;
+  padding: $pad;
+}
+
+// Numbered badge (the "01", "✓" icons)
+@mixin num-badge($size: 34px, $radius: 9px) {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  width: $size;
+  height: $size;
+  border-radius: $radius;
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+
+// 2-column grid collapsing to 1 on mobile
+@mixin grid-2col($gap: 14px, $breakpoint: 560px) {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $gap;
+
+  @media (max-width: $breakpoint) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Card lift hover
+@mixin hover-lift {
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s,
+    border-color 0.15s;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 32px -16px color-mix(in srgb, var(--accent) 45%, transparent);
+    border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+  }
+}
+
+// Mono label / kicker style
+@mixin mono-label($size: 12px) {
+  font-family: var(--font-mono);
+  font-size: $size;
+  color: var(--fg-muted);
+}

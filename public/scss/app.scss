@@ -1,0 +1,19 @@
+/*
+ * app.scss — Plan Then Code (v3)
+ * Compiled to public/css/app.css via: npm run build:scss
+ *
+ * Structure:
+ *   colors.css   — design tokens (light/dark via [data-theme])
+ *   _mixins.scss — card-base, num-badge, grid-2col, hover-lift, mono-label
+ *   _base.scss   — reset, body, global a, utility classes
+ *   _layout.scss — wrap, header, nav, hero, sections, footer
+ *   _components.scss — about, svc, prod, reco, cards, cat-pills, article-image
+ *   _pages.scss  — article, offer, contact, talks
+ */
+
+// SCSS partials — @use must come first
+@use 'mixins' as *;
+@use 'base';
+@use 'layout';
+@use 'components';
+@use 'pages';
