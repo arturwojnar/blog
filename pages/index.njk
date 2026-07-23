@@ -31,7 +31,7 @@ ogUrl: "https://www.planthencode.com/"
   <section class="section">
     <div class="kicker">Who I am</div>
     <div class="about">
-      <img class="avatar" src="/public/artur/avatar.webp" alt="Artur Wojnar" width="110" height="110" loading="eager" />
+      <img class="about-photo" src="/public/artur/hero@sm.webp" alt="Artur Wojnar speaking at Devoxx Poland" loading="eager" />
       <div>
         <p>
           <strong>In the industry since 2011.</strong> I design solutions collaboratively with
@@ -120,15 +120,15 @@ ogUrl: "https://www.planthencode.com/"
     </div>
   </section>
 
-  <section class="section">
+   <section class="section">
     <div class="band">
-      <h2>Stuck on a hard technical decision?</h2>
-      <p>
-        Mentoring, code &amp; architecture audits, workshops and Event Storming sessions. Always
-        concrete, with materials on the way out.
-      </p>
-      <a class="btn btn-primary" href="/contact">Book a call <span class="a">&gt;&gt;</span></a>
-      <div class="lang">EN · <a href="/oferta">wersja PL »</a></div>
+      <img class="band-avatar" src="/public/arturwojnar-profile.png" alt="Artur Wojnar" />
+      <div class="band-body">
+        <h2>{{ services.copy.en.ctaTitle }}</h2>
+        <p>{{ services.copy.en.ctaText }}</p>
+        <a class="btn btn-primary" href="/contact">{{ services.copy.en.ctaButton }} <span class="a">&gt;&gt;</span></a>
+        <div class="lang">🇬🇧 EN · <a href="{{ services.copy.en.langSwitchUrl }}">{{ services.copy.en.langSwitch }}</a></div>
+      </div>
     </div>
   </section>
 </div>

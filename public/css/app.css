@@ -272,7 +272,9 @@ a {
   text-decoration: none;
   padding: 12px 20px;
   border-radius: 9px;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 .btn .a {
   opacity: 0.7;
@@ -325,25 +327,62 @@ a {
   color: var(--fg-muted);
 }
 .site-footer a:hover {
-  color: var(--fg);
+  color: var(--accent);
 }
 
 .band {
   background: var(--code-bg);
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 34px;
+  padding: 34px 34px 34px 80px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
 }
-.band h2 {
+@media (max-width: 560px) {
+  .band {
+    flex-direction: column;
+    padding: 100px 24px 34px;
+  }
+}
+
+.band-avatar {
+  position: absolute;
+  left: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  border: 2px solid var(--border);
+}
+@media (max-width: 560px) {
+  .band-avatar {
+    left: 50%;
+    top: 16px;
+    transform: translateX(-50%);
+  }
+}
+
+.band-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.band-body h2 {
   font-family: var(--font-serif);
   font-size: 25px;
   margin-bottom: 12px;
 }
-.band p {
+.band-body p {
   color: var(--fg-muted);
-  max-width: 500px;
-  margin: 0 auto 22px;
+  margin-bottom: 22px;
 }
 
 .lang {
@@ -353,18 +392,10 @@ a {
   margin-top: 14px;
 }
 
-.about {
-  display: grid;
-  grid-template-columns: 110px 1fr;
-  gap: 26px;
-  align-items: start;
-}
-.about .avatar {
-  width: 110px;
-  height: 110px;
-  border-radius: 14px;
-  object-fit: cover;
-  background: linear-gradient(135deg, var(--accent), var(--secondary));
+.about::after {
+  content: "";
+  display: table;
+  clear: both;
 }
 .about p {
   color: var(--fg-muted);
@@ -373,9 +404,20 @@ a {
 .about p strong {
   color: var(--fg);
 }
-@media (max-width: 560px) {
-  .about {
-    grid-template-columns: 1fr;
+
+.about-photo {
+  float: right;
+  width: 220px;
+  height: auto;
+  border-radius: 14px;
+  display: block;
+  margin: 0 0 16px 24px;
+}
+@media (max-width: 480px) {
+  .about-photo {
+    float: none;
+    width: 100%;
+    margin: 0 0 20px;
   }
 }
 

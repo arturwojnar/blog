@@ -3,17 +3,10 @@
 
 // ---- About ----
 .about {
-  display: grid;
-  grid-template-columns: 110px 1fr;
-  gap: 26px;
-  align-items: start;
-
-  .avatar {
-    width: 110px;
-    height: 110px;
-    border-radius: 14px;
-    object-fit: cover;
-    background: linear-gradient(135deg, var(--accent), var(--secondary));
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
   }
 
   p {
@@ -24,9 +17,20 @@
       color: var(--fg);
     }
   }
+}
 
-  @media (max-width: 560px) {
-    grid-template-columns: 1fr;
+.about-photo {
+  float: right;
+  width: 220px;
+  height: auto;
+  border-radius: 14px;
+  display: block;
+  margin: 0 0 16px 24px;
+
+  @media (max-width: 480px) {
+    float: none;
+    width: 100%;
+    margin: 0 0 20px;
   }
 }
 
