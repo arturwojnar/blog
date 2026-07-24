@@ -296,6 +296,10 @@ a {
   padding: 44px 0;
   border-top: 1px solid var(--border);
 }
+.section.product-section .prod {
+  width: 720px;
+  margin: 0 auto;
+}
 
 .kicker {
   font-family: var(--font-mono);
@@ -340,6 +344,8 @@ a {
   align-items: center;
   justify-content: center;
   text-align: center;
+  max-width: 760px;
+  margin: 0 auto;
 }
 @media (max-width: 560px) {
   .band {
@@ -392,10 +398,10 @@ a {
   margin-top: 14px;
 }
 
-.about::after {
-  content: "";
-  display: table;
-  clear: both;
+.about {
+  display: flex;
+  align-items: center;
+  gap: 24px;
 }
 .about p {
   color: var(--fg-muted);
@@ -405,20 +411,24 @@ a {
 .about p strong {
   color: var(--fg);
 }
+@media (max-width: 480px) {
+  .about {
+    flex-direction: column;
+  }
+}
 
 .about-photo {
-  float: right;
   width: 220px;
   height: auto;
   border-radius: 14px;
   display: block;
-  margin: 0 0 16px 24px;
+  flex: none;
+  order: 2;
 }
 @media (max-width: 480px) {
   .about-photo {
-    float: none;
     width: 100%;
-    margin: 0 0 20px;
+    order: -1;
   }
 }
 
@@ -488,32 +498,75 @@ a {
   line-height: 1.55;
 }
 
+.svc--bg {
+  position: relative;
+  overflow: hidden;
+  background-image: var(--svc-bg);
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  min-height: 200px;
+  isolation: isolate;
+}
+.svc--bg.guarantee {
+  background-image: var(--svc-bg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.svc--bg.guarantee .num {
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+}
+.svc--bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(0, 0, 0, 0.6);
+}
+.svc--bg h3 {
+  color: #fff;
+}
+.svc--bg p {
+  color: rgba(255, 255, 255, 0.88);
+}
+.svc--bg .num {
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  backdrop-filter: blur(2px);
+}
+.svc--bg.alt .num {
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+}
+
 .prod {
   background: var(--bg-elev);
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 20px;
+  padding: 14px;
   display: flex;
-  gap: 16px;
+  gap: 14px;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 .prod .ico {
-  width: 48px;
-  height: 48px;
-  border-radius: 11px;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
   background: var(--code-bg);
   display: grid;
   place-items: center;
-  font-size: 24px;
+  font-size: 20px;
   flex: none;
 }
 .prod h3 {
-  font-size: 16px;
-  margin-bottom: 3px;
+  font-size: 15px;
+  margin-bottom: 2px;
 }
 .prod p {
-  font-size: 13.5px;
+  font-size: 13px;
   color: var(--fg-muted);
 }
 .prod a {
@@ -544,7 +597,7 @@ a {
 }
 .reco blockquote {
   margin: 0 0 14px;
-  font-size: 14.5px;
+  font-size: 12.5px;
   line-height: 1.6;
   color: var(--fg);
 }
@@ -758,6 +811,12 @@ a {
   max-width: var(--width-prose);
   margin: 0 auto;
 }
+.article .cover-image {
+  max-height: 300px;
+  width: 100%;
+  object-fit: cover;
+  margin-bottom: 2em;
+}
 
 .article-body > pre,
 .article-body > table,
@@ -830,6 +889,7 @@ a {
 }
 .article-body p {
   margin-bottom: 18px;
+  text-align: justify;
 }
 .article-body ul,
 .article-body ol {
@@ -1012,10 +1072,12 @@ a {
   background-size: cover;
   background-position-x: -150px;
   background-position-y: -300px;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 @media (min-width: 1600px) {
   [data-theme=dark] .page-contact {
-    background-position-y: -600px;
+    background-position-y: -690px;
   }
 }
 [data-theme=dark] .page-contact::before {
@@ -1035,6 +1097,19 @@ a {
 }
 [data-theme=dark] .page-contact .lede {
   color: rgba(255, 255, 255, 0.85);
+}
+[data-theme=light] .page-contact {
+  background-image: url("/public/artur/conf4.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+[data-theme=light] .page-contact::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.85) 100%);
+  pointer-events: none;
 }
 .page-contact .wrap {
   position: relative;

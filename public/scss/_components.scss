@@ -3,11 +3,9 @@
 
 // ---- About ----
 .about {
-  &::after {
-    content: '';
-    display: table;
-    clear: both;
-  }
+  display: flex;
+  align-items: center;
+  gap: 24px;
 
   p {
     color: var(--fg-muted);
@@ -18,20 +16,23 @@
       color: var(--fg);
     }
   }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
 }
 
 .about-photo {
-  float: right;
   width: 220px;
   height: auto;
   border-radius: 14px;
   display: block;
-  margin: 0 0 16px 24px;
+  flex: none;
+  order: 2;
 
   @media (max-width: 480px) {
-    float: none;
     width: 100%;
-    margin: 0 0 20px;
+    order: -1;
   }
 }
 
@@ -84,32 +85,83 @@
   }
 }
 
+// Background-image tile variant (test)
+.svc--bg {
+  position: relative;
+  overflow: hidden;
+  background-image: var(--svc-bg);
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  min-height: 200px;
+  isolation: isolate;
+
+  &.guarantee {
+    background-image: var(--svc-bg);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    .num {
+      background: rgba(0,0,0,0.4);
+      color: #fff;
+    }
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgba(0,0,0,0.6);
+  }
+
+  h3 {
+    color: #fff;
+  }
+
+  p {
+    color: rgba(255,255,255,0.88);
+  }
+
+  .num {
+    background: rgba(0,0,0,0.4);
+    color: #fff;
+    backdrop-filter: blur(2px);
+  }
+
+  &.alt .num {
+    background: rgba(0,0,0,0.4);
+    color: #fff;
+  }
+}
+
 // ---- Products ----
 .prod {
-  @include card-base(14px, 20px);
+  @include card-base(14px, 14px);
   display: flex;
-  gap: 16px;
+  gap: 14px;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 
   .ico {
-    width: 48px;
-    height: 48px;
-    border-radius: 11px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
     background: var(--code-bg);
     display: grid;
     place-items: center;
-    font-size: 24px;
+    font-size: 20px;
     flex: none;
   }
 
   h3 {
-    font-size: 16px;
-    margin-bottom: 3px;
+    font-size: 15px;
+    margin-bottom: 2px;
   }
 
   p {
-    font-size: 13.5px;
+    font-size: 13px;
     color: var(--fg-muted);
   }
 
@@ -133,7 +185,7 @@
 
   blockquote {
     margin: 0 0 14px;
-    font-size: 14.5px;
+    font-size: 12.5px;
     line-height: 1.6;
     color: var(--fg);
 
