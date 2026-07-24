@@ -121,6 +121,21 @@ a {
   content: "» ";
   color: var(--accent);
 }
+.site-nav a.nav-cta {
+  color: var(--accent-fg);
+  font-size: 14px;
+  padding: 8px 16px;
+}
+.site-nav a.nav-cta:hover {
+  color: var(--accent-fg);
+}
+.site-nav a.nav-cta::before {
+  content: none;
+}
+.site-nav a.nav-cta.active::before {
+  content: "» ";
+  color: var(--accent-fg);
+}
 
 .theme-toggle {
   border: 1px solid var(--border);
@@ -237,6 +252,7 @@ a {
   font-size: 18.5px;
   color: var(--fg-muted);
   max-width: 580px;
+  text-align: justify;
 }
 .lede em {
   color: var(--fg);

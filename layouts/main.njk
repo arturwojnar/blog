@@ -92,7 +92,7 @@
           <a href="/articles" class="{% if page.url.startsWith('/articles') %}active{% endif %}">Articles</a>
           <a href="/offer" class="{% if page.url.startsWith('/offer') or page.url.startsWith('/oferta') %}active{% endif %}">Offer</a>
           <a href="/talks" class="{% if page.url.startsWith('/talks') %}active{% endif %}">Speaker</a>
-          <a href="/contact" class="{% if page.url.startsWith('/contact') %}active{% endif %}">Contact</a>
+          <a href="/contact" class="btn btn-primary nav-cta{% if page.url.startsWith('/contact') %} active{% endif %}">Book a call</a>
 
           <button
             id="theme-toggle"
