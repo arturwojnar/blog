@@ -1,6 +1,7 @@
 // Theme toggle button. Flips <html> data-theme + Shoelace .sl-theme-dark,
 // persists to localStorage. The initial theme is set by an inline no-flash
 // script in <head>; this only handles user clicks + reflecting current state.
+
 export function initThemeToggle() {
   const btn = document.getElementById("theme-toggle");
   if (!btn) return;

@@ -105,7 +105,7 @@
       </div>
     </header>
 
-    <main class="main-content">{{ content | safe }}</main>
+    <main class="main-content{% if bodyClass %} {{ bodyClass }}{% endif %}">{{ content | safe }}</main>
 
     <footer class="site-footer">
       <div class="social-icons">
@@ -121,6 +121,9 @@
         </a>
         <a href="mailto:contact@arturwojnar.com" aria-label="Email">
           <sl-icon name="envelope" style="font-size: 1.6rem;"></sl-icon>
+        </a>
+        <a href="https://cal.eu/arturwojnar" target="_blank" aria-label="Calendar">
+          <sl-icon name="calendar-day" style="font-size: 1.6rem;"></sl-icon>
         </a>
       </div>
 

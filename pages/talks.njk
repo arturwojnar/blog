@@ -87,6 +87,7 @@ talks:
 
           {% if event.link and "youtube.com" in event.link %}
             <div class="talk-video">
+              <div class="video-loader"></div>
               <iframe
                 width="560"
                 height="315"
@@ -94,7 +95,8 @@ talks:
                 title="{{ talk.title }}"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen>
+                allowfullscreen
+                onload="this.previousElementSibling.style.display='none'">
               </iframe>
             </div>
           {% endif %}
@@ -126,6 +128,7 @@ talks:
 
         {% if talk.link and "youtube.com" in talk.link %}
           <div class="talk-video">
+            <div class="video-loader"></div>
             <iframe
               width="560"
               height="315"
@@ -133,7 +136,8 @@ talks:
               title="{{ talk.title }}"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen>
+              allowfullscreen
+              onload="this.previousElementSibling.style.display='none'">
             </iframe>
           </div>
         {% endif %}

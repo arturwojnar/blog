@@ -39,8 +39,12 @@ ogUrl: "https://www.planthencode.com/"
           aligned with business goals.
         </p>
         <p>
-          Focus: DDD, SDLC optimization, AWS cost reduction, data-heavy systems. Node.js /
-          TypeScript. Always concrete, with take-away materials.
+          I’ve been through a lot during my professional career. I’ve seen total chaos, and I learned the importance of <strong>trade-offs</strong>, <strong>product analysis</strong>, <strong>collaboration</strong>, and <strong>pragmatism</strong>.
+          If you want to transform your software and call it truly <strong>mature</strong> — contact me.
+        </p>
+        <p>
+          <strong>Focus</strong>: DDD, event-driven architectures, event sourcing, SDLC optimization, AWS cost reduction, data-heavy systems. Node.js /
+          TypeScript.
         </p>
       </div>
     </div>
@@ -91,6 +95,7 @@ ogUrl: "https://www.planthencode.com/"
           <figcaption>
             <span class="reco-name">{{ r.name }}</span>
             <span class="reco-role">{{ r.role }}</span>
+            {% if r.date %}<span class="reco-date">{{ r.date }}</span>{% endif %}
           </figcaption>
         </figure>
       {% endfor %}

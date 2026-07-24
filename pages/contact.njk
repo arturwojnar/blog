@@ -4,6 +4,7 @@ description: "Book a short 1:1 call with Artur Wojnar, or reach out by email. Me
 layout: "../layouts/main.njk"
 permalink: "/contact.html"
 ogUrl: "https://www.planthencode.com/contact/"
+bodyClass: "page-contact"
 ---
 
 <div class="wrap">
@@ -24,7 +25,12 @@ ogUrl: "https://www.planthencode.com/contact/"
   <section class="section">
     <div class="kicker">Book a slot</div>
     <!-- Cal.com inline embed → https://cal.eu/arturwojnar -->
-    <div id="cal-inline" class="cal-embed"></div>
+    <div class="cal-wrap">
+      <div class="cal-loader" id="cal-loader">
+        <span class="cal-spinner"></span>
+      </div>
+      <div id="cal-inline" class="cal-embed"></div>
+    </div>
     <noscript>
       <p>
         Enable JavaScript to book inline, or go straight to
@@ -79,4 +85,18 @@ ogUrl: "https://www.planthencode.com/contact/"
     theme: document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light",
     hideEventTypeDetails: false,
   });
+
+  // Hide loader once Cal iframe sends its first resize/content message
+  window.addEventListener("message", function onCalReady(e) {
+    if (e.data && (e.data.type === "__dimensionChanged" || (typeof e.data === "string" && e.data.indexOf("cal") !== -1))) {
+      var loader = document.getElementById("cal-loader");
+      if (loader) loader.style.display = "none";
+      window.removeEventListener("message", onCalReady);
+    }
+  });
+  // Fallback: hide after 5s regardless
+  setTimeout(function () {
+    var loader = document.getElementById("cal-loader");
+    if (loader) loader.style.display = "none";
+  }, 5000);
 </script>

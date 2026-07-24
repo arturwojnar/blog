@@ -400,6 +400,7 @@ a {
 .about p {
   color: var(--fg-muted);
   margin-bottom: 12px;
+  text-align: justify;
 }
 .about p strong {
   color: var(--fg);
@@ -572,6 +573,13 @@ a {
 .reco-role {
   font-size: 12.5px;
   color: var(--fg-muted);
+}
+
+.reco-date {
+  font-size: 11.5px;
+  color: var(--fg-muted);
+  opacity: 0.6;
+  margin-top: 2px;
 }
 
 .reco-more {
@@ -996,6 +1004,47 @@ a {
   font-size: 14.5px;
 }
 
+.page-contact {
+  position: relative;
+}
+[data-theme=dark] .page-contact {
+  background-image: url("/public/artur/hero.webp");
+  background-size: cover;
+  background-position-x: -150px;
+  background-position-y: -300px;
+}
+@media (min-width: 1600px) {
+  [data-theme=dark] .page-contact {
+    background-position-y: -600px;
+  }
+}
+[data-theme=dark] .page-contact::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.65) 100%);
+  pointer-events: none;
+}
+[data-theme=dark] .page-contact .eyebrow,
+[data-theme=dark] .page-contact h1,
+[data-theme=dark] .page-contact .lede {
+  color: #fff;
+}
+[data-theme=dark] .page-contact .eyebrow {
+  color: rgba(255, 255, 255, 0.7);
+}
+[data-theme=dark] .page-contact .lede {
+  color: rgba(255, 255, 255, 0.85);
+}
+.page-contact .wrap {
+  position: relative;
+  z-index: 1;
+}
+.page-contact .contact-links {
+  position: relative;
+  z-index: 1;
+}
+
 .contact-links {
   display: flex;
   gap: 12px;
@@ -1003,6 +1052,37 @@ a {
   margin-top: 30px;
 }
 
+.cal-wrap {
+  position: relative;
+}
+
+.cal-loader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  min-height: 620px;
+  z-index: 2;
+}
+
+.cal-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: cal-spin 0.7s linear infinite;
+}
+
+@keyframes cal-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 .cal-embed {
   min-height: 620px;
   width: 100%;
@@ -1116,6 +1196,24 @@ a {
   aspect-ratio: 16/9;
   border-radius: var(--radius-lg);
   overflow: hidden;
+}
+.talk-video .video-loader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-elev);
+  z-index: 1;
+}
+.talk-video .video-loader::after {
+  content: "";
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: cal-spin 0.7s linear infinite;
 }
 .talk-video iframe {
   position: absolute;

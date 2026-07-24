@@ -260,11 +260,92 @@
 }
 
 // ---- Contact page ----
+.page-contact {
+  position: relative;
+
+  [data-theme="dark"] & {
+    background-image: url('/public/artur/hero.webp');
+    background-size: cover;
+    background-position-x: -150px;
+    background-position-y: -300px;
+
+    @media (min-width: 1600px) {
+      background-position-y: -600px;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.65) 100%);
+      pointer-events: none;
+    }
+
+    .eyebrow,
+    h1,
+    .lede {
+      color: #fff;
+    }
+
+    .eyebrow {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .lede {
+      color: rgba(255,255,255,0.85);
+    }
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-links {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.hero--contact {
+  // kept for reference, styles moved to .page-contact
+}
+
 .contact-links {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
   margin-top: 30px;
+}
+
+.cal-wrap {
+  position: relative;
+}
+
+.cal-loader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  min-height: 620px;
+  z-index: 2;
+}
+
+.cal-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: cal-spin 0.7s linear infinite;
+}
+
+@keyframes cal-spin {
+  to { transform: rotate(360deg); }
 }
 
 .cal-embed {
@@ -377,6 +458,26 @@
   aspect-ratio: 16 / 9;
   border-radius: var(--radius-lg);
   overflow: hidden;
+
+  .video-loader {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-elev);
+    z-index: 1;
+
+    &::after {
+      content: '';
+      width: 36px;
+      height: 36px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: cal-spin 0.7s linear infinite;
+    }
+  }
 
   iframe {
     position: absolute;
