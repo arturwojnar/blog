@@ -8,8 +8,10 @@ description: "My thoughts on how we can help ourselves to successfully deliver t
 layout: ../layouts/article.njk
 readingTime: 18
 tags:
+  - product-delivery
   - risk-management
-  - kubernetes
+  - mvp
+  - delivery
 ---
 
 <img class="cover-image article-image" src="/public/articles/mvp/cover.webp" alt="" loading="eager" fetchpriority="high" />

@@ -8,13 +8,14 @@ title: Every* system you develop is distributed, and Hermes PostgreSQL supports 
 description: Pretending it is not exposes your client’s system to the unpredictability of the world’s reality.
 layout: ../layouts/article.njk
 tags:
+  - cloud-distributed
   - distributed-systems
-  - postgresql
   - outbox-pattern
+  - postgresql
   - nodejs
   - typescript
   - hermesjs
-canonical: https://www.knowhowcode.dev/articles/outbox
+canonical: https://www.planthencode.com/articles/outbox
 excerpt: "A comprehensive introduction to distributed systems and how Hermes PostgreSQL implements the Outbox pattern for reliable message publishing"
 readingTime: 39
 published: true

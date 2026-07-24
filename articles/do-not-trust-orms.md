@@ -8,12 +8,12 @@ title: "Do not trust docs... and ORMs"
 layout: ../layouts/article.njk
 description: "Many documentations of different frameworks can deceive you because their creators are primarily interested in their interests, and sometimes, their knowledge and experience are limited. Read this article to prepare!"
 tags:
+  - engineering-craft
   - orm
   - database
   - frameworks
-  - documentation
   - best-practices
-canonical: https://www.knowhowcode.dev/articles/do-not-trust-orms
+canonical: https://www.planthencode.com/articles/do-not-trust-orms
 excerpt: "Why you should be skeptical of framework documentation and ORMs, and how to make better architectural decisions"
 readingTime: 3
 published: true

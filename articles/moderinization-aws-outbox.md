@@ -7,11 +7,12 @@ title: "Architecture Modernization in Legacy AWS Cloud-Native Systems"
 description: "Learn how to modernize legacy AWS cloud-native systems using the Outbox Pattern with DynamoDB Streams, SNS, SQS, and Lambda to build reliable event-driven architecture."
 layout: ../layouts/article.njk
 tags:
+  - cloud-distributed
   - aws
   - modernization
-  - architecture
-  - outbox
-canonical: https://www.knowhowcode.dev/articles/moderinization-aws-outbox
+  - outbox-pattern
+  - event-driven-architecture
+canonical: https://www.planthencode.com/articles/moderinization-aws-outbox
 excerpt: "A practical guide to implementing the New Scaffolding Pattern in legacy AWS systems. Learn how to use DynamoDB Streams, SNS, SQS, and Lambda to build a reliable cloud-native outbox pattern for event-driven architecture modernization."
 readingTime: 5
 slug: moderinization-aws-outbox
@@ -55,7 +56,7 @@ The previous contractor company working on this product figured out that they co
 
 **But you and I know that the best method of [dependency inversion](http://en.wikipedia.org/wiki/Dependency_inversion_principle) is events.**
 
-You can read one of my previous articles where I explain how [events are fruitful for implementing domains](https://www.knowhowcode.dev/articles/events-are-domain-atoms/). You can also catch up on a [longer explanation of why traditional CRUD, transaction scripts, and layered architectures are not a good path](https://www.knowhowcode.dev/articles/architecture-the-bad-parts/).
+You can read one of my previous articles where I explain how [events are fruitful for implementing domains](https://www.planthencode.com/articles/events-are-domain-atoms/). You can also catch up on a [longer explanation of why traditional CRUD, transaction scripts, and layered architectures are not a good path](https://www.planthencode.com/articles/architecture-the-bad-parts/).
 
 I decided to introduce a new foundation for system communication by publishing events to [*Simple Queue Service* (*SQS*)](https://aws.amazon.com/sqs/) and using it only for new parts of the system (new features).
 
@@ -79,7 +80,7 @@ Before anything else, we must remember:
 
 - We are talking about **domain events**, and domain events express — unsurprisingly — the domain.
 - Events are not notifications sent at the end of an operation just to inform other parties. **There is a command, the command produces events, and those events drive state changes and read models.**
-- [Change Data Capture (CDC)](https://www.knowhowcode.dev/articles/events-are-domain-atoms/) is *not* events. CDC produces data streams, not business facts.
+- [Change Data Capture (CDC)](https://www.planthencode.com/articles/events-are-domain-atoms/) is *not* events. CDC produces data streams, not business facts.
 - **CDC feeding a data warehouse cannot be treated as domain events.**
 
 ℹ️ *There are many more rules of thumb and good practices related to events, but this is not the place to cover them all.*
@@ -91,7 +92,7 @@ I highly recommend the work of Oskar Dudycz. Here are some useful links:
 - [Anti-pattern: Property sourcing](https://event-driven.io/en/property-sourcing/)
 - [Versioning patterns](https://event-driven.io/en/simple_events_versioning_patterns/)
 
-In my opinion, the most seamless, resilient, and reliable option is to implement the [Outbox Pattern](https://www.knowhowcode.dev/articles/outbox/) using cloud-native components.
+In my opinion, the most seamless, resilient, and reliable option is to implement the [Outbox Pattern](https://www.planthencode.com/articles/outbox/) using cloud-native components.
 
 ### Why?
 

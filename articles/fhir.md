@@ -7,14 +7,12 @@ title: "HL7 FHIR: Foundations in the architectural context"
 description: "The common language for healthcare data exchange"
 layout: ../layouts/article.njk
 tags:
+  - domain-design
   - fhir
-  - smile
   - hl7
-  - architecture
-  - design-principles
-  - availability-archetype
+  - healthcare
   - domain-driven-design
-canonical: https://www.knowhowcode.dev/articles/fhir
+canonical: https://www.planthencode.com/articles/fhir
 excerpt: "The Fast Healthcare Interoperability Resources (HL7 FHIR) standard describes how computer systems can exchange healthcare information. Learn why it's important from a software developer's perspective."
 readingTime: 8
 published: true

@@ -8,12 +8,11 @@ title: "Overengineering by being a prisoner of patterns"
 description: "Learn how being trapped by design patterns leads to overengineering. Discover the balance between coupling control and communication in software development."
 layout: ../layouts/article.njk
 tags:
-  - overengineering
-  - design-patterns
   - architecture
+  - design-patterns
   - coupling
   - communication
-canonical: https://www.knowhowcode.dev/articles/overengineering
+canonical: https://www.planthencode.com/articles/overengineering
 excerpt: "Understanding how rigid adherence to patterns can trap developers and lead to unnecessarily complex solutions"
 readingTime: 2
 published: true

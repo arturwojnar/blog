@@ -8,9 +8,11 @@ title: "Interviews Are Just a Random Process 🎲"
 layout: ../layouts/article.njk
 description: "You don’t know who you'll meet on the other side. You don’t know the company's mentality. You jump into unknown, into unknown organizational structure which often turns out to be chaotic, at best. Most importantly, you may face a person who doesn't necessairly wish you well."
 tags:
+  - people-communication
   - interview
   - soft-skills
-canonical: https://www.knowhowcode.dev/articles/do-not-trust-orms
+  - career
+canonical: https://www.planthencode.com/articles/do-not-trust-orms
 excerpt: "This text is a summary of my troubles and lessons learned, presented as points on how to handle interviews."
 readingTime: 4
 published: true

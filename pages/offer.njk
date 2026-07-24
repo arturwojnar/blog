@@ -1,0 +1,71 @@
+---
+title: "Offer — mentoring, consulting, workshops, discovery"
+description: "I help teams through hard technical decisions — DDD, SDLC optimization, AWS cost reduction, data systems. Mentoring, consulting & audits, workshops, talks, and product discovery."
+layout: "../layouts/main.njk"
+permalink: "/offer.html"
+ogUrl: "https://www.planthencode.com/offer/"
+---
+{% set c = services.copy.en %}
+
+<div class="wrap">
+  <div class="hero" style="padding-bottom:24px">
+    <div class="eyebrow">plan <span class="c1">&gt;&gt;</span> then <span class="c1">&gt;&gt;</span> code</div>
+    <h1>{{ c.title }}</h1>
+    <p class="lede">{{ c.lede }}</p>
+  </div>
+
+  <section class="section">
+    <div class="offer-grid">
+      {% for s in services.services %}
+        <article class="offer-card {% if loop.index0 % 2 == 1 %}alt{% endif %}">
+          <div class="num">{{ s.num }}</div>
+          <h2>{{ s.en.title }}</h2>
+          <div class="offer-meta">{{ s.en.meta }}</div>
+          <ul>
+            {% for p in s.en.points %}<li>{{ p }}</li>{% endfor %}
+          </ul>
+        </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="kicker">What people say</div>
+    <div class="reco-grid">
+      {% for r in recommendations.items %}
+        <figure class="reco">
+          <blockquote>{{ r.quote }}</blockquote>
+          <figcaption>
+            <span class="reco-name">{{ r.name }}</span>
+            <span class="reco-role">{{ r.role }}</span>
+          </figcaption>
+        </figure>
+      {% endfor %}
+    </div>
+    <p class="reco-more">
+      <a href="{{ recommendations.profileUrl }}" target="_blank" rel="noopener">{{ c.recoMore }} &gt;&gt;</a>
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="guarantee-band">
+      <div class="num">✓</div>
+      <div>
+        <h3>{{ c.guaranteeTitle }}</h3>
+        <p>{{ c.guarantee }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="band">
+      <img class="band-avatar" src="/public/arturwojnar-profile.png" alt="Artur Wojnar" />
+      <div class="band-body">
+        <h2>{{ c.ctaTitle }}</h2>
+        <p>{{ c.ctaText }}</p>
+        <a class="btn btn-primary" href="/contact">{{ c.ctaButton }} <span class="a">&gt;&gt;</span></a>
+        <div class="lang">🇬🇧 EN</div>
+      </div>
+    </div>
+  </section>
+</div>

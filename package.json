@@ -1,18 +1,24 @@
 {
-  "name": "know-how-code",
+  "name": "plan-then-code",
   "version": "1.0.0",
-  "description": "Know-How Code blog by Artur Wojnar.",
+  "description": "Plan Then Code — blog by Artur Wojnar.",
   "main": "api/server.ts",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "tsc",
-    "build": "npm run build:11ty && npm run build:tsc && npm run build:sitemap",
+    "build": "npm run build:scss && npm run build:11ty && npm run build:tsc && npm run build:sitemap",
+    "build:scss": "sass public/scss/app.scss public/css/app.css --no-source-map",
     "build:tsc": "npx --package typescript tsc",
     "build:11ty": "node ./node_modules/.bin/eleventy",
     "build:sitemap": "node ./generate-sitemap.js",
-    "dev:11ty": "node ./node_modules/.bin/eleventy --watch",
-    "start": "vercel dev"
+    "dev:11ty": "node ./node_modules/.bin/eleventy --serve",
+    "dev": "node ./node_modules/.bin/eleventy --serve",
+    "start": "vercel dev",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "repository": {
     "type": "git",
@@ -21,7 +27,7 @@
   "keywords": [
     "blog",
     "arturwojnar",
-    "knowhowcode",
+    "planthencode",
     "softwarearchitecture",
     "ddd"
   ],
@@ -32,18 +38,26 @@
   },
   "homepage": "https://github.com/arturwojnar/blog#readme",
   "devDependencies": {
-    "@11ty/eleventy": "~3.1.5",
+    "@11ty/eleventy": "~3.1.6",
     "@11ty/eleventy-plugin-syntaxhighlight": "~5.0.2",
+    "@eslint/js": "^10.0.1",
     "@types/express": "~5.0.6",
-    "@vercel/node": "~5.8.2",
-    "concurrently": "~9.2.1",
-    "markdown-it-anchor": "~9.2.0",
+    "@vercel/node": "~5.8.26",
+    "concurrently": "~10.0.3",
+    "eslint": "^10.7.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.6",
+    "globals": "^17.7.0",
+    "markdown-it-anchor": "~9.2.1",
     "nodemon": "~3.1.14",
+    "prettier": "^3.9.6",
+    "sass": "^1.101.6",
     "typescript": "~6.0.3",
-    "vercel": "~54.1.0"
+    "typescript-eslint": "^8.65.0",
+    "vercel": "~56.5.0"
   },
   "dependencies": {
-    "@supabase/supabase-js": "~2.106.0",
+    "@supabase/supabase-js": "~2.110.8",
     "dotenv": "~17.4.2",
     "express": "~5.2.1",
     "lit": "~3.3.3"

@@ -8,12 +8,12 @@ title: "Coupling management + Communication = Our job"
 description: "Most of the known patterns can be reduced to the coupling control. Get to know how this reasoning can help you simplify your solutions."
 layout: ../layouts/article.njk
 tags:
-  - architecture
+  - people-communication
   - coupling
   - communication
   - design-patterns
   - domain-driven-design
-canonical: https://www.knowhowcode.dev/articles/coupling
+canonical: https://www.planthencode.com/articles/coupling
 excerpt: "Discover how coupling management and communication are the fundamental building blocks of all software development methodologies and patterns"
 readingTime: 3
 published: true

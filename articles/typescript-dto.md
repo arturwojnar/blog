@@ -8,12 +8,13 @@ title: "How easily get your DTO in TypeScript"
 description: "Learn simple and effective ways to create DTOs in TypeScript for better type safety and data validation in your applications."
 layout: ../layouts/article.njk
 tags:
+  - engineering-craft
   - typescript
   - dto
   - data-validation
-  - nodejs
   - type-safety
-canonical: https://www.knowhowcode.dev/articles/typescript-dto
+  - nodejs
+canonical: https://www.planthencode.com/articles/typescript-dto
 excerpt: "A practical guide to creating Data Transfer Objects (DTOs) in TypeScript with simple, effective patterns"
 readingTime: 2
 published: true

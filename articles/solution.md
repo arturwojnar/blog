@@ -7,11 +7,11 @@ title: "The ultimate solution to everything"
 description: "If you do THAT, THEN YOU DO IT WRONG!"
 layout: ../layouts/article.njk
 tags:
-  - architecture
+  - domain-design
+  - domain-driven-design
   - risk-management
   - legacy-code
-  - domain-driven-design
-canonical: https://www.knowhowcode.dev/articles/solution
+canonical: https://www.planthencode.com/articles/solution
 excerpt: "If you do THAT, THEN YOU DO IT WRONG! Explore how we approach problem-solving in software development and avoid falling for ultimate solutions and silver bullets."
 readingTime: 11
 published: true

@@ -1,0 +1,21 @@
+{#
+  collab-cta — reusable "Stuck on a hard technical decision?" band.
+  Tiered funnel teaser → Contact (book a call) + Offer. Bilingual.
+  Uses the shared services.copy data so it stays in sync with the home/offer pages.
+  Usage: {% from "collab-cta.njk" import collabCta %}{{ collabCta(services.copy, "en") }}
+#}
+{% macro collabCta(copy, lang="en") %}
+{% set c = copy[lang] %}
+{% set flag = "🇵🇱 PL" if lang == "pl" else "🇬🇧 EN" %}
+<section class="section">
+  <div class="band">
+    <img class="band-avatar" src="/public/arturwojnar-profile.png" alt="Artur Wojnar" />
+    <div class="band-body">
+      <h2>{{ c.ctaTitle }}</h2>
+      <p>{{ c.ctaText }}</p>
+      <a class="btn btn-primary" href="/contact">{{ c.ctaButton }} <span class="a">&gt;&gt;</span></a>
+      <div class="lang">{{ flag }}</div>
+    </div>
+  </div>
+</section>
+{% endmacro %}

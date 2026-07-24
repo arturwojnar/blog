@@ -2,60 +2,134 @@
 title: "Articles"
 layout: "../layouts/main.njk"
 permalink: "/articles/index.html"
-description: List of KnowHowCode articles
-ogUrl: "https://www.knowhowcode.dev/articles/"
+description: "Articles on software architecture, DDD, product delivery, engineering craft, cloud & distributed systems, and the human side of building software."
+ogUrl: "https://www.planthencode.com/articles/"
 ---
 
-<div class="articles-grid">
-  {% for a in collections.articles %}
-    <article class="article-card {% if loop.first %}article-featured{% endif %}">
-      <a href="{{ a.url }}" class="article-link">
-        {% if a.data.cover %}
-          <article-image src="/public{{ a.data.cover }}" alt="{{ a.data.title }}" thumbnail="true" class="thumbnail-article-image" {% if loop.first %}featured{% endif %}></article-image>
-        {% else %}
-          <div class="article-image"></div>
-        {% endif %}
+<div class="wrap">
+  <div class="hero" style="padding-bottom:32px">
+    <div class="eyebrow">plan <span class="c1">&gt;&gt;</span> then <span class="c1">&gt;&gt;</span> code</div>
+    <h1>Articles</h1>
+    <p class="lede">Pick a lens. Every article has one primary category — filter to what interests you.</p>
+  </div>
 
-        <div class="article-content">
-          <h2 class="article-title">{{ a.data.title }}</h2>
-          <p class="article-description">{{ a.data.description }}</p>
+  {# Category filter pills — explicit product vs architecture etc. #}
+  <div class="cat-filter" role="tablist" aria-label="Filter articles by category">
+    <button class="cat-pill active" data-cat="all" role="tab" aria-selected="true">All</button>
+    {% for c in categories.categories %}
+      <button class="cat-pill" data-cat="{{ c.slug }}" id="{{ c.slug }}" role="tab" aria-selected="false">{{ c.label }}</button>
+    {% endfor %}
+  </div>
 
-          <div class="article-meta">
-            {% if a.data.date %}
-              <div class="article-date">
-                <sl-icon name="calendar" style="font-size: 14px;"></sl-icon>
-                <time datetime="{{ a.data.date | date('c') }}">
-                  {{ a.data.date | date('MMMM d, yyyy') }}
-                </time>
-              </div>
+  <div class="cards" id="article-cards">
+    {% for a in collections.articles %}
+      {% set category = a.data.tags | categoryOf %}
+      <article class="card" data-cat="{{ category }}">
+        <a href="{{ a.url }}" class="card-link">
+          {% if a.data.cover %}
+            <img
+              class="card-cover"
+              src="/public{{ a.data.cover }}"
+              alt=""
+              loading="lazy"
+              width="400"
+              height="210" />
+          {% endif %}
+          <div class="card-body">
+            {% if category %}
+              <span class="card-cat">{{ category | categoryLabel }}</span>
             {% endif %}
-            {% if a.data.author and a.data.author.name %}
-              <div class="article-author">
-                <sl-icon name="person" style="font-size: 14px;"></sl-icon>
-                {{ a.data.author.name }}
-              </div>
-            {% endif %}
-            {% if a.data.readingTime %}
-              <div class="article-reading-time">
-                <sl-icon name="clock" style="font-size: 14px; position: relative;"></sl-icon>
-                {{ a.data.readingTime }} min
-              </div>
-            {% endif %}
+            <h2 class="card-title">{{ a.data.title }}</h2>
+            <p class="card-desc">{{ a.data.description }}</p>
+            <div class="card-meta">
+              {% if a.data.date %}
+                <time datetime="{{ a.data.date | date('c') }}">{{ a.data.date | date('MMMM d, yyyy') }}</time>
+              {% endif %}
+              {% if a.data.readingTime %}<span>· {{ a.data.readingTime }} min</span>{% endif %}
+            </div>
           </div>
+        </a>
+      </article>
+    {% endfor %}
+  </div>
 
-          <div class="article-tags">
-            {% if a.data.tags %}
-              {% set tagCount = 0 %}
-              {% for tag in a.data.tags %}
-                {% if tag != "articles" and tagCount < 2 %}
-                  <sl-badge variant="primary" pill>{{ tag }}</sl-badge>
-                  {% set tagCount = tagCount + 1 %}
-                {% endif %}
-              {% endfor %}
-            {% endif %}
-          </div>
-        </div>
-      </a>
-    </article>
-  {% endfor %}
+  <p class="pager-empty" id="pager-empty" hidden>No articles in this category yet.</p>
+  <div class="scroll-sentinel" id="scroll-sentinel" aria-hidden="true"></div>
 </div>
+
+<script>
+  // Category filter + INFINITE SCROLL. Cards stay in DOM (for filtering);
+  // we reveal them in batches as the sentinel scrolls into view.
+  // Images use loading="lazy" so they fetch on demand near the viewport.
+  (function () {
+    var BATCH = 6; // reveal this many per scroll step
+    var pills = Array.prototype.slice.call(document.querySelectorAll(".cat-pill"));
+    var cards = Array.prototype.slice.call(document.querySelectorAll("#article-cards .card"));
+    var empty = document.getElementById("pager-empty");
+    var sentinel = document.getElementById("scroll-sentinel");
+    var cat = "all";
+    var shown = 0;
+
+    function filtered() {
+      return cards.filter(function (c) {
+        return cat === "all" || c.dataset.cat === cat;
+      });
+    }
+
+    function reset() {
+      shown = 0;
+      cards.forEach(function (c) {
+        c.style.display = "none";
+      });
+      var list = filtered();
+      empty.hidden = list.length !== 0;
+      revealMore();
+      // reflect active pill
+      pills.forEach(function (p) {
+        var on = p.dataset.cat === cat;
+        p.classList.toggle("active", on);
+        p.setAttribute("aria-selected", String(on));
+      });
+    }
+
+    function revealMore() {
+      var list = filtered();
+      var next = list.slice(shown, shown + BATCH);
+      next.forEach(function (c) {
+        c.style.display = "";
+      });
+      shown += next.length;
+      // hide sentinel when everything for this filter is shown
+      sentinel.style.visibility = shown >= list.length ? "hidden" : "visible";
+    }
+
+    // IntersectionObserver drives the infinite scroll.
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) revealMore();
+          });
+        },
+        { rootMargin: "400px 0px" }, // prefetch a bit before reaching bottom
+      );
+      io.observe(sentinel);
+    } else {
+      // Fallback: no IO → reveal everything.
+      BATCH = cards.length;
+    }
+
+    pills.forEach(function (p) {
+      p.addEventListener("click", function () {
+        cat = p.dataset.cat;
+        history.replaceState(null, "", cat === "all" ? "#" : "#" + cat);
+        reset();
+      });
+    });
+
+    // Deep-link: /articles#architecture
+    var hash = location.hash.replace("#", "");
+    if (hash) cat = hash;
+    reset();
+  })();
+</script>

@@ -7,14 +7,12 @@ title: "Comparing Time Availability archetype implementations"
 description: "How to implement a time-based resource reservation system, assuming high traffic?"
 layout: ../layouts/article.njk
 tags:
-  - architecture
+  - domain-design
   - archetypes
-  - postgresql
-  - software-development
-  - domain-driven-design
-  - design-principles
   - availability-archetype
-canonical: https://www.knowhowcode.dev/articles/availability
+  - domain-driven-design
+  - postgresql
+canonical: https://www.planthencode.com/articles/availability
 excerpt: "An Archetype is a defined solution to a business problem. The Time Availability answers the question: Can I schedule resource X between D1 and D2?."
 readingTime: 23
 slug: availability
