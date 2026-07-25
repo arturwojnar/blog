@@ -17,7 +17,7 @@ readingTime: 16
 published: true
 ---
 
-<img class="cover-image article-image" src="/public/articles/decomposition/cover.webp" alt="" loading="eager" fetchpriority="high" />
+<img class="cover-image article-image" src="/public/articles/decomposition/cover.webp" alt="Why make a decomposition of the monolith database?" loading="eager" fetchpriority="high" />
 
 Figure 0. A typical emotion when you look at your database schema.
 

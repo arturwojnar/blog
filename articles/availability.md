@@ -18,7 +18,7 @@ readingTime: 23
 slug: availability
 ---
 
-<img class="cover-image article-image" src="/public/articles/availability/cover.webp" alt="" loading="eager" fetchpriority="high" />
+<img class="cover-image article-image" src="/public/articles/availability/cover.webp" alt="Comparing Time Availability archetype implementations" loading="eager" fetchpriority="high" />
 
 ### Comparing Time Availability archetype implementations
 

@@ -18,7 +18,7 @@ readingTime: 3
 published: true
 ---
 
-<img class="cover-image article-image" src="/public/articles/is-solid-dead.webp" alt="" loading="eager" fetchpriority="high" />
+<img class="cover-image article-image" src="/public/articles/is-solid-dead.webp" alt="Is SOLID dead?" loading="eager" fetchpriority="high" />
 
 In the past year, I've had the chance to work on a skills matrix at my company. It's been a hell of a challenge, and I still feel the burden of potential consequences.  
 I concluded with my colleagues that soft skills comprise at least half of a developer's capabilities. These include communication, independence, and a willingness to work on both front—and back-ends.  

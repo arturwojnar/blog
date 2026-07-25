@@ -17,7 +17,7 @@ readingTime: 33
 slug: architecture-the-bad-parts
 ---
 
-<img class="cover-image article-image" src="/public/articles/architecture-the-bad-parts/cover.webp" alt="" loading="eager" fetchpriority="high" />
+<img class="cover-image article-image" src="/public/articles/architecture-the-bad-parts/cover.webp" alt="Software Architecture: The Bad Parts" loading="eager" fetchpriority="high" />
 
 ## Table of Contents
 

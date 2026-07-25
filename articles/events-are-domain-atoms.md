@@ -18,7 +18,7 @@ readingTime: 10
 published: true
 ---
 
-<img class="cover-image article-image" src="/public/articles/events-are-domain-atoms/cover.webp" alt="" loading="eager" fetchpriority="high" />
+<img class="cover-image article-image" src="/public/articles/events-are-domain-atoms/cover.webp" alt="Events are domain atoms" loading="eager" fetchpriority="high" />
 
 Last year was a marathon of learning for me. I've finally tried event sourcing, and I love it! ❤️
 The shift towards it may not have been difficult, because I was already deep in event-driven architecture. I decided to do so after realising one tiny detail, which convinced me I could be more business-oriented and closer to the domain language than I was.

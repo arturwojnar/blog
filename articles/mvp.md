@@ -14,7 +14,7 @@ tags:
   - delivery
 ---
 
-<img class="cover-image article-image" src="/public/articles/mvp/cover.webp" alt="" loading="eager" fetchpriority="high" />
+<img class="cover-image article-image" src="/public/articles/mvp/cover.webp" alt="How to successfully deliver an MVP to the market" loading="eager" fetchpriority="high" />
 
 **I’ve only worked in software houses, where we usually kick off startup projects**. So we begin tiny, without guaranteeing that the market will appreciate our effort and the client’s plan. This situation also indirectly implies the non-functional requirement — the budget is not a bottomless pit, so we have to thoroughly plan our work to not sink all the client’s money into a product **yet to be released.**
 

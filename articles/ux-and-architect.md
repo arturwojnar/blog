@@ -18,7 +18,7 @@ readingTime: 3
 published: true
 ---
 
-<img class="cover-image article-image" src="/public/articles/ux-and-architect/cover.webp" alt="" loading="eager" fetchpriority="high" />
+<img class="cover-image article-image" src="/public/articles/ux-and-architect/cover.webp" alt="UX and Architect are two sides of the design" loading="eager" fetchpriority="high" />
 
 _The more I mature like a wine in a dark software development basement, the more I’m convinced that programming is not the most essential part of the development process, but the **collaboration** is._
 

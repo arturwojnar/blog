@@ -17,7 +17,7 @@ readingTime: 14
 slug: mechanics-of-talking
 ---
 
-<img class="cover-image article-image" src="/public/articles/mechanics-of-talking/cover.webp" alt="" loading="eager" fetchpriority="high" />
+<img class="cover-image article-image" src="/public/articles/mechanics-of-talking/cover.webp" alt="Mechanics of talking. Must-have soft skills of Solutions Architect." loading="eager" fetchpriority="high" />
 
 You hear it everywhere: if you want to be a modern **Solutions Architect** and not get left behind, you _must_ know **#GenAI**, **#DDD**, **#EventSourcing**, **#EventStorming**, or **#EventModelling**. That’s only partially true. I’d say it’s _half_ the truth.
 

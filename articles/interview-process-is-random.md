@@ -18,7 +18,7 @@ readingTime: 4
 published: true
 ---
 
-<img class="cover-image article-image" src="/public/articles/interview-cover.webp" alt="" loading="eager" fetchpriority="high" />
+<img class="cover-image article-image" src="/public/articles/interview-cover.webp" alt="Interviews Are Just a Random Process 🎲" loading="eager" fetchpriority="high" />
 
 🎲🎲🎲
 

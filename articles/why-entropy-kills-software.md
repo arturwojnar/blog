@@ -18,7 +18,7 @@ readingTime: 5
 slug: why-entropy-kills-software
 ---
 
-<img class="cover-image article-image" src="/public/articles/why-entropy-kills-software/cover.webp" alt="" loading="eager" fetchpriority="high" />
+<img class="cover-image article-image" src="/public/articles/why-entropy-kills-software/cover.webp" alt="Why does entropy kill my software?" loading="eager" fetchpriority="high" />
 
 The default state of matter is chaos. The movement of matter is always toward chaos. Disorganization.
 

@@ -104,6 +104,11 @@ export default function (eleventyConfig) {
     return new Date(dateStr) < new Date();
   });
 
+  // ISO 8601 date for structured data / OG article tags.
+  eleventyConfig.addFilter("isoDate", (dateObj) => {
+    return new Date(dateObj).toISOString();
+  });
+
   eleventyConfig.addFilter("year", () => {
     return new Date().getFullYear().toString();
   });

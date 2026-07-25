@@ -1,11 +1,11 @@
-# robots.txt - fallback for both domains
-# Domain-specific robots.txt files: robots-knowhowcode.txt, robots-arturwojnar.txt
+# robots.txt for Plan Then Code
+# https://www.planthencode.com
 
 User-agent: *
 Allow: /
 
-# Sitemap location (contains all articles listed individually)
-Sitemap: https://www.knowhowcode.dev/sitemap.xml
+# Sitemap location (contains all pages and articles)
+Sitemap: https://www.planthencode.com/sitemap.xml
 
 # Disallow dependencies (defensive measure)
 Disallow: /node_modules/

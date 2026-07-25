@@ -17,7 +17,7 @@ readingTime: 11
 published: true
 ---
 
-<img class="cover-image article-image" src="/public/articles/solution/cover.webp" alt="" loading="eager" fetchpriority="high" />
+<img class="cover-image article-image" src="/public/articles/solution/cover.webp" alt="The ultimate solution to everything" loading="eager" fetchpriority="high" />
 
 “**STOP**_ _using it”_
 

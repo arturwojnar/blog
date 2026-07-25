@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#4f46e5" />
 
     <!-- Theme: set before first paint to avoid flash-of-wrong-theme. -->
     <script>
@@ -19,12 +20,36 @@
     <meta name="description" content="{{ description }}" />
     <meta name="author" content="Artur Wojnar" />
 
+    {# ---- Canonical URL ---- #}
+    {% set canonicalUrl = canonical or ogUrl or (site.url + page.url) %}
+    <link rel="canonical" href="{{ canonicalUrl }}" />
+
+    {# ---- Resolve social share image (absolute URL) ---- #}
+    {% if cover %}
+      {% set socialImage = site.url + "/public" + cover %}
+    {% elif ogImage %}
+      {% set socialImage = site.url + ogImage %}
+    {% else %}
+      {% set socialImage = site.url + site.defaultImage %}
+    {% endif %}
+
+    {# ---- Page type: article body pages set layout to article.njk ---- #}
+    {% set isArticle = (layout == "../layouts/article.njk") or (tags and date) %}
+
     <!-- Open Graph / SEO -->
     <meta property="og:title" content="{{ title }}" />
     <meta property="og:description" content="{{ description }}" />
-    <meta property="og:type" content="article" />
-    {% if ogUrl %}<meta property="og:url" content="{{ ogUrl }}" />{% endif %}
+    <meta property="og:type" content="{% if isArticle %}article{% else %}website{% endif %}" />
+    <meta property="og:url" content="{{ canonicalUrl }}" />
     <meta property="og:site_name" content="Plan Then Code" />
+    <meta property="og:image" content="{{ socialImage }}" />
+    <meta property="og:locale" content="en_US" />
+    {% if isArticle %}
+      {% if date %}<meta property="article:published_time" content="{{ date | isoDate }}" />{% endif %}
+      <meta property="article:author" content="{{ site.author.name }}" />
+      {% if tags %}{% for tag in tags %}<meta property="article:tag" content="{{ tag }}" />
+      {% endfor %}{% endif %}
+    {% endif %}
 
     <!-- Favicons -->
     <link rel="icon" href="/public/icons/favicon.ico" sizes="32x32" />
@@ -63,6 +88,49 @@
       type="module"
       src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"></script>
     <script type="module" src="/public/js/main.js"></script>
+
+    {# ---- Structured data (JSON-LD) ---- #}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Plan Then Code",
+      "url": "{{ site.url }}",
+      "author": {
+        "@type": "Person",
+        "name": "{{ site.author.name }}",
+        "url": "{{ site.author.url }}",
+        "sameAs": [{% for s in site.author.sameAs %}"{{ s }}"{% if not loop.last %}, {% endif %}{% endfor %}]
+      }
+    }
+    </script>
+    {% if isArticle %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": {{ title | dump | safe }},
+      "description": {{ description | dump | safe }},
+      "image": "{{ socialImage }}",
+      "url": "{{ canonicalUrl }}",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ canonicalUrl }}" },
+      {% if date %}"datePublished": "{{ date | isoDate }}",
+      "dateModified": "{{ date | isoDate }}",{% endif %}
+      {% if readingTime %}"timeRequired": "PT{{ readingTime }}M",{% endif %}
+      {% if tags %}"keywords": "{{ tags | join(', ') }}",{% endif %}
+      "author": {
+        "@type": "Person",
+        "name": "{{ site.author.name }}",
+        "url": "{{ site.author.url }}",
+        "sameAs": [{% for s in site.author.sameAs %}"{{ s }}"{% if not loop.last %}, {% endif %}{% endfor %}]
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "{{ site.author.name }}"
+      }
+    }
+    </script>
+    {% endif %}
   </head>
   <body>
     <header class="site-header">
@@ -102,7 +170,7 @@
         <nav class="site-nav" id="site-nav">
           <a href="/" class="{% if page.url == '/' or page.url.startsWith('/about') %}active{% endif %}">About me</a>
           <a href="/articles" class="{% if page.url.startsWith('/articles') %}active{% endif %}">Articles</a>
-          <a href="/offer" class="{% if page.url.startsWith('/offer') or page.url.startsWith('/oferta') %}active{% endif %}">Offer</a>
+          <a href="/offer" class="{% if page.url.startsWith('/offer') %}active{% endif %}">Offer</a>
           <a href="/talks" class="{% if page.url.startsWith('/talks') %}active{% endif %}">Speaker</a>
           <a href="/contact" class="btn btn-primary nav-cta{% if page.url.startsWith('/contact') %} active{% endif %}">Book a call</a>
 

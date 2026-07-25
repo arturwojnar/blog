@@ -1,6 +1,5 @@
 import fs from "fs/promises";
 import path from "path";
-import { __dirname } from "./consts.js";
 
 type Article = {
   url: string;
@@ -13,22 +12,25 @@ type PageConfig = {
   url: string;
   priority: string;
   changefreq: string;
+  lastmod?: string;
 }
 
-// Domain configurations
+// Canonical domain for the site.
 const DOMAINS = {
-  knowhowcode: "https://www.knowhowcode.dev",
-  arturwojnar: "https://www.arturwojnar.dev",
+  planthencode: "https://www.planthencode.com",
 } as const;
 
 type DomainKey = keyof typeof DOMAINS;
+
+const PRIMARY_DOMAIN: DomainKey = "planthencode";
 
 // Static pages configuration
 const STATIC_PAGES: PageConfig[] = [
   { url: "/", priority: "1.0", changefreq: "weekly" },
   { url: "/articles", priority: "0.9", changefreq: "weekly" },
+  { url: "/offer", priority: "0.8", changefreq: "monthly" },
   { url: "/talks", priority: "0.7", changefreq: "monthly" },
-  { url: "/trainings", priority: "0.7", changefreq: "monthly" },
+  { url: "/contact", priority: "0.7", changefreq: "monthly" },
 ];
 
 /**
@@ -58,15 +60,16 @@ function extractFrontmatter(content: string): Record<string, any> {
  * Reads all article markdown files and extracts their metadata
  */
 async function getArticles(): Promise<Article[]> {
-  const articlesDir = path.join(__dirname, "../articles");
-  const files = await fs.readdir(articlesDir);
+  // Markdown sources live at the repo root /articles (not in dist).
+  const dir = path.join(process.cwd(), "articles");
+  const files = await fs.readdir(dir);
   const mdFiles = files.filter((file) => file.endsWith(".md"));
 
   const articles: Article[] = [];
 
   for (const file of mdFiles) {
     try {
-      const filePath = path.join(articlesDir, file);
+      const filePath = path.join(dir, file);
       const content = await fs.readFile(filePath, "utf-8");
       const frontmatter = extractFrontmatter(content);
 
@@ -103,6 +106,9 @@ function generateSitemapXML(articles: Article[], staticPages: PageConfig[], base
   for (const page of staticPages) {
     xml += "  <url>\n";
     xml += `    <loc>${baseUrl}${page.url}</loc>\n`;
+    if (page.lastmod) {
+      xml += `    <lastmod>${page.lastmod}</lastmod>\n`;
+    }
     xml += `    <changefreq>${page.changefreq}</changefreq>\n`;
     xml += `    <priority>${page.priority}</priority>\n`;
     xml += "  </url>\n";
@@ -124,40 +130,49 @@ function generateSitemapXML(articles: Article[], staticPages: PageConfig[], base
 }
 
 /**
- * Main function to generate and save sitemaps for all domains
+ * Main function to generate and save the sitemap for the canonical domain.
  */
 export async function generateSitemap(): Promise<void> {
   const articles = await getArticles();
+  const baseUrl = DOMAINS[PRIMARY_DOMAIN];
 
-  // Generate sitemap for each domain
-  for (const [domainKey, domainUrl] of Object.entries(DOMAINS)) {
-    const xml = generateSitemapXML(articles, STATIC_PAGES, domainUrl);
+  // Use the most recent article date as lastmod for the home & articles index.
+  const newestArticleDate =
+    articles[0]?.lastmod ?? new Date().toISOString().split("T")[0]!;
 
-    // Save to public directory with domain-specific filename for reference
-    const publicOutputPath = path.join(__dirname, `../public/sitemap-${domainKey}.xml`);
-    await fs.writeFile(publicOutputPath, xml, "utf-8");
+  const staticPages: PageConfig[] = STATIC_PAGES.map((page) =>
+    page.url === "/" || page.url === "/articles"
+      ? { ...page, lastmod: newestArticleDate }
+      : page
+  );
 
-    console.log(`✅ Sitemap generated for ${domainUrl} with ${articles.length} articles at ${publicOutputPath}`);
-  }
+  const xml = generateSitemapXML(articles, staticPages, baseUrl);
 
-  // Also save the primary domain sitemap as sitemap.xml in dist root
-  const primaryXml = generateSitemapXML(articles, STATIC_PAGES, DOMAINS.knowhowcode);
-  const rootOutputPath = path.join(__dirname, `../sitemap.xml`);
+  // Reference copy in public/
+  const publicOutputPath = path.join(process.cwd(), `public/sitemap.xml`);
+  await fs.writeFile(publicOutputPath, xml, "utf-8");
+  console.log(`✅ Sitemap generated for ${baseUrl} with ${articles.length} articles at ${publicOutputPath}`);
 
-  // Ensure dist directory exists
-  const distDir = path.join(__dirname, `../dist`);
+  // Primary sitemap in dist root
+  const distDir = path.join(process.cwd(), `dist`);
   await fs.mkdir(distDir, { recursive: true });
-
-  await fs.writeFile(rootOutputPath, primaryXml, "utf-8");
-
+  const rootOutputPath = path.join(distDir, `sitemap.xml`);
+  await fs.writeFile(rootOutputPath, xml, "utf-8");
   console.log(`✅ Primary sitemap copied to ${rootOutputPath}`);
 }
 
 /**
  * Generate sitemap dynamically (for server routes)
  */
-export async function generateSitemapDynamic(domain: DomainKey = "knowhowcode"): Promise<string> {
+export async function generateSitemapDynamic(domain: DomainKey = PRIMARY_DOMAIN): Promise<string> {
   const articles = await getArticles();
   const baseUrl = DOMAINS[domain];
-  return generateSitemapXML(articles, STATIC_PAGES, baseUrl);
+  const newestArticleDate =
+    articles[0]?.lastmod ?? new Date().toISOString().split("T")[0]!;
+  const staticPages: PageConfig[] = STATIC_PAGES.map((page) =>
+    page.url === "/" || page.url === "/articles"
+      ? { ...page, lastmod: newestArticleDate }
+      : page
+  );
+  return generateSitemapXML(articles, staticPages, baseUrl);
 }

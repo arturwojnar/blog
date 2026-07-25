@@ -20,7 +20,7 @@ published: true
 
 > Homo Sovieticus's mantra was "**Everything belongs to the kolkhoz, everything belongs to me**". In the context of this text I want to rephrase it to: **Everything belongs to the app, everything belongs to users**.
 
-<img class="cover-image article-image" src="/public/articles/kolkhoz.webp" alt="" loading="eager" fetchpriority="high" />
+<img class="cover-image article-image" src="/public/articles/kolkhoz.webp" alt="Everything belongs to users" loading="eager" fetchpriority="high" />
 
 I often hear we _can't_ modularise the app when everything depends on _users_. I hear it's a mirage, overcomplication in the name of self-indulgence.
 

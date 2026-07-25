@@ -18,7 +18,7 @@ readingTime: 5
 slug: moderinization-aws-outbox
 ---
 
-<img class="cover-image article-image" src="/public/articles/moderinization-aws-outbox/cover.webp" alt="" loading="eager" fetchpriority="high" />
+<img class="cover-image article-image" src="/public/articles/moderinization-aws-outbox/cover.webp" alt="Architecture Modernization in Legacy AWS Cloud-Native Systems" loading="eager" fetchpriority="high" />
 
 Oh, you commercial project. You bastard.
 
