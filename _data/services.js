@@ -58,7 +58,7 @@ export const services = [
     num: "03",
     en: {
       title: "Workshops",
-      meta: "1–6 days · online / on-site · EN & PL",
+      meta: "1–3 days · online / on-site · EN & PL",
       points: [
         "Modernize legacy with Event Sourcing (flagship)",
         "Domain-Driven Design — strategic & tactical",
@@ -70,7 +70,7 @@ export const services = [
     },
     pl: {
       title: "Warsztaty",
-      meta: "1–6 dni · online / on-site · EN & PL",
+      meta: "1–3 dni · online / on-site · EN & PL",
       points: [
         "Modernizacja legacy z Event Sourcing (flagowy)",
         "Domain-Driven Design — strategicznie i taktycznie",
