@@ -1,5 +1,4 @@
-// Services offered — single bilingual source consumed by both the EN /offer
-// and PL /oferta pages so the two never drift. Each service has EN + PL fields.
+// Services offered — consumed by the /offer page.
 // Content per plan.md §4 (5 numbered services + satisfaction guarantee).
 
 export const services = [
@@ -164,8 +163,8 @@ export const copy = {
     ctaTitle: "Stuck on a hard technical decision?",
     ctaText: "Book a short call and let's talk about where you're stuck.",
     ctaButton: "Book a call",
-    langSwitch: "🇵🇱 PL »",
-    langSwitchUrl: "/oferta",
+    langSwitch: "🇬🇧 EN",
+    langSwitchUrl: "/offer",
     recoMore: "All recommendations on LinkedIn",
   },
   pl: {

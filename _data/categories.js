@@ -23,7 +23,7 @@ export const categories = [
     slug: "product-delivery",
     label: "Product & Delivery",
     description:
-      "Shipping the right product: MVPs, quality, SDLC, risk and delivery.",
+      "Shipping a mature product: MVPs, quality, SDLC, risk and delivery.",
   },
   {
     slug: "engineering-craft",
