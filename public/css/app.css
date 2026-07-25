@@ -272,6 +272,8 @@ a {
   border: 1px solid var(--border);
   border-radius: 100px;
   padding: 6px 13px;
+  pointer-events: none;
+  user-select: none;
 }
 
 .cta {
@@ -306,6 +308,11 @@ a {
   color: var(--secondary);
   border: 1px solid color-mix(in srgb, var(--secondary) 40%, var(--border));
   background: var(--secondary-subtle);
+  transition: border-color 0.15s, background 0.15s;
+}
+.btn-ghost:hover {
+  border-color: var(--secondary);
+  background: color-mix(in srgb, var(--secondary) 14%, var(--secondary-subtle));
 }
 
 .section {
