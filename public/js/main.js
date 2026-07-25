@@ -27,6 +27,24 @@ if (document.getElementById("theme-toggle")) {
     .catch((err) => console.error("Failed to load theme-toggle:", err));
 }
 
+// Mobile hamburger nav toggle.
+const navToggle = document.getElementById("nav-toggle");
+const siteNav = document.getElementById("site-nav");
+if (navToggle && siteNav) {
+  navToggle.addEventListener("click", () => {
+    const open = siteNav.classList.toggle("open");
+    navToggle.setAttribute("aria-expanded", String(open));
+  });
+
+  // Close the menu when a link is tapped.
+  siteNav.addEventListener("click", (e) => {
+    if (e.target.closest("a")) {
+      siteNav.classList.remove("open");
+      navToggle.setAttribute("aria-expanded", "false");
+    }
+  });
+}
+
 // Newsletter forms live in the shared footer/nav. Load if a form is present.
 if (document.getElementById("newsletter-form") || document.getElementById("nav-newsletter-form")) {
   import("./newsletter.js")

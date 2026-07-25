@@ -87,7 +87,19 @@
                 opacity="0.7" />
             </g></svg>code</a>
 
-        <nav class="site-nav">
+        <button
+          id="nav-toggle"
+          type="button"
+          class="nav-toggle"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+          aria-controls="site-nav">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+
+        <nav class="site-nav" id="site-nav">
           <a href="/" class="{% if page.url == '/' or page.url.startsWith('/about') %}active{% endif %}">About me</a>
           <a href="/articles" class="{% if page.url.startsWith('/articles') %}active{% endif %}">Articles</a>
           <a href="/offer" class="{% if page.url.startsWith('/offer') or page.url.startsWith('/oferta') %}active{% endif %}">Offer</a>
@@ -101,7 +113,6 @@
             aria-label="Switch theme"
             aria-pressed="false">☾</button>
         </nav>
-      </div>
       </div>
     </header>
 
