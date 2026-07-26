@@ -238,6 +238,52 @@
   margin-bottom: 16px;
 }
 
+// Background-image variant for offer tiles
+.offer-card--bg {
+  position: relative;
+  overflow: hidden;
+  background-image: var(--offer-bg);
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  isolation: isolate;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgba(0, 0, 0, 0.6);
+  }
+
+  h2 {
+    color: #fff;
+  }
+
+  .offer-meta {
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  li {
+    color: rgba(255, 255, 255, 0.88);
+
+    &::before {
+      color: #fff;
+    }
+  }
+
+  .num {
+    background: var(--secondary);
+    color: var(--secondary-fg);
+    backdrop-filter: none;
+  }
+
+  &.alt .num {
+    background: var(--accent);
+    color: var(--accent-fg);
+  }
+}
+
 // ---- Guarantee band ----
 .guarantee-band {
   display: flex;
@@ -383,6 +429,50 @@
 }
 
 // ---- Speaker / Talks page ----
+.speaker-profiles {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.speaker-profiles-label {
+  @include mono-label(12px);
+  letter-spacing: 0.04em;
+}
+
+.speaker-profile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: var(--accent);
+  transition: filter 0.15s, transform 0.15s;
+
+  img {
+    height: 20px;
+    width: auto;
+    display: block;
+
+    // Force both logos to solid black in dark mode.
+    [data-theme="dark"] & {
+      filter: brightness(0);
+    }
+  }
+
+  &:nth-of-type(2) {
+    background: var(--secondary);
+  }
+
+  &:hover {
+    filter: brightness(1.08);
+  }
+}
+
 .talks-list {
   display: flex;
   flex-direction: column;

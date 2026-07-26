@@ -318,6 +318,11 @@ a {
     font-size: 34px;
   }
 }
+@media (max-width: 399px) {
+  .hero h1 {
+    font-size: 30px;
+  }
+}
 
 .lede {
   font-size: 18.5px;
@@ -549,6 +554,12 @@ a {
   box-shadow: 0 14px 32px -16px color-mix(in srgb, var(--accent) 45%, transparent);
   border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
 }
+.svc {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
 .svc .num {
   font-family: var(--font-mono);
   font-weight: 700;
@@ -604,10 +615,6 @@ a {
   background-position: center;
   background-repeat: no-repeat;
 }
-.svc--bg.guarantee .num {
-  background: rgba(0, 0, 0, 0.4);
-  color: #fff;
-}
 .svc--bg::before {
   content: "";
   position: absolute;
@@ -622,13 +629,17 @@ a {
   color: rgba(255, 255, 255, 0.88);
 }
 .svc--bg .num {
-  background: rgba(0, 0, 0, 0.4);
-  color: #fff;
-  backdrop-filter: blur(2px);
+  background: var(--secondary);
+  color: var(--secondary-fg);
+  backdrop-filter: none;
 }
 .svc--bg.alt .num {
-  background: rgba(0, 0, 0, 0.4);
-  color: #fff;
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+.svc--bg.guarantee .num {
+  background: var(--accent);
+  color: var(--accent-fg);
 }
 
 .prod {
@@ -800,6 +811,29 @@ a {
   text-decoration: none;
   color: inherit;
   display: block;
+}
+.card-cover-wrap {
+  position: relative;
+  width: 100%;
+  height: 190px;
+}
+.card-cover-loader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-elev);
+  border-bottom: 1px solid var(--border);
+}
+.card-cover-loader::after {
+  content: "";
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: cal-spin 0.7s linear infinite;
 }
 .card-cover {
   width: 100%;
@@ -1122,6 +1156,44 @@ a {
   margin-bottom: 16px;
 }
 
+.offer-card--bg {
+  position: relative;
+  overflow: hidden;
+  background-image: var(--offer-bg);
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  isolation: isolate;
+}
+.offer-card--bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(0, 0, 0, 0.6);
+}
+.offer-card--bg h2 {
+  color: #fff;
+}
+.offer-card--bg .offer-meta {
+  color: rgba(255, 255, 255, 0.75);
+}
+.offer-card--bg li {
+  color: rgba(255, 255, 255, 0.88);
+}
+.offer-card--bg li::before {
+  color: #fff;
+}
+.offer-card--bg .num {
+  background: var(--secondary);
+  color: var(--secondary-fg);
+  backdrop-filter: none;
+}
+.offer-card--bg.alt .num {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+
 .guarantee-band {
   display: flex;
   gap: 18px;
@@ -1255,6 +1327,47 @@ a {
   border-radius: 14px;
   overflow: hidden;
   background: var(--bg-elev);
+}
+
+.speaker-profiles {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.speaker-profiles-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--fg-muted);
+  letter-spacing: 0.04em;
+}
+
+.speaker-profile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: var(--accent);
+  transition: filter 0.15s, transform 0.15s;
+}
+.speaker-profile img {
+  height: 20px;
+  width: auto;
+  display: block;
+}
+[data-theme=dark] .speaker-profile img {
+  filter: brightness(0);
+}
+.speaker-profile:nth-of-type(2) {
+  background: var(--secondary);
+}
+.speaker-profile:hover {
+  filter: brightness(1.08);
 }
 
 .talks-list {

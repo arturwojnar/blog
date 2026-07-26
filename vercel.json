@@ -19,6 +19,16 @@
       "source": "/trainings.html",
       "destination": "/offer",
       "permanent": true
+    },
+    {
+      "source": "/oferta",
+      "destination": "/offer",
+      "permanent": true
+    },
+    {
+      "source": "/oferta.html",
+      "destination": "/offer",
+      "permanent": true
     }
   ],
   "rewrites": [
@@ -31,15 +41,11 @@
       "destination": "/offer.html"
     },
     {
-      "source": "/oferta",
-      "destination": "/oferta.html"
-    },
-    {
       "source": "/contact",
       "destination": "/contact.html"
     },
     {
-      "source": "/((?!api).*)",
+      "source": "/((?!api|public|.*\\.).*)",
       "destination": "/api/index"
     }
   ],

@@ -9,6 +9,18 @@ import { categorySlugs, categoryLabel } from "./_data/categories.js";
  * @param {import("@11ty/eleventy/UserConfig").default} eleventyConfig
  */
 export default function (eleventyConfig) {
+  // When running under `vercel dev`, Vercel assigns a port via $PORT and waits
+  // to detect the dev server on it. Eleventy's dev server otherwise picks its
+  // own port (8080), which Vercel never detects → "Detecting port … timed out".
+  // Bind the Eleventy Dev Server to $PORT so Vercel can proxy to it.
+  if (process.env.PORT) {
+    eleventyConfig.setServerOptions({
+      port: Number(process.env.PORT),
+      // Don't bump off $PORT if it looks busy — Vercel expects us on that exact port.
+      portReassignmentRetryCount: 0,
+    });
+  }
+
   // Exclude repo docs from build
   eleventyConfig.ignores.add("AGENTS.md");
   eleventyConfig.ignores.add("plan.md");

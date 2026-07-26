@@ -27,13 +27,17 @@ ogUrl: "https://www.planthencode.com/articles/"
       <article class="card" data-cat="{{ category }}">
         <a href="{{ a.url }}" class="card-link">
           {% if a.data.cover %}
-            <img
-              class="card-cover"
-              src="/public{{ a.data.cover }}"
-              alt=""
-              loading="lazy"
-              width="400"
-              height="210" />
+            <div class="card-cover-wrap">
+              <span class="card-cover-loader"></span>
+              <img
+                class="card-cover"
+                src="/public{{ a.data.cover }}"
+                alt=""
+                loading="lazy"
+                width="400"
+                height="210"
+                onload="this.previousElementSibling.style.display='none'" />
+            </div>
           {% endif %}
           <div class="card-body">
             {% if category %}

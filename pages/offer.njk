@@ -6,6 +6,14 @@ permalink: "/offer.html"
 ogUrl: "https://www.planthencode.com/offer/"
 ---
 {% set c = services.copy.en %}
+{% set tileImages = [
+  "/public/artur/conf1.webp",
+  "/public/artur/conf2.webp",
+  "/public/artur/stage-wide@sm.webp",
+  "/public/artur/hero@sm.webp",
+  "/public/artur/audience.webp",
+  "/public/artur/conf4.webp"
+] %}
 
 <div class="wrap">
   <div class="hero" style="padding-bottom:24px">
@@ -17,7 +25,7 @@ ogUrl: "https://www.planthencode.com/offer/"
   <section class="section">
     <div class="offer-grid">
       {% for s in services.services %}
-        <article class="offer-card {% if loop.index0 % 2 == 1 %}alt{% endif %}">
+        <article class="offer-card offer-card--bg {% if loop.index0 == 1 or loop.index0 == 2 or loop.last %}alt{% endif %}" style="--offer-bg: url('{{ tileImages[loop.index0] }}')">
           <div class="num">{{ s.num }}</div>
           <h2>{{ s.en.title }}</h2>
           <div class="offer-meta">{{ s.en.meta }}</div>
