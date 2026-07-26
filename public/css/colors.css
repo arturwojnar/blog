@@ -99,9 +99,9 @@
   --radius-xl: 1rem;
 
   /* ---- Content widths ---- */
-  --width-reading: 720px; /* prose / article body */
-  --width-wide: 840px; /* service tiles */
-  --width-full: 1040px; /* full sections */
+  --width-reading: 1024px; /* main wrap / page body */
+  --width-wide: 1024px; /* service tiles */
+  --width-full: 1024px; /* full sections */
   --width-prose: 720px; /* comfortable text measure for article paragraphs */
 
   /* ---- Typography ---- */
