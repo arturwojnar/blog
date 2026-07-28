@@ -58,3 +58,50 @@ if (document.getElementById("newsletter-form") || document.getElementById("nav-n
     })
     .catch((err) => console.error("Failed to load newsletter:", err));
 }
+
+// Recommendations carousel — show PAGE_SIZE at a time, cycle via prev/next.
+(function initRecoCarousel() {
+  const carousel = document.querySelector("[data-reco-carousel]");
+  if (!carousel) return;
+
+  const PAGE_SIZE = 4;
+  const cards = Array.from(carousel.querySelectorAll(".reco"));
+  const total = cards.length;
+  if (total <= PAGE_SIZE) return; // nothing to paginate
+
+  const prevBtn = carousel.querySelector(".reco-nav-prev");
+  const nextBtn = carousel.querySelector(".reco-nav-next");
+  const dotsEl  = carousel.querySelector(".reco-nav-dots");
+  const pages   = Math.ceil(total / PAGE_SIZE);
+  let page      = 0;
+
+  // Build dots.
+  const dots = Array.from({ length: pages }, (_, i) => {
+    const d = document.createElement("button");
+    d.className = "reco-dot";
+    d.setAttribute("aria-label", `Page ${i + 1}`);
+    d.addEventListener("click", () => goTo(i));
+    dotsEl.appendChild(d);
+    return d;
+  });
+
+  function render() {
+    const start = page * PAGE_SIZE;
+    cards.forEach((c, i) => {
+      c.hidden = i < start || i >= start + PAGE_SIZE;
+    });
+    prevBtn.disabled = page === 0;
+    nextBtn.disabled = page === pages - 1;
+    dots.forEach((d, i) => d.classList.toggle("active", i === page));
+  }
+
+  function goTo(p) {
+    page = Math.max(0, Math.min(pages - 1, p));
+    render();
+  }
+
+  prevBtn.addEventListener("click", () => goTo(page - 1));
+  nextBtn.addEventListener("click", () => goTo(page + 1));
+
+  render();
+}());

@@ -752,6 +752,60 @@ a {
   color: var(--accent-hover);
 }
 
+.reco-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.reco-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 0;
+  background: none;
+  color: var(--accent);
+  cursor: pointer;
+  transition: color 0.15s, opacity 0.15s, transform 0.15s;
+}
+.reco-nav-btn.reco-nav-next {
+  color: var(--secondary);
+}
+.reco-nav-btn:hover:not(:disabled) {
+  opacity: 0.75;
+  transform: scale(1.15);
+}
+.reco-nav-btn:disabled {
+  opacity: 0.2;
+  cursor: default;
+}
+
+.reco-nav-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.reco-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: var(--border);
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.15s;
+}
+.reco-dot.active {
+  background: var(--accent);
+  transform: scale(1.25);
+}
+
 .cat-filter {
   display: flex;
   gap: 8px;

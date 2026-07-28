@@ -1,0 +1,44 @@
+{#
+  recommendations — reusable "What people say" carousel section.
+  Renders all items from the global `recommendations` data with prev/next
+  pagination (4 per page). The carousel JS in main.js targets [data-reco-carousel].
+
+  Usage:
+    {% from "recommendations.njk" import recoSection %}
+    {{ recoSection(recommendations) }}
+
+  Parameters:
+    data  — the recommendations global object { items, profileUrl }
+    label — optional link label override (default: "All recommendations on LinkedIn")
+#}
+{% macro recoSection(data, label="All recommendations on LinkedIn") %}
+<section class="section">
+  <div class="kicker">What people say</div>
+  <div class="reco-carousel" data-reco-carousel>
+    <div class="reco-grid">
+      {% for r in data.items %}
+        <figure class="reco">
+          <blockquote>{{ r.quote }}</blockquote>
+          <figcaption>
+            <span class="reco-name">{{ r.name }}</span>
+            <span class="reco-role">{{ r.role }}</span>
+            {% if r.date %}<span class="reco-date">{{ r.date }}</span>{% endif %}
+          </figcaption>
+        </figure>
+      {% endfor %}
+    </div>
+    <div class="reco-nav">
+      <button class="reco-nav-btn reco-nav-prev" aria-label="Previous recommendation" disabled>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <span class="reco-nav-dots" aria-hidden="true"></span>
+      <button class="reco-nav-btn reco-nav-next" aria-label="Next recommendation">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+  <p class="reco-more">
+    <a href="{{ data.profileUrl }}" target="_blank" rel="noopener">{{ label }} &gt;&gt;</a>
+  </p>
+</section>
+{% endmacro %}

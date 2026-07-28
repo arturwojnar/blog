@@ -5,6 +5,7 @@ layout: "../layouts/main.njk"
 permalink: "/index.html"
 ogUrl: "https://www.planthencode.com/"
 ---
+{% from "recommendations.njk" import recoSection %}
 
 <div class="wrap">
   <div class="hero">
@@ -85,24 +86,7 @@ ogUrl: "https://www.planthencode.com/"
     </div>
   </section>
 
-  <section class="section">
-    <div class="kicker">What people say</div>
-    <div class="reco-grid">
-      {% for r in recommendations.items %}
-        <figure class="reco">
-          <blockquote>{{ r.quote }}</blockquote>
-          <figcaption>
-            <span class="reco-name">{{ r.name }}</span>
-            <span class="reco-role">{{ r.role }}</span>
-            {% if r.date %}<span class="reco-date">{{ r.date }}</span>{% endif %}
-          </figcaption>
-        </figure>
-      {% endfor %}
-    </div>
-    <p class="reco-more">
-      <a href="{{ recommendations.profileUrl }}" target="_blank" rel="noopener">All recommendations on LinkedIn &gt;&gt;</a>
-    </p>
-  </section>
+  {{ recoSection(recommendations) }}
 
   <section class="section product-section">
     <div class="kicker">Products</div>

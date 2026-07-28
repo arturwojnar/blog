@@ -5,6 +5,7 @@ layout: "../layouts/main.njk"
 permalink: "/offer.html"
 ogUrl: "https://www.planthencode.com/offer/"
 ---
+{% from "recommendations.njk" import recoSection %}
 {% set c = services.copy.en %}
 {% set tileImages = [
   "/public/artur/conf1.webp",
@@ -37,23 +38,7 @@ ogUrl: "https://www.planthencode.com/offer/"
     </div>
   </section>
 
-  <section class="section">
-    <div class="kicker">What people say</div>
-    <div class="reco-grid">
-      {% for r in recommendations.items %}
-        <figure class="reco">
-          <blockquote>{{ r.quote }}</blockquote>
-          <figcaption>
-            <span class="reco-name">{{ r.name }}</span>
-            <span class="reco-role">{{ r.role }}</span>
-          </figcaption>
-        </figure>
-      {% endfor %}
-    </div>
-    <p class="reco-more">
-      <a href="{{ recommendations.profileUrl }}" target="_blank" rel="noopener">{{ c.recoMore }} &gt;&gt;</a>
-    </p>
-  </section>
+  {{ recoSection(recommendations, c.recoMore) }}
 
   <section class="section">
     <div class="guarantee-band">

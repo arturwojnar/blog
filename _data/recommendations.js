@@ -5,6 +5,13 @@ export const profileUrl = "https://www.linkedin.com/in/artur-wojnar-a19349a6/det
 export const items = [
   {
     quote:
+      "I had the privilege of being mentored by Artur, and I can't recommend him highly enough. Artur is a Solution Architect whose deep, hands-on experience is obvious from day one. He has a rare talent for tailoring his language and technical depth to his audience, making advanced system design and DDD remarkably easy to digest. Artur always draws from real-world examples and maintains an approachable, feedback-friendly environment. Learning under his guidance completely reshaped how I approach architectural challenges and had a direct, positive impact on my day-to-day work.",
+    name: "Paweł Zgorzały",
+    role: "Backend Developer",
+    date: "2026",
+  },
+  {
+    quote:
       "Artur is very keen on getting the quality right and understanding what the customer needs. He is open to provide honest feedback and develop high quality medical software. Artur provides not only technical solutions but also provides improvements that make the products easier to maintain and keep medical software documentation up to date. He is a team player and helps others grow. He is a great addition to the team.",
     name: "Niek Jochems",
     role: "SW Test Architect",
