@@ -183,6 +183,10 @@
   @include grid-2col(14px, 560px);
 }
 
+.reco--hidden {
+  display: none;
+}
+
 .reco {
   @include card-base(14px, 22px);
   margin: 0;

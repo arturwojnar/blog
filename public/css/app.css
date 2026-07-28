@@ -689,6 +689,10 @@ a {
   }
 }
 
+.reco--hidden {
+  display: none;
+}
+
 .reco {
   background: var(--bg-elev);
   border: 1px solid var(--border);

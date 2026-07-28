@@ -60,37 +60,49 @@ if (document.getElementById("newsletter-form") || document.getElementById("nav-n
 }
 
 // Recommendations carousel — show PAGE_SIZE at a time, cycle via prev/next.
+// PAGE_SIZE adapts to viewport: 1 on mobile, 2 on tablet, 4 on desktop.
 (function initRecoCarousel() {
   const carousel = document.querySelector("[data-reco-carousel]");
   if (!carousel) return;
 
-  const PAGE_SIZE = 4;
   const cards = Array.from(carousel.querySelectorAll(".reco"));
   const total = cards.length;
-  if (total <= PAGE_SIZE) return; // nothing to paginate
 
   const prevBtn = carousel.querySelector(".reco-nav-prev");
   const nextBtn = carousel.querySelector(".reco-nav-next");
   const dotsEl  = carousel.querySelector(".reco-nav-dots");
-  const pages   = Math.ceil(total / PAGE_SIZE);
-  let page      = 0;
 
-  // Build dots.
-  const dots = Array.from({ length: pages }, (_, i) => {
-    const d = document.createElement("button");
-    d.className = "reco-dot";
-    d.setAttribute("aria-label", `Page ${i + 1}`);
-    d.addEventListener("click", () => goTo(i));
-    dotsEl.appendChild(d);
-    return d;
-  });
+  let pageSize = getPageSize();
+  let pages    = Math.ceil(total / pageSize);
+  let page     = 0;
+  let dots     = [];
+
+  function getPageSize() {
+    if (window.innerWidth < 560) return 1;
+    if (window.innerWidth < 900) return 2;
+    return 4;
+  }
+
+  function buildDots() {
+    dotsEl.innerHTML = "";
+    dots = Array.from({ length: pages }, (_, i) => {
+      const d = document.createElement("button");
+      d.className = "reco-dot";
+      d.setAttribute("aria-label", `Page ${i + 1}`);
+      d.addEventListener("click", () => goTo(i));
+      dotsEl.appendChild(d);
+      return d;
+    });
+  }
 
   function render() {
-    const start = page * PAGE_SIZE;
+    const start = page * pageSize;
     cards.forEach((c, i) => {
-      c.hidden = i < start || i >= start + PAGE_SIZE;
+      c.classList.toggle("reco--hidden", i < start || i >= start + pageSize);
     });
     prevBtn.disabled = page === 0;
+    // Hide nav entirely when everything fits on one page.
+    carousel.querySelector(".reco-nav").style.display = pages <= 1 ? "none" : "";
     nextBtn.disabled = page === pages - 1;
     dots.forEach((d, i) => d.classList.toggle("active", i === page));
   }
@@ -100,8 +112,20 @@ if (document.getElementById("newsletter-form") || document.getElementById("nav-n
     render();
   }
 
+  function recalc() {
+    const newSize = getPageSize();
+    if (newSize === pageSize) return;
+    pageSize = newSize;
+    pages = Math.ceil(total / pageSize);
+    page = 0;
+    buildDots();
+    render();
+  }
+
   prevBtn.addEventListener("click", () => goTo(page - 1));
   nextBtn.addEventListener("click", () => goTo(page + 1));
+  window.addEventListener("resize", recalc, { passive: true });
 
+  buildDots();
   render();
 }());
