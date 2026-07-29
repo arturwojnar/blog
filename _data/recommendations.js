@@ -5,6 +5,13 @@ export const profileUrl = "https://www.linkedin.com/in/artur-wojnar-a19349a6/det
 export const items = [
   {
     quote:
+      "I had the pleasure of working with Artur during a series of architecture mentoring sessions. We covered topics such as DDD and Event Sourcing, and I was consistently impressed by his ability to explain complex technical concepts in a simple, practical, and easy-to-understand way. Thanks to his guidance, I not only improved my understanding of these architectural patterns but also gained more confidence in making technical decisions. His mentoring had a real impact on both my knowledge and my professional growth. What also made the sessions especially valuable was Artur's approachable personality. He's friendly, down-to-earth, and has a great sense of humor. Rather than acting like someone who already knows everything, he creates a relaxed atmosphere that encourages questions and makes learning enjoyable. That combination of deep expertise and humility makes him an outstanding mentor, and I would highly recommend him to anyone looking to grow as a software engineer.",
+    name: "Wojciech Szczygielski",
+    role: "Backend Developer",
+    date: "2026",
+  },
+  {
+    quote:
       "I had the privilege of being mentored by Artur, and I can't recommend him highly enough. Artur is a Solution Architect whose deep, hands-on experience is obvious from day one. He has a rare talent for tailoring his language and technical depth to his audience, making advanced system design and DDD remarkably easy to digest. Artur always draws from real-world examples and maintains an approachable, feedback-friendly environment. Learning under his guidance completely reshaped how I approach architectural challenges and had a direct, positive impact on my day-to-day work.",
     name: "Paweł Zgorzały",
     role: "Backend Developer",
