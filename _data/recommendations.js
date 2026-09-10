@@ -5,6 +5,13 @@ export const profileUrl = "https://www.linkedin.com/in/artur-wojnar-a19349a6/det
 export const items = [
   {
     quote:
+      "Had the great joy of being able to work with Artur on a development project. Artur had a tough job coming in, needing to quickly assess what had been done by previous developers, work through new requirements, identify any additional gaps, perform a security and best practices audit, and help us tackle all of it... within the span of just a few weeks. Artur and his team not only handled all of the above with time to spare, Artur took that extra time to instruct and guide me on what had been done, how to maintain it going forward, and give me some lessons in Terraform to boot. He was very generous with both his time, and knowledge - I find myself today a stronger engineer thanks to his assistance and guidance. Artur is an extremely efficient, diligent, and knowledgeable solutions architect with an innate talent for working with, and guiding others. Anyone lucky enough to work with him on any project I'm sure will see these qualities.",
+    name: "Gregory Rainville",
+    role: "Client",
+    date: "2026",
+  },
+  {
+    quote:
       "I had the pleasure of working with Artur during a series of architecture mentoring sessions. We covered topics such as DDD and Event Sourcing, and I was consistently impressed by his ability to explain complex technical concepts in a simple, practical, and easy-to-understand way. Thanks to his guidance, I not only improved my understanding of these architectural patterns but also gained more confidence in making technical decisions. His mentoring had a real impact on both my knowledge and my professional growth. What also made the sessions especially valuable was Artur's approachable personality. He's friendly, down-to-earth, and has a great sense of humor. Rather than acting like someone who already knows everything, he creates a relaxed atmosphere that encourages questions and makes learning enjoyable. That combination of deep expertise and humility makes him an outstanding mentor, and I would highly recommend him to anyone looking to grow as a software engineer.",
     name: "Wojciech Szczygielski",
     role: "Backend Developer",
